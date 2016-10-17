@@ -1,0 +1,165 @@
+*{
+	padding: 0;
+	margin:0;
+	font-family:Helvetica;
+}
+
+html, body
+ { 
+  height: 100%; 
+  margin: 0; 
+  padding: 0; 
+ 
+}
+
+.justificar{
+	text-align: justify;
+}
+body {
+  display: table;
+  width: 100%;
+}
+
+.clase-general{
+	display: table-row; 
+}
+
+#HF_txt{
+	
+	font-family:"Helvetica";
+	font-size: 100%;
+	color:#FFFFE0;
+}
+#HF2_txt{
+	
+	font-family:"Helvetica";
+	font-size: 100%;
+	color:black;
+}
+footer, header, push{
+	background: black; 
+	height: 100px;
+	text-align: center;
+}
+#header2{
+	background: white; 
+	height: 80px;
+	text-align: center;
+}
+.badge-warning {
+background-color: #d58512;
+}
+
+
+img {
+		position:relative;
+		width: 78px;
+		left:20px;
+		height: 78px;
+}
+.fondo{
+	background: #f2f2f2;
+}
+ 
+    select {
+      width: 150px;
+    }
+    .overflow {
+      height: 1500px;
+    }
+
+
+    /**************************************************************************************************
+    												GOGO
+    ***************************************************************************************************/
+
+
+#ppgral{
+	text-align:center;
+	font-size:11px;
+	color:#fff;
+}
+#piepagina{
+	font-family:"Helvetica";
+	clear:both;
+	background-color:#000;
+	color:#FFF;
+}
+/*Navegación*/
+#uno{
+    list-style-type: none;
+	margin-left:20%;
+	margin-right:20%;
+	width:60%;
+    padding: 0;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+#dos{
+    float:left;
+	text-align: center;
+}
+
+#logoppal{
+	width: 50%;
+	height: 50%;
+	text-align:center;
+}
+#parr{
+	padding: 0;
+}
+#titimg{
+	text-decoration: none;
+	color:black;
+	text-align: center;
+}
+#titimg.active{
+	text-decoration: none;
+	color:black;
+}
+
+/*Tablas*/
+.tabenc{
+	font-size: 14px;
+	font-weight:bold;
+	color:black;
+	font-variant: small-caps;
+	text-align: center;
+}
+.tabuno { 	
+	color:black;
+	border-radius: 12px;
+    /*border-collapse: collapse;*/
+    background-color:#BFBFBF;
+    width: 100%;
+    border-radius: 12px;	
+}
+.tabdos { 	
+	color:black;
+	border-radius: 12px;
+    /*border-collapse: collapse;*/
+    background-color:#BFBFBF;
+    width: 100%;
+}
+
+.tabunoth, .tabunotd {
+	background-color:#F7F9F9;
+    padding: 8px;
+    text-align: center;
+}
+.tabdosth, .tabdostd {
+	background-color:#BFBFBF;
+    padding: 8px;
+    text-align: center;
+    border-radius: 12px;
+}
+.imgpdf1{
+	width: 50px;
+	height: 50px;
+}
+.tabimg{
+	background-color:#F7F9F9;
+    padding: 8px;
+    text-align: left;
+}

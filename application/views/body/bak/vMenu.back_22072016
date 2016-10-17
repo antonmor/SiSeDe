@@ -1,0 +1,21 @@
+<nav class="navbar navbar-inverse">
+	<div class="navbar-header">	
+		<a class="navbar-brand" href="#">SISeDe v1.0 </a>  
+	</div>
+	<div class="navbar-collapse collapse pull-right">
+		<ul class="nav navbar-nav">
+			<li class="active">
+				<a href="#">Notificiones <span class="badge badge-error">42</span></a>				
+			</li>
+			<li class="active">
+				<a href="#">Acuerdos <span class="badge badge-error">42</span></a>
+			</li>
+			<li class="active">
+				<a href="#">Mi perfil </a>
+			</li>
+			<li class="active">
+				<a href="#">Cerrar sesión</a>
+			</li>
+		</ul>
+	</div>
+</nav>

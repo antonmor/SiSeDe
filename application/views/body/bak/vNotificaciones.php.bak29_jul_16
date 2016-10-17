@@ -1,0 +1,63 @@
+<div id="container">
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-1 col-md-offset-8" >
+            <p>Prueba 1</p>
+        </div>
+    </div> <!--ROW-->
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="container">
+            <table class="tabdos">
+                <tr>
+                    <th class="tabdosth">N° de Expediente</th>
+                    <th class="tabdosth">Notificado</th>
+                    <th class="tabdosth">Observaciones</th>
+                    <th class="tabdosth">Notificación</th>
+                    <th class="tabdosth">Fecha</th>
+                    <th class="tabdosth">Fecha límite presentar</th>
+                    <th class="tabdosth">Acción</th>
+                </tr>
+                <tr>
+                    <td class="tabunoth">N° de Expediente</td>
+                    <td class="tabunoth">Notificado</td>
+                    <td class="tabunoth">Observaciones</td>
+                    <td class="tabimg">
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <img class="imgpdf1" src="<?php echo base_url();  ?>Imagenes/pdf1.jpg">
+                        </p>
+                    </td>
+                    <td class="tabunoth">Fecha</td>
+                    <td class="tabunoth">Fecha límite presentar</td>
+                    <td class="tabunoth">
+                        <button type="button" class="btn btn-success">Abrir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tabunoth">N° de Expediente</td>
+                    <td class="tabunoth">Notificado</td>
+                    <td class="tabunoth">Observaciones</td>
+                    <td class="tabimg">
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <img class="imgpdf1" src="<?php echo base_url();  ?>Imagenes/pdf1.jpg">
+                        </p>
+                    </td>
+                    <td class="tabunoth">Fecha</td>
+                    <td class="tabunoth">Fecha límite presentar</td>
+                    <td class="tabunoth">
+                        <button type="button" class="btn btn-success">Abrir</button>
+                    </td>
+                </tr>
+            </table> 
+            
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+  
+</div> <!--container-->

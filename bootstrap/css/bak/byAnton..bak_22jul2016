@@ -1,0 +1,63 @@
+html, body
+ { 
+  height: 100%; 
+  margin: 0; 
+  padding: 0; 
+ 
+}
+
+.justificar{
+	text-align: justify;
+}
+body {
+  display: table;
+  width: 100%;
+}
+
+.clase-general{
+	display: table-row; 
+}
+
+#HF_txt{
+	
+	font-family:"Helvetica";
+	font-size: 100%;
+	color:#FFFFE0;
+}
+#HF2_txt{
+	
+	font-family:"Helvetica";
+	font-size: 100%;
+	color:black;
+}
+footer, header, push{
+	background: black; 
+	height: 100px;
+	text-align: center;
+}
+#header2{
+	background: white; 
+	height: 80px;
+	text-align: center;
+}
+.badge-warning {
+background-color: #d58512;
+}
+
+
+img {
+		position:relative;
+		width: 78px;
+		left:20px;
+		height: 78px;
+}
+.fondo{
+	background: #f2f2f2;
+}
+ 
+    select {
+      width: 150px;
+    }
+    .overflow {
+      height: 1500px;
+    }
