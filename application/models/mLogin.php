@@ -1,14 +1,16 @@
 <?php 
 class mLogin extends CI_Model{	
-	public function loggin($usr,$pass){		
+	//funcion para realizar logeo y variables de sesion atrae los datos de la persona, domicilio, rol
+	public function loggin($usr,$pass){		 
 		$var= $this->db->query("
 			select * from 
 			(persona p join RolesPeriodo rp on rp.idPersona=p.id 
 				and rp.status=1
 			    and p.usuario='".$usr."'
 			    and p.password='".$pass."') 
-			 join Rol r on r.idroles=rp.idroles;
-			");		
+			 join Rol r on r.idroles=rp.idroles
+			 left join Domicilio d on d.id_persona = p.id and d.status=1;
+			");	// nuevo comentario	
 		return $var->result();
 	}
 	public function persona($idRoles)
