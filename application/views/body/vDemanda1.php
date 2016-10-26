@@ -225,9 +225,10 @@ function Roles(roles){
 						//id expediente
 						tipo:document.getElementById('doc2').value, //tipo de documento
 						//idCreaExp: es de la sesi[on] actual
-						idPDemandante:idPd1,
-						idPDemandado:idPd,
-						fecha:document.getElementById('datepicker').value
+						idPDemandante:idPd1, //Demandante
+						idPDemandado:idPd, //Demandado
+						fecha:document.getElementById('datepicker').value, //fecha de alta
+
 					 },
 					 success:function(result){
 					 	alert(result);
