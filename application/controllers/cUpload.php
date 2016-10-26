@@ -1,6 +1,6 @@
 <?php 
 	
-	class Upload extends CI_Controller{
+	class cUpload extends CI_Controller{
 
 		public function __construct()
 		{
@@ -18,7 +18,17 @@
 
 		public function do_upload()
 		{
-				$config['upload_path'] = './Imagenes/';
+			$this->load->model('mLogin'); //llamamos al modelo
+			//$idExp =           //id Expediente control de la tabla
+			$idCreaExp=$_SESSION["Persona_id"]; //idPersona sesion que crea la demanda
+		    $idPDemandante=$this->input->post('idPDemandante'); //demandante
+			$idPDemandado=$this->input->post('idPDemandado'); //demandado
+			echo $fecha=$this->input->post('fecha'); // fecha en que se crea.
+			$tipo=$this->input->post('tipo'); //tipo del documento que se va a subir (Demanda)
+			//$idPpresenta
+
+			/*
+				$config['upload_path'] = './Historico/';
 				$config['allowed_types'] = 'pdf';
 				$config['max_size'] = '3024';
 
@@ -43,6 +53,7 @@
   		      // uploading successfull, now do your further actions
    				 }
 
+			*/
 		}
 
 	
