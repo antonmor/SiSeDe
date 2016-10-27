@@ -11,6 +11,7 @@ class mLogin extends CI_Model{
 			 join Rol r on r.idroles=rp.idroles
 			 left join Domicilio d on d.id_persona = p.id and d.status=1;
 			");	// nuevo comentario	
+		// prueba de hoy
 		return $var->result();
 	}
 	public function persona($idRoles)
