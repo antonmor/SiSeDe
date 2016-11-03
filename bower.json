@@ -1,0 +1,30 @@
+{
+  "name": "SiSeDe",
+  "authors": [
+    "Antonio Moreno Jauregui <ingantonmor@gmail.com>",
+    "Juan Manuel Fernandez",
+    "Uriel Rolon"
+  ],
+  "description": "Tribunal de lo Contencioso Administrativo del Estado de Colima",
+  "main": "header.php",
+  "keywords": [
+    "SiSeDe"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "jquery": "~1.12.4",
+    "jquery-ui": "~1.11.4",
+    "angular": "~1.5.8",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.43"
+  }
+}

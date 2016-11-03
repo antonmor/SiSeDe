@@ -1,4 +1,4 @@
-<div id="container">
+<div class="container">
 	<div class="row">
 		<div class="col-md-4 col-md-offset-5">
 			<h4><img class="imgview" src="<?php echo base_url();  ?>Imagenes/Promociones.png" title="Demandas" width="10" height="10">
@@ -33,10 +33,19 @@
 			 <div class="col-md-5 col-md-offset-1">
 				<input id="Regristra" class="form-control input-sm" type="text" name="Registra"  value="<?php print_r($_SESSION["Nombre"]." ".$_SESSION["Apat"]." ".$_SESSION["Amat"]); ?>"> </br>
 			 </div> <!--col-Registra-->
-			<div class="col-md-5 col-md-offset-1"> 
-				<input type="text" id="datepicker" name="datepicker">
-			</div>
-
+		
+			<div class="col-md-5 col-md-offset-1">  
+			<!---	<input type="text" id="datepicker" name="datepicker"> -->
+				<div class="form-group">	
+					<div class="input-group date" id="datetimepicker1">
+                    	<input type='text' class="form-control" id ="datecadena" />
+                    	<span class="input-group-addon">
+                        	<span class="glyphicon glyphicon-calendar"></span>
+                    	</span>
+                    </div><!--DateTimer--> 	
+                </div>  <!--formGroup-->  
+            </div><!--Col-->	
+      
 		</div><!--Row-->
 		<div class="row">		
 			<div class="col-md-5 col-md-offset-1">
@@ -159,7 +168,6 @@
 
  	$(function(){
  		$("#accordion").accordion();
- 		$("#datepicker").datepicker();
  		$("#rol").selectmenu();
  		$("#doc").selectmenu();
  		$("#doc2").selectmenu();
@@ -167,6 +175,7 @@
  		$("#Municipio").selectmenu();
  		$("#Estado1").selectmenu();
  		$("#Municipio1").selectmenu();
+  		$("#datetimepicker1").datetimepicker();		
 
  	});//javascripUI
  
@@ -227,8 +236,8 @@ function Roles(roles){
 						//idCreaExp: es de la sesi[on] actual
 						idPDemandante:idPd1, //Demandante
 						idPDemandado:idPd, //Demandado
-						fecha:document.getElementById('datepicker').value, //fecha de alta
-
+						//fecha:document.getElementById('datetimepicker1').value, //fecha de alta
+						fecha: "cujc"
 					 },
 					 success:function(result){
 					 	alert(result);
