@@ -1,0 +1,26 @@
+{
+  "name": "sisede",
+  "version": "1.0.0",
+  "description": "Tribunal de lo contencioso administrativo del estado de colima",
+  "main": "header.php",
+  "dependencies": {
+    "wiredep": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "try"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antonmor/SiSeDe.git"
+  },
+  "keywords": [
+    "sisede"
+  ],
+  "author": "Antonio Moreno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antonmor/SiSeDe/issues"
+  },
+  "homepage": "https://github.com/antonmor/SiSeDe#readme"
+}
