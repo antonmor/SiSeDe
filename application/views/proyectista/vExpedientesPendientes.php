@@ -21,26 +21,26 @@
 				<br>
 				<div class="row">
 					<div class="col-md-3 col-md-offset-2">
-						<a href="/SiSeDe/index.php/cLEProy">XXXX01</a>
+						<a href="/SiSeDe/index.php/cleerexp">XXXX01</a>
 					</div>
 					<div class="col-md-3 col-md-offset-3">
-						<a href="/SiSeDe/index.php/cLEProy"> <img class="imgview" src="<?php echo base_url();  ?>Imagenes/leer.png" title="Leer" width="10" height="10"></a>
+						<a href="/SiSeDe/index.php/cleerexp"> <img class="imgview" src="<?php echo base_url();  ?>Imagenes/leer.png" title="Leer" width="10" height="10"></a>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-3 col-md-offset-2">
-						<a href="/SiSeDe/index.php/cLEProy">XXXX02</a>
+						<a href="/SiSeDe/index.php/cleerexp">XXXX02</a>
 					</div>
 					<div class="col-md-3 col-md-offset-3">
-						<a href="/SiSeDe/index.php/cLEProy"> <img class="imgview" src="<?php echo base_url();  ?>Imagenes/leer.png" title="Leer" width="10" height="10"></a>
+						<a href="/SiSeDe/index.php/cleerexp"> <img class="imgview" src="<?php echo base_url();  ?>Imagenes/leer.png" title="Leer" width="10" height="10"></a>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-3 col-md-offset-2">
-						<a href="/SiSeDe/index.php/cLEProy">XXXX03</a>
+						<a href="/SiSeDe/index.php/cleerexp">XXXX03</a>
 					</div>
 					<div class="col-md-3 col-md-offset-3">
-						<a href="/SiSeDe/index.php/cLEProy"> <img class="imgview" src="<?php echo base_url();  ?>Imagenes/leer.png" title="Leer" width="10" height="10"></a>
+						<a href="/SiSeDe/index.php/cleerexp"> <img class="imgview" src="<?php echo base_url();  ?>Imagenes/leer.png" title="Leer" width="10" height="10"></a>
 					</div>
 				</div>
 				<br>

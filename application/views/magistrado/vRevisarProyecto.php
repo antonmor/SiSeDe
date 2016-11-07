@@ -1,5 +1,5 @@
 <section>
-	<div style="width:70%; height:100%; margin-left:5%; float:left;">
+	<div style="width:70%; height:100%; margin-left:5%; margin-top:5%;  float:left;">
 		<div class="row">
 			<div class="col-sm-12">
 				<textarea class="form-control" rows="3" name="descripcion"></textarea>
