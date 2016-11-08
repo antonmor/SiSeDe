@@ -13,8 +13,8 @@
 			<h5><strong>Tipo de demanda:</strong> Tipo 1</h5>
 		</div>
 		<div class="col-sm-3 col-md-3 col-md-offset-1">
-			<a href="/SiSeDe/index.php/cESProy"><img src="<?php echo base_url();  ?>Imagenes/escribir.png" title="Redactar Proyecto" style="width:30px; height:30px;"></a>
-			<br><a href="/SiSeDe/index.php/cESProy" style="font-size:10px; text-decoration:none; color:black; text-align:center;">Redactar Proyecto</a>
+			<a href="/SiSeDe/index.php/credproy"><img src="<?php echo base_url();  ?>Imagenes/escribir.png" title="Redactar Proyecto" style="width:30px; height:30px;"></a>
+			<br><a href="/SiSeDe/index.php/credproy" style="font-size:10px; text-decoration:none; color:black; text-align:center;">Redactar Proyecto</a>
 		</div> 
 	</div>	
 	<br>

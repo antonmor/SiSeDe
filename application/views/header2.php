@@ -50,7 +50,9 @@ defined('BASEPATH') or exit('No direct script access allowd');
   <!--CSS -->
   <link rel="stylesheet" type="text/css" href="<?php echo base_url("bootstrap/css/byAnton.css"); ?>">
 
-
+<!--CKEditor-->
+  <script type="text/javascript" src="<?php echo base_url("/ckeditor/ckeditor.js"); ?>"></script>
+<!-- -->
 
 
 
@@ -77,3 +79,4 @@ defined('BASEPATH') or exit('No direct script access allowd');
 
 <body>
 
+<legend>  </legend>

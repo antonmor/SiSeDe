@@ -14,7 +14,7 @@
         </div>
         
         <div class="col-sm-2 col-md-2">
-            <a id="titimg" href="/SiSeDe/index.php/cEPPRoy">
+            <a id="titimg" href="/SiSeDe/index.php/cexppendproy">
                 <img src="<?php echo base_url();  ?>Imagenes/folder.png" title="Expedientes" width="50" height="50"></br>
                 &nbsp;&nbsp;&nbsp;&nbsp;Expedientes
             </a>

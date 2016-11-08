@@ -38,7 +38,9 @@ defined('BASEPATH') or exit('No direct script access allowd');
   <script type="text/javascript" src="<?php echo base_url("bootstrap/js/bootstrap3.3.6.min.js"); ?>"></script> 
 
 
-
+<!--CKEditor-->
+	<script type="text/javascript" src="<?php echo base_url("/ckeditor/ckeditor.js"); ?>"></script>
+<!-- -->
 
 
   <!--CSS -->

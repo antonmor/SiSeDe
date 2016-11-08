@@ -22,7 +22,7 @@
         </div>
         
         <div class="col-sm-2 col-md-2 col-md-offset-1">
-            <a id="titimg" href="/SiSeDe/index.php/cNot_act">
+            <a id="titimg" href="/SiSeDe/index.php/cnotiact">
                 <img src="<?php echo base_url();  ?>Imagenes/exped.png" title="Notificaciones" width="50" height="50"></br>
                 &nbsp;&nbsp;&nbsp;&nbsp;Notificaciones
             </a>
