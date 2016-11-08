@@ -75,11 +75,8 @@ class cOficial extends CI_Controller {
 	public function buscar_persona(){
 		$this->load->model('mLogin');
 		
-
 		$rol = $this->input->post('idRoles');
 		$resultado=$this->mLogin->persona($rol);
-
-
 		echo json_encode($resultado);
 		
 	}

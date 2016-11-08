@@ -12,6 +12,7 @@ class mLogin extends CI_Model{
 			 left join Domicilio d on d.id_persona = p.id and d.status=1;
 			");	// nuevo comentario	
 		// prueba de hoy
+		// hero
 		return $var->result();
 	}
 	public function persona($idRoles)
@@ -22,6 +23,7 @@ class mLogin extends CI_Model{
             and idRoles = ".$idRoles." )join Rol r on r.idroles=rp.idroles;");
 	    return $var->result();
 	}
+
 	public function save_bd($tipo,$nombre,$apat,$amat,$rsocial,$genero,$identificacion,$referencia,$tf,$movil,$email,$cemail,$Estado,$Municipio,$Dom,$interior,$exterior,$cp,$Estado1,$Municipio1,$Dom1,$interior1,$exterior1,$cp1,$refe,$user,$pass,$curp){
 		$this->db->trans_begin();
 		$this->db->query("call PersonaDom "."('" .$tipo ."','" .$nombre ."','" .$apat ."','" .$amat ."','" .$rsocial ."','" .$genero ."','" .$identificacion ."','" .$referencia ."','" .$tf ."','" .$movil ."','" .$email ."','" .$cemail ."','" .$Estado ."','" .$Municipio ."','" .$Dom ."','" .$interior ."','" .$exterior ."','" .$cp ."','" .$Estado1 ."','" .$Municipio1 ."','" .$Dom1 ."','" .$interior1 ."','" .$exterior1 ."','" .$cp1 ."','" .$refe ."','" .$user ."','" .$pass ."','" .$curp ."');");

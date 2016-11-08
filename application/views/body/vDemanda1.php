@@ -28,6 +28,10 @@
 
 		<input type="hidden" id="idRoles" value="<?php print_r($_SESSION["Persona_id"]); ?>" > <!--BD persona que crea el expediente usuario interno(O.Partes) o externo-->
 		<input type="hidden"  id="Tiporol" value="<?php print_r($_SESSION["Rol"]); ?>" > <!--BD Tipo de rol del usuario -->
+		<!--DEMANDANTE Y DEMANDADO-->
+		<input type="hidden" id="d1" name="d1"> <!--Demandante o Demandado-->
+		<input type="hidden" id="d2" name="d2"> <!--Demandante o Demandado-->
+		
 
 			<div class="row">
 			 <div class="col-md-5 col-md-offset-1">
@@ -37,8 +41,8 @@
 			<div class="col-md-5 col-md-offset-1">  
 			<!---	<input type="text" id="datepicker" name="datepicker"> -->
 				<div class="form-group">	
-					<div class="input-group date" id="datetimepicker1">
-                    	<input type='text' class="form-control" id ="datecadena" />
+					<div class="input-group date" id="datetimepicker2">
+                    	<input type='text' class="form-control"/>
                     	<span class="input-group-addon">
                         	<span class="glyphicon glyphicon-calendar"></span>
                     	</span>
@@ -118,14 +122,14 @@
 	   				 <td id="combodoc2">
 						<div id="divdoc2" class="col-md-3 col-md-offset-1">
 				   		  	<select id="doc2" name="doc2" style="width: 200px;">
-			   		  			<option  value="Boleta de Infracción" selected="selected" >Boleta de Infracción</option>
-			   		  			<option  value="Concesion">Concesión</option>
-	   				  			<option  value="Demanda">Demanda</option>
-	   		   					<option  value="Nombramiento">Nombramiento</option>
-	   		   					<option  value="Pleitos">Pleitos y Cobranzas</option>
-	   		   					<option  value="Promocion">Promoción</option>
-	   		   					<option  value="Oficio">Oficio</option>
-	   		   					<option  value="Otros">Otros</option>	   		
+			   		  			<option  value="1"  >Boleta de Infracción</option>
+			   		  			<option  value="2">Concesión</option>
+	   				  			<option  value="3"selected=" selected">Demanda</option>
+	   		   					<option  value="4">Nombramiento</option>
+	   		   					<option  value="5">Pleitos y Cobranzas</option>
+	   		   					<option  value="6">Promoción</option>
+	   		   					<option  value="7">Oficio</option>
+	   		   					<option  value="8">Otros</option>	   		
 	   		  				</select> 	
 	   					</div><!--Col-->  
 	   				 </td>
@@ -140,7 +144,6 @@
 	   					</div>	
 			  		 </td>
 	   				</tr> 
-	   		
 	   		</tbody>
 	   	  </table>
 	   	</div> <!--fin angular-->
@@ -175,7 +178,7 @@
  		$("#Municipio").selectmenu();
  		$("#Estado1").selectmenu();
  		$("#Municipio1").selectmenu();
-  		$("#datetimepicker1").datetimepicker();		
+  		$("#datetimepicker2").datetimepicker();		
 
  	});//javascripUI
  
@@ -183,28 +186,38 @@
 function requiredAutocomplete(idRoles,id){
 		var persona=[];
 	$.post("<?php echo site_url('cOficial/buscar_persona');?>",
-			{ idRoles:id},
+			 {idRoles:id},
 			function(data){
+
 			for(var l=0; l<data.length;l++){
 				if(id == 7){  // Fisica/moral
 					persona.push(data[l].idPersona + " " + id + " " + " " + data[l].Nombre + " " + data[l].Apat + " " + data[l].Amat);
 					idPd1 = data[l].idPersona;
+					$("#d1").text(data[l].idPersona);
 				//persona.push(data[l]);
 				//	alert(data);
 					}
 				if(id == 8)
-					persona.push(data[l].idPersona + " "+id + " "+ idRoles+" " + data[l].RazonSocial); 
-					idPD = data[l].idPersona;
-
+				   {
+				   	persona.push(data[l].idPersona + " "+id + " "+ idRoles+" " + data[l].RazonSocial); 
+					idPd = data[l].idPersona;
+					$("#d2").text(data[l].idPersona);
 					//Institucion
 					//alert(persona);
+				   }
 				}
 			
 			},"json");//post
 		return persona;
 	}//requiredAutocomplete()
 
-	$("#Demandante").autocomplete({source:requiredAutocomplete("idRoles",7)}); // demandante
+	$("#Demandante").autocomplete({
+		source:requiredAutocomplete("data",7),
+		select: function(event, ui){
+			 alert(ui.item.value);
+
+		}
+	}); // demandante
 	$("#Demandado").autocomplete({source:requiredAutocomplete("idRoles",8)}); //demandado
 	
 		
@@ -234,10 +247,14 @@ function Roles(roles){
 						//id expediente
 						tipo:document.getElementById('doc2').value, //tipo de documento
 						//idCreaExp: es de la sesi[on] actual
-						idPDemandante:idPd1, //Demandante
-						idPDemandado:idPd, //Demandado
+						idPDemandante:"", //Demandante
+						idPDemandado:"" , //Demandado
 						//fecha:document.getElementById('datetimepicker1').value, //fecha de alta
-						fecha: "cujc"
+						fecha: document.getElementById('datetimepicker2').value, 
+						Des: document.getElementById('tDescrip').value, //descripcioon
+						status:'1',
+						file:document.getElementById('userfile').value
+
 					 },
 					 success:function(result){
 					 	alert(result);
