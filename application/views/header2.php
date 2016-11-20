@@ -28,7 +28,7 @@ defined('BASEPATH') or exit('No direct script access allowd');
 	<script src="<?php echo base_url(); ?>jquery-ui-1.11.4/jquery-ui.js"></script>
 	<script src="<?php echo base_url(); ?>jquery-ui-1.11.4/jquery-ui.css"></script>
 
-<!-- ... Datepicker 3 -->
+<!-- ... Datepicker 3 
   <script src="<?php echo base_url(); ?>jquery1.12.4/jquery.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>bower_components/moment/min/moment.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script> 
@@ -36,8 +36,10 @@ defined('BASEPATH') or exit('No direct script access allowd');
   <script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/collapse.js"></script>
   <link rel="stylesheet" href="<?php echo base_url(); ?>bower_components/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="<?php echo base_url(); ?>bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+--><!-- ... -->
 
-<!-- ... -->
+
+
 
   <title>Seguimiento de Demandas y Sentencias </title>
   

@@ -18,11 +18,15 @@
 			<div class="col-md-5 col-md-offset-1">
 				<label id="Oficial">Presenta</label> </br>
 			</div> <!--col-->
-			<div class="col-md-5 col-md-offset-1"> 
+			<div class="col-md-2 col-md-offset-1"> 
 				<label id="fecha" >
 						Fecha
 				</label>
-				
+			</div>
+			<div class="col-md-2 col-md-offset-1">
+				<label>
+						Hora:Min
+				</label>
 			</div>
 		</div><!--Row-->
 
@@ -33,24 +37,23 @@
 		<input type="hidden" id="d2" name="d2"> <!--Demandante o Demandado-->
 		
 
-			<div class="row">
+		<div class="row">
+			
 			 <div class="col-md-5 col-md-offset-1">
 				<input id="Regristra" class="form-control input-sm" type="text" name="Registra"  value="<?php print_r($_SESSION["Nombre"]." ".$_SESSION["Apat"]." ".$_SESSION["Amat"]); ?>"> </br>
 			 </div> <!--col-Registra-->
 		
 			<div class="col-md-5 col-md-offset-1">  
-			<!---	<input type="text" id="datepicker" name="datepicker"> -->
-				<div class="form-group">	
-					<div class="input-group date" id="datetimepicker2">
-                    	<input type='text' class="form-control"/>
-                    	<span class="input-group-addon">
-                        	<span class="glyphicon glyphicon-calendar"></span>
-                    	</span>
-                    </div><!--DateTimer--> 	
-                </div>  <!--formGroup-->  
-            </div><!--Col-->	
-      
+                 	<input  type='text' id="datepicker" name="dfecha" placeholder="<?php echo Date('Y-m-d'); ?>" style="width: 25%;"/>
+                        	<span class="glyphicon glyphicon-calendar"></span>                
+
+                 	<input type='text' id="dHours" name="dHours" pattern="[0-23]" size="2" />
+                    <input type="text" id="dMin"   name="dMin" pattern="[0-59]"	 size="2" > 
+				
+							<span class="glyphicon glyphicon-time"></span>
+            </div>   <!--Col-->
 		</div><!--Row-->
+		
 		<div class="row">		
 			<div class="col-md-5 col-md-offset-1">
 				<label id="demandado" name="demandado">Demandante</label> </br>
@@ -122,7 +125,7 @@
 	   				 <td id="combodoc2">
 						<div id="divdoc2" class="col-md-3 col-md-offset-1">
 				   		  	<select id="doc2" name="doc2" style="width: 200px;">
-			   		  			<option  value="1"  >Boleta de Infracción</option>
+			   		  			<option  value="1">Boleta de Infracción</option>
 			   		  			<option  value="2">Concesión</option>
 	   				  			<option  value="3"selected=" selected">Demanda</option>
 	   		   					<option  value="4">Nombramiento</option>
@@ -168,6 +171,7 @@
  	var idPd1,  // idPersona demandante
  	idPd; //idPersona demandado
 
+ 	
 
  	$(function(){
  		$("#accordion").accordion();
@@ -178,13 +182,33 @@
  		$("#Municipio").selectmenu();
  		$("#Estado1").selectmenu();
  		$("#Municipio1").selectmenu();
-  		$("#datetimepicker2").datetimepicker();		
+ 		$("#dampm").spinner({
+ 			min:"am",
+ 			max:"pm"
+ 		});
+ 		$('#dHours').spinner({
+ 			numberFormat: "n",
+ 			min:1,
+ 			max:23
+ 		});
+ 		$('#dMin').spinner({
+ 			numberFormat: "n",
+ 			min:00,
+ 			max:59
+ 		});
 
+ 		$("#datepicker").datepicker({
+ 			yearRange: "2015:2020",
+ 			dateFormat: "yy-mm-dd"
+
+ 		});
  	});//javascripUI
  
 
 function requiredAutocomplete(idRoles,id){
 		var persona=[];
+	//	var fdate = $('#datetimepicker2')
+
 	$.post("<?php echo site_url('cOficial/buscar_persona');?>",
 			 {idRoles:id},
 			function(data){
@@ -193,7 +217,7 @@ function requiredAutocomplete(idRoles,id){
 				if(id == 7){  // Fisica/moral
 					persona.push(data[l].idPersona + " " + id + " " + " " + data[l].Nombre + " " + data[l].Apat + " " + data[l].Amat);
 					idPd1 = data[l].idPersona;
-					$("#d1").text(data[l].idPersona);
+					$("#d1").val(data[l].idPersona);
 				//persona.push(data[l]);
 				//	alert(data);
 					}
@@ -201,7 +225,7 @@ function requiredAutocomplete(idRoles,id){
 				   {
 				   	persona.push(data[l].idPersona + " "+id + " "+ idRoles+" " + data[l].RazonSocial); 
 					idPd = data[l].idPersona;
-					$("#d2").text(data[l].idPersona);
+					$("#d2").val(data[l].idPersona);
 					//Institucion
 					//alert(persona);
 				   }
@@ -214,13 +238,13 @@ function requiredAutocomplete(idRoles,id){
 	$("#Demandante").autocomplete({
 		source:requiredAutocomplete("data",7),
 		select: function(event, ui){
-			 alert(ui.item.value);
+			 alert($("#d1").val());
 
 		}
 	}); // demandante
 	$("#Demandado").autocomplete({source:requiredAutocomplete("idRoles",8)}); //demandado
 	
-		
+	
 
 function Roles(roles){
 	 $("#TRol").text("Rol del "+ roles );
@@ -238,19 +262,19 @@ function Roles(roles){
 	$("#adddemanda").on('click',function(){ 
 			
 
+
 			//alert("Esta por subirse el archivo");
 		
 		$.ajax({url:"<?php echo base_url().'index.php/cupload/do_upload'; ?>",
 				type:'POST',
 				data:{
 						
-						//id expediente
+						FolioExp: 'folio1',//id expediente
 						tipo:document.getElementById('doc2').value, //tipo de documento
 						//idCreaExp: es de la sesi[on] actual
-						idPDemandante:"", //Demandante
-						idPDemandado:"" , //Demandado
-						//fecha:document.getElementById('datetimepicker1').value, //fecha de alta
-						fecha: document.getElementById('datetimepicker2').value, 
+						idPDemandante: $("#d1").val(), //Demandante
+						idPDemandado:  $("#d2").val(), //Demandado
+						fecha: document.getElementById('datepicker').value + ' ' + document.getElementById('dHours').value + ':' + document.getElementById('dMin').value , 
 						Des: document.getElementById('tDescrip').value, //descripcioon
 						status:'1',
 						file:document.getElementById('userfile').value
