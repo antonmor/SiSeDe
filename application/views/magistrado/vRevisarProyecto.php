@@ -1,4 +1,44 @@
 <section>
+		<br>
+	<div class="row">
+		<div class="col-xs-10 col-xs-offset-1">
+			<form action="http://localhost:8000/SiSeDe/index.php/cGuardarProyecto/guardar" method="post">
+				<textarea class="form-control" rows="3" name="descripcion">
+					<?php
+						$fichero = "Proyectos/prueba1.txt"; 
+						$fp = fopen($fichero,"r"); 
+						$contenido = fread ($fp, filesize ($fichero)); 
+						fclose($fp); 
+						echo $contenido;
+					?>
+				</textarea>
+				<script>CKEDITOR.replace('descripcion');</script>
+				<br>
+				<input type="button" value="Editar" onclick="desactivar()"/>
+			</form>
+		</div>
+	</div>
+	<br>
+
+	<script type="text/javascript">
+		function habilitar(){
+			document.getElementById('mitext2').disabled=false;
+		}
+	</script>
+	 <!--<div class="row">
+		<div class="col-xs-12 col-xs-offset-5">
+				<input type="radio" name="rad" onclick="descripcion.disabled = false" />
+               <button type="button"  onclick="descripcion.disabled = false" class="btn btn-success">Editar</button>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function habilitar(){
+			document.getElementByName("descripcion").disabled="false";
+		}
+	</script>
+	
+   
 	<div style="width:70%; height:100%; margin-left:5%; margin-top:5%;  float:left;">
 		<div class="row">
 			<div class="col-sm-12">
@@ -68,5 +108,5 @@
 				</a>
 			</div>
 		</div>
-	</div>
+	</div>-->
 </section>
