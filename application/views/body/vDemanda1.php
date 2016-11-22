@@ -1,4 +1,13 @@
+	<!-- <?php echo form_open_multipart('cupload/do_guardar');?> 	 -->
+
+	<?
+	$attributes = array('id'=>'form1');
+	echo form_open_multipart('cupload/do_guardar',$attributes);
+	echo validation_errors();
+	?>
 <div class="container">
+
+
 	<div class="row">
 		<div class="col-md-4 col-md-offset-5">
 			<h4><img class="imgview" src="<?php echo base_url();  ?>Imagenes/Promociones.png" title="Demandas" width="10" height="10">
@@ -9,6 +18,13 @@
     <br>   
     <br>
 	</div> <!--Imgane demanda-->
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+		<label>Folio</label>
+		<input type="text" id="FolioExp" name="FolioExp" autofocus style="text-align:right;">
+	</div>
+
+</div>
 <div class="row">
 <div class="col-md-10 col-md-offset-1">
 <div id="accordion">
@@ -29,7 +45,7 @@
 				</label>
 			</div>
 		</div><!--Row-->
-
+<!-- <form method="POST" class="myform" enctype="multipart/form-data"> -->
 		<input type="hidden" id="idRoles" value="<?php print_r($_SESSION["Persona_id"]); ?>" > <!--BD persona que crea el expediente usuario interno(O.Partes) o externo-->
 		<input type="hidden"  id="Tiporol" value="<?php print_r($_SESSION["Rol"]); ?>" > <!--BD Tipo de rol del usuario -->
 		<!--DEMANDANTE Y DEMANDADO-->
@@ -44,7 +60,7 @@
 			 </div> <!--col-Registra-->
 		
 			<div class="col-md-5 col-md-offset-1">  
-                 	<input  type='text' id="datepicker" name="dfecha" placeholder="<?php echo Date('Y-m-d'); ?>" style="width: 25%;"/>
+                 	<input  type='text' id="datepicker" name="datepicker" placeholder="<?php echo Date('Y-m-d'); ?>" style="width: 25%;"/>
                         	<span class="glyphicon glyphicon-calendar"></span>                
 
                  	<input type='text' id="dHours" name="dHours" pattern="[0-23]" size="2" />
@@ -80,11 +96,11 @@
 		</div> <!--Row-->		
 	   	<div class="row">
 	   		<div class="col-md-5 col-md-offset-1">
-	   		  	<select id="rol" style="width: 100%;">
-	   		  		<option id="rol" name="rol" value="Actor" selected="selected" onclick="Roles(this.value);">Actor</option>
-	   		  		<option id="rol" name="rol" value="Apoderado Legal" onclick="Roles(this.value);">Apoderado Legal</option>
-	   		  		<option id="rol" name="rol" value="Demandado" onclick="Roles(this.value);">Demandado</option>
-	   		   		<option id="rol" name="rol" value="Tercero Interesado" onclick="roles(this.value);">Tercero Interesado</option>
+	   		  	<select id="rol" name="rol" style="width: 100%;">
+	   		  		<option value="1" selected="selected" onclick="Roles(this.value);">Actor</option>
+	   		  		<option  value="2" onclick="Roles(this.value);">Apoderado Legal</option>
+	   		  		<option value="3" onclick="Roles(this.value);">Demandado</option>
+	   		   		<option value="4" onclick="roles(this.value);">Tercero Interesado</option>
 	   		  	</select> </br>
 	   		</div><!--Col-->  
 	   	</div><!--row-->
@@ -115,9 +131,10 @@
 	   				 <!--Aqui deberia ir tr no-repeat="x in names| filter:filtro" en caso de ser Angularjs -->
 	   				<tr id="first"> 
 	   				 <td id="partida">
+	   	  		
 	   				 <div class = "row">	  
 	   	  				<div class="col-md-3 "> 	
-	   	  	 			<input type="file" id="userfile" name="userfile" accept="application/pdf">
+	   	  	 			<input type="file" id="userfile" name="userfile" size="20" accept="application/pdf">
 	   	  				</div>
  					 </div>
  					 </td>
@@ -138,7 +155,7 @@
 	   				 </td>
 	   				 <td>	   		
 	   				 	<div clas="col-md-4"> 
-	   				 		<textarea id="tDescrip"></textarea>
+	   				 		<textarea id="tDescrip" name="tDescrip" ></textarea>
 	   				 	</div>
 			  		 </td>
 			  		 <td>
@@ -159,13 +176,15 @@
 	   	<!--submit para subir archivo-->
  		<div class = "row">	  
 	   	  <div class="col-md-3  col-md-offset-5"> 	
-		   	<input type="submit" class="btn btn-success" id="updemanda" value="Guardar">
-	   	 	<input type="submit" class="btn btn-danger" id="updemanda" value="Cancelar">
+		   	<input type="button" class="btn btn-success" id="updemanda" value="Guardar"> 
+	   	 	<input type="button" class="btn btn-danger" id="cancelar" value="Cancelar">
 	   	  </div> <!--Col-->
 	   	</div> <!--Row-->
 
-	   	
+<!-- </form> -->
 </div> <!--Container-->
+<?php echo form_close(); ?>
+
 
 <script lenguage="javascript" type="text/javascript">
  	var idPd1,  // idPersona demandante
@@ -182,18 +201,12 @@
  		$("#Municipio").selectmenu();
  		$("#Estado1").selectmenu();
  		$("#Municipio1").selectmenu();
- 		$("#dampm").spinner({
- 			min:"am",
- 			max:"pm"
- 		});
  		$('#dHours').spinner({
- 			numberFormat: "n",
- 			min:1,
+ 			numberFormat: "nn",
  			max:23
  		});
  		$('#dMin').spinner({
- 			numberFormat: "n",
- 			min:00,
+ 			numberFormat: "nn",
  			max:59
  		});
 
@@ -242,7 +255,12 @@ function requiredAutocomplete(idRoles,id){
 
 		}
 	}); // demandante
-	$("#Demandado").autocomplete({source:requiredAutocomplete("idRoles",8)}); //demandado
+	$("#Demandado").autocomplete({
+		source:requiredAutocomplete("idRoles",8),
+		select: function(){
+			alert($("#d2").val());
+		}
+	}); //demandado
 	
 	
 
@@ -260,16 +278,16 @@ function Roles(roles){
 
 	//javascript para agregar los archivos en una lista
 	$("#adddemanda").on('click',function(){ 
-			
-
-
-			//alert("Esta por subirse el archivo");
-		
-		$.ajax({url:"<?php echo base_url().'index.php/cupload/do_upload'; ?>",
+	//alert("Esta por subirse el archivo");
+	//	alert(document.getElementById('FolioExp').value);
+	event.preventDefault();
+	var formData = $(this).serialize();
+		$.ajax({
+				url:"<?php echo base_url().'index.php/cupload/do_guardar'; ?>",
 				type:'POST',
-				data:{
+				/*data:{
 						
-						FolioExp: 'folio1',//id expediente
+						FolioExp:document.getElementById('FolioExp').value,//id expediente
 						tipo:document.getElementById('doc2').value, //tipo de documento
 						//idCreaExp: es de la sesi[on] actual
 						idPDemandante: $("#d1").val(), //Demandante
@@ -277,9 +295,15 @@ function Roles(roles){
 						fecha: document.getElementById('datepicker').value + ' ' + document.getElementById('dHours').value + ':' + document.getElementById('dMin').value , 
 						Des: document.getElementById('tDescrip').value, //descripcioon
 						status:'1',
-						file:document.getElementById('userfile').value
+						//file:document.getElementById('userfile').value
 
-					 },
+					 },*/
+					 data:formData, 
+					 async:false,
+					// mimeType: "multipart/form-data",
+					 contentType:false,
+					 cache:false,
+					 processData:true,
 					 success:function(result){
 					 	alert(result);
 
@@ -326,7 +350,8 @@ function Roles(roles){
 
 	});//LOAD
 
-// funcion con ajax para subir archivos
-
+$('#cancelar').on('click',function (){
+	window.location.href='<?php echo base_url().'index.php/cOficial/demanda';?>';
+});
 	
  </script>

@@ -36,6 +36,31 @@ class mLogin extends CI_Model{
 		}
 	
 	}//save_bd
+
+	public function getExp(){
+		
+		 
+		$var= $this->db->query("call Expediente;");
+		return $var->result();
+
+		}
+
+	public function save_demanda($jsonTabla,$tabla){
+		$this->db->trans_begin();
+		$this-> db->insert($tabla,$jsonTabla);
+		$last_id=$this->db->insert_id();  
+  
+
+   if($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return 0;
+		} else {
+			$this->db->trans_commit();
+			return $last_id;
+		}
+
+	}
+
 }//mLogin
 
 ?>

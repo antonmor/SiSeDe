@@ -53,7 +53,7 @@
             if(result == '0'){          
                alert('Usuario o Contraseña no existe');                
             }else{
-                  alert('Bienvenido ' + result);
+                 // alert('Bienvenido ' + result);
                    window.location.href=url;
                 //aqui se su pone que mando abrir el controlador...
             }

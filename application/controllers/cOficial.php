@@ -51,11 +51,14 @@ class cOficial extends CI_Controller {
 
 	}
 	public function demanda(){
-			$this->load->model('mLogin');
 			$this->load->view('header2');
-			$this->load->view('body/vOficial');
-			$this->load->view('body/vDemanda');
+			
+			$this->load->view('body/vOficial');		
+			$this->load->model('mLogin');   
+
+		    $this->load->view('body/vDemanda');
 			$this->load->view('footer');
+			
 	}
 	public function nueva_demanda(){
 			$this->load->model('mLogin');
@@ -77,7 +80,9 @@ class cOficial extends CI_Controller {
 		
 		$rol = $this->input->post('idRoles');
 		$resultado=$this->mLogin->persona($rol);
-		echo json_encode($resultado);
+		json_encode($resultado);
 		
 	}
 }
+
+?>

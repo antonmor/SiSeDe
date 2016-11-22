@@ -59,7 +59,9 @@ class Welcome extends CI_Controller {
 				);
 			$this->session->set_userdata($user_data);
 			//$this->session->set_userdata('sesion_nombre', $usuario[0]->Nombre);
-			echo json_encode($this->session->userdata('Nombre'));
+			redirect('cOficial');
+			//echo json_encode($this->session->userdata('Nombre'));
+			
 			//echo json_encode($this->session->userdata('Nombre'));
 			//redirect('cMenu');
 

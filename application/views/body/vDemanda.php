@@ -1,3 +1,5 @@
+
+
 <div class="container">
 <div class="row">
   <div class="col-md-3 col-md-offset-6">
@@ -21,8 +23,28 @@
   <div class="col-md2">
     {{buscar}}
   </div>
-  
 </div>
+
+<!--tabla-->
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+            <th> Expediente </th>  
+            <th> Fecha      </th>  
+            <th> Demandado  </th>
+            <th> Demandante </th>
+            <th> Resumen </th>  
+        </tr>
+      </thead>
+      <tbody>
+        
+      </tbody>
+    </table>
+  </div>
+</div>  
 
 
 </div> <!--container-->
