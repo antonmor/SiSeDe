@@ -1,6 +1,5 @@
-<?php 
-	
-	class cUpload extends CI_Controller{
+<?php
+class cUpload extends CI_Controller{
 
 		public function __construct()
 		{

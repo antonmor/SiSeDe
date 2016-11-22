@@ -11,7 +11,7 @@
     <div class="row">
     	<div class="col-md-4 col-md-offset-4">
     		<label class="labprf">TIPO DE PERSONA:</label>
-    		<input class="txtin" name="txttp" type="text"> 
+    		<input class="txtin" id="txttp" name="txttp" type="text"> 
     	</div>
     </div>
     <div class="row">
@@ -121,3 +121,11 @@
 	<br>
 	<br>
 </div>
+
+<script type="text/javascript">
+    
+   
+        $("#txttp").val($_SESSION["Nombre"]);       
+
+
+</script>

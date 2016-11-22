@@ -1,9 +1,6 @@
-<?php 
-
+<?php
 defined('BASEPATH') or exit('No direct script access allowd');
-
 ?>
-
 <!DOCTYPE html>
 <html ng-app>
 <head>

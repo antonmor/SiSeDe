@@ -1,5 +1,6 @@
-
-
+<?php
+$Expedientes=$this->mLogin->getExp();
+?>
 <div class="container">
 <div class="row">
   <div class="col-md-3 col-md-offset-6">
@@ -27,9 +28,9 @@
 
 <!--tabla-->
 <br>
-<div class="row">
+<div class="row"> 
   <div class="col-md-12">
-    <table class="table table-striped">
+     <table class="table table-striped">
       <thead>
         <tr>
             <th> Expediente </th>  
@@ -39,12 +40,32 @@
             <th> Resumen </th>  
         </tr>
       </thead>
-      <tbody>
-        
-      </tbody>
-    </table>
-  </div>
-</div>  
-
-
+     <tbody>
+        <?php 
+            if($Expedientes!=NULL){
+              foreach ($Expedientes as $re) {
+                # code...
+        ?> <!--cierre PHP -->
+            <tr id="<?php echo $re['id']; ?>">
+            <td><a> <?php echo $re['Expediente']; ?></a> </td>
+            <td> <?php echo $re['Fecha']; ?> </td> 
+            <td> <?php echo $re['Demandado']; ?> </td>
+            <td> <?php echo $re['Demandante']; ?> </td>
+            <td> <?php echo $re['Descripcion']; ?> </td>
+           </tr>
+        <?php 
+          } // cierra foreach
+         } // cierra if
+         else{   
+        ?><!--PHP-->
+          <tr> 
+            <td coldspan="4"> No hay registros </td>
+          </tr>
+        <?php
+          } // cierra else          
+        ?>
+     </tbody> <!--tbody-->    
+     </table>  <!--Table-->    
+  </div> <!--Col-->
+</div> <!--row-->
 </div> <!--container-->

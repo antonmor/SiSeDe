@@ -1,6 +1,5 @@
 	<!-- <?php echo form_open_multipart('cupload/do_guardar');?> 	 -->
-
-	<?
+<?php
 	$attributes = array('id'=>'form1');
 	echo form_open_multipart('cupload/do_guardar',$attributes);
 	echo validation_errors();
@@ -80,7 +79,7 @@
 		</div><!--Row-->
 		<div class="row">
 			<div class="col-md-5 col-md-offset-1">
-				<input id="Demandante" class="form-control input-sm" type="text" name="Demandante" placeholder="buscar " > </br>
+				<input id="Demandante" class="form-control input-sm" type="text" name="Demandante" placeholder="buscar" > </br>
 			</div><!--col Demandante-->
 			<div class="col-md-5 col-md-offset-1">
 				<input class="form-control input-sm" type="text" name="Demandado" id="Demandado" placeholder="buscar">
@@ -228,16 +227,17 @@ function requiredAutocomplete(idRoles,id){
 
 			for(var l=0; l<data.length;l++){
 				if(id == 7){  // Fisica/moral
-					persona.push(data[l].idPersona + " " + id + " " + " " + data[l].Nombre + " " + data[l].Apat + " " + data[l].Amat);
 					idPd1 = data[l].idPersona;
+					persona.push(data[l].idPersona + " " + id + " " + " " + data[l].Nombre + " " + data[l].Apat + " " + data[l].Amat);
+					
 					$("#d1").val(data[l].idPersona);
 				//persona.push(data[l]);
 				//	alert(data);
 					}
 				if(id == 8)
-				   {
+				   {idPd = data[l].idPersona;
 				   	persona.push(data[l].idPersona + " "+id + " "+ idRoles+" " + data[l].RazonSocial); 
-					idPd = data[l].idPersona;
+					
 					$("#d2").val(data[l].idPersona);
 					//Institucion
 					//alert(persona);
