@@ -36,7 +36,8 @@ defined('BASEPATH') or exit('No direct script access allowd');
 
 
 <!--CKEditor-->
-	<script type="text/javascript" src="<?php echo base_url("/ckeditor/ckeditor.js"); ?>"></script>
+	<!--<script type="text/javascript" src="<?php echo base_url("/ckeditor/ckeditor.js"); ?>"></script>-->
+  <script type="text/javascript" src="<?php echo base_url("/ckeditor_full/ckeditor.js"); ?>"></script>
 <!-- -->
 
 
