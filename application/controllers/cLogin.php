@@ -52,7 +52,10 @@ public function registrar_nuevo(){
 			$user=$this->input->post('user' );
 			$pass=$this->input->post('pass' );
 			$pass1=$this->input->post('pass1' );	
-echo 	 $this->mLogin->save_bd($tipo,$nombre,$apat,$amat,$rsocial,$genero,$identificacion,$referencia,$tf,$movil,$email,$cemail,$Estado,$Municipio,$Dom,$interior,$exterior,$cp,$Estado1,$Municipio1,$Dom1,$interior1,$exterior1,$cp1,$refe,$user,$pass,$curp);
+   echo $this->mLogin->save_bd($tipo,$nombre,$apat,$amat,$rsocial,$genero,$identificacion,$referencia,$tf,$movil,$email,$cemail,$Estado,$Municipio,$Dom,$interior,$exterior,$cp,$Estado1,$Municipio1,$Dom1,$interior1,$exterior1,$cp1,$refe,$user,$pass,$curp);
+
+	
+
 	}
 }
 

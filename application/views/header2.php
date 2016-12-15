@@ -14,19 +14,39 @@ defined('BASEPATH') or exit('No direct script access allowd');
 
 
  <!--ANGULAR 1.5.8 -->
+<!--
 <script type="text/javascript" src="<?php echo base_url("angular-1.5.8/angular.min.js"); ?>"></script>
-  
+ -->
 
 	<!--PARA INCLUIR EL JAVASCRIPT DE JQUERY Y DE BOOTSTRAP-->
 	<script type="text/javascript" src="<?php echo base_url("bootstrap/js/jquery-3.0.0.min.js"); ?>"></script>
   <script type="text/javascript" src="<?php echo base_url("bootstrap/js/bootstrap.js"); ?>"></script> 
  
-	<!--jquery ui-->
+	<!--jquery ui 1.11.4-->
 	<link   href="<?php echo base_url(); ?>jquery-ui-1.11.4/jquery-ui.min.css" rel="stylesheet">
+  <link   href="<?php echo base_url(); ?>jquery-ui-1.11.4/jquery-ui.css" rel="stylesheet">
 	<script src="<?php echo base_url(); ?>jquery-ui-1.11.4/external/jquery/jquery.js"></script>
 	<script src="<?php echo base_url(); ?>jquery-ui-1.11.4/jquery-ui.min.js"></script>
 	<script src="<?php echo base_url(); ?>jquery-ui-1.11.4/jquery-ui.js"></script>
-	<script src="<?php echo base_url(); ?>jquery-ui-1.11.4/jquery-ui.css"></script>
+	
+<!--easy autocomplete-->
+  <link   href="<?php echo base_url(); ?>EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.css" rel="stylesheet">
+  <script src="<?php echo base_url(); ?>EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script>
+   <link   href="<?php echo base_url(); ?>EasyAutocomplete-1.3.5/easy-autocomplete.themes.min.css" rel="stylesheet">
+
+<!-- Table-->
+<link rel="stylesheet" type="text/css" href="<?=base_url()?>/bootstrap/css/dataTables.bootstrap.min.css">
+<script src="<?=base_url()?>/bootstrap/js/jquery.dataTables.min.js"></script>
+<script src="<?=base_url()?>/bootstrap/js/dataTables.bootstrap.min.js"></script>
+
+<!--jquery ui 1.12.custom-->
+<!--  <link rel="stylesheet" href="<?php echo base_url(); ?>jquery-ui-1.12.custom/jquery-ui.theme.css"> -->
+<!--  <script src="<?php echo base_url(); ?>jquery-ui-1.12.custom/external/jquery/jquery.js"></script>
+  <script src="<?php echo base_url(); ?>jquery-ui-1.12.custom/jquery-ui.min.js"></script>
+  <script src="<?php echo base_url(); ?>jquery-ui-1.12.custom/jquery-ui.js"></script>
+  <script src="<?php echo base_url(); ?>jquery-ui-1.12.custom/jquery-ui.css"></script> -->
+ 
+
 
 <!-- ... Datepicker 3 
   <script src="<?php echo base_url(); ?>jquery1.12.4/jquery.min.js"></script>

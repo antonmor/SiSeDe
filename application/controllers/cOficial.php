@@ -50,16 +50,53 @@ class cOficial extends CI_Controller {
 			$this->load->view('footer');
 
 	}
+/**************************************************************************/
 	public function demanda(){
-			$this->load->view('header2');
 			
+			$this->load->model('mLogin');
+			$datos['expedientes'] = $this->mLogin->per_exp();
+			$datos['secretario_a'] = $this->mLogin->get_SA();
+			$datos['envios'] = $this->mLogin->get_envios_sa();
+			if ($_POST) {
+
+				$id_anexopdf=$this->input->post('id_exp' );
+				$id_logeado=$this->input->post('id_log' );
+				$id_sa=$this->input->post('id_sa' );
+				
+				$insercion = $this->mLogin->enviar($id_anexopdf,$id_logeado,$id_sa);
+
+				if($insercion){
+                $this->session->set_flashdata('actualizado', 'El expediente se envio correctamente');
+              		redirect(base_url('index.php/cOficial/demanda'));
+              	}
+			}
+			$this->load->view('header2');
+			$this->load->view('body/vOficial');		  
+		    $this->load->view('body/vDemandanew',$datos);
+			$this->load->view('footer');
+	}
+	public function recuperar(){
+
+		$this->load->model('mLogin');
+		$id_expediente = $_GET['expediente'];
+		$anexos_pdf = $this->mLogin->get_anexos(['id_Expediente'=>$id_expediente]);
+		$datos = ['anexos'=>$anexos_pdf];
+		header("Content-Type: application/json; encoding=UTF-8");
+		echo json_encode($datos);
+	}
+
+/**************************************************************************/	
+/*	public function demanda(){
+			$this->load->view('header2');
 			$this->load->view('body/vOficial');		
 			$this->load->model('mLogin');   
-
-		    $this->load->view('body/vDemanda');
+			 //$array=array('Expedientes'=>$this->mLogin->getExp());
+			 //print_r($array);
+		    $this->load->view('body/vDemandanew');
 			$this->load->view('footer');
 			
 	}
+*/
 	public function nueva_demanda(){
 			$this->load->model('mLogin');
 			$this->load->view('header2');
@@ -77,12 +114,16 @@ class cOficial extends CI_Controller {
 
 	public function buscar_persona(){
 		$this->load->model('mLogin');
+	//print_r( $this->mLogin->persona($_GET['term'])); //se envia el rol
 		
-		$rol = $this->input->post('idRoles');
-		$resultado=$this->mLogin->persona($rol);
-		json_encode($resultado);
-		
+		$buscar =$this->input->post('valorBusqueda');
+		$idRol=$this->input->post('idRoles'); 
+		echo(json_encode($this->mLogin->persona($buscar,$idRol)));
 	}
-}
+	public function obtener_exp(){
+		$this->load->model('mLogin');
+		echo(json_encode($this->mLogin->get_ultimoexp()));
+	}
 
+}
 ?>

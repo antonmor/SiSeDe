@@ -18,12 +18,15 @@
     <br>
 	</div> <!--Imgane demanda-->
 <div class="row">
+	<div class="col-md-4 col-md-offset-4"> 
+		<label>Serie</label>
+		<input type="text" id="Serie" name="Serie" style="text-align:right;">
+	</div><!--col-->
 	<div class="col-md-4 col-md-offset-4">
 		<label>Folio</label>
 		<input type="text" id="FolioExp" name="FolioExp" autofocus style="text-align:right;">
 	</div>
-
-</div>
+</div> <!--Row-->
 <div class="row">
 <div class="col-md-10 col-md-offset-1">
 <div id="accordion">
@@ -78,12 +81,34 @@
 			</div> <!--col--> 
 		</div><!--Row-->
 		<div class="row">
-			<div class="col-md-5 col-md-offset-1">
-				<input id="Demandante" class="form-control input-sm" type="text" name="Demandante" placeholder="buscar" > </br>
-			</div><!--col Demandante-->
-			<div class="col-md-5 col-md-offset-1">
+			<form accept-charset="utf-8" method="POST" enctype="multipart/form-data">
+					<input type="hidden" class="tags_id" name="tags_id" id="tags_id" >
+					<input type="hidden" class="tags_id" name="tags_id2" id="tags_id2" >
+
+				<div class="col-md-5 col-md-offset-1">
+					<input type="text" class="form-control input-sm" name="busqueda" value="" placeholder="" maxlength="50" autocomplete="off" onkeyup="buscar(this.value);" />
+					<table id="tbDatos" width="100%"  border="0" cellspacing="0" cellpadding="0" style="font-size:12px"> </table>
+				</div>	
+				<div class="col-md-5 col-md-offset-1">
+					<input type="text" class="form-control input-sm" name="busqueda2" value="" placeholder="" maxlength="50" autocomplete="off" onkeyup="buscar2(this.value);" >
+					<table id="tbDatos2" width="100%"  border="0" cellspacing="0" cellpadding="0" style="font-size:12px"> </table>
+				</div>	
+			</form>
+	<!--		<div id="resultadoBusqueda"></div>	<br> 
+	-->
+	
+
+	<!--			<input id="Demandante" class="form-control input-sm" type="text" name="Demandante" placeholder="buscar" > </br>
+			
+			
+	-->		
+
+	<!--		<div class="col-md-5 col-md-offset-1">
 				<input class="form-control input-sm" type="text" name="Demandado" id="Demandado" placeholder="buscar">
-			</div> <!--col Demandado --> 
+			
+			</div>
+ 	-->	
+		
 		</div><!--Row-->
 		<div class="row">
 			<div class="col-md-5 col-md-offset-1">
@@ -133,7 +158,7 @@
 	   	  		
 	   				 <div class = "row">	  
 	   	  				<div class="col-md-3 "> 	
-	   	  	 			<input type="file" id="userfile" name="userfile" size="20" accept="application/pdf">
+	   	  	 			<input type="file" class="multi" id="usr_file" name="usr_file[]" size="20" multiple="" accept="application/pdf">
 	   	  				</div>
  					 </div>
  					 </td>
@@ -213,63 +238,40 @@
  			yearRange: "2015:2020",
  			dateFormat: "yy-mm-dd"
 
- 		});
+ 		});	
  	});//javascripUI
- 
 
-function requiredAutocomplete(idRoles,id){
-		var persona=[];
-	//	var fdate = $('#datetimepicker2')
-
-	$.post("<?php echo site_url('cOficial/buscar_persona');?>",
-			 {idRoles:id},
-			function(data){
-
-			for(var l=0; l<data.length;l++){
-				if(id == 7){  // Fisica/moral
-					idPd1 = data[l].idPersona;
-					persona.push(data[l].idPersona + " " + id + " " + " " + data[l].Nombre + " " + data[l].Apat + " " + data[l].Amat);
-					
-					$("#d1").val(data[l].idPersona);
-				//persona.push(data[l]);
-				//	alert(data);
-					}
-				if(id == 8)
-				   {idPd = data[l].idPersona;
-				   	persona.push(data[l].idPersona + " "+id + " "+ idRoles+" " + data[l].RazonSocial); 
-					
-					$("#d2").val(data[l].idPersona);
-					//Institucion
-					//alert(persona);
-				   }
-				}
-			
-			},"json");//post
-		return persona;
-	}//requiredAutocomplete()
-
-	$("#Demandante").autocomplete({
-		source:requiredAutocomplete("data",7),
-		select: function(event, ui){
-			 alert($("#d1").val());
-
-		}
-	}); // demandante
-	$("#Demandado").autocomplete({
-		source:requiredAutocomplete("idRoles",8),
-		select: function(){
-			alert($("#d2").val());
-		}
-	}); //demandado
-	
-	
 
 function Roles(roles){
 	 $("#TRol").text("Rol del "+ roles );
 }
 
 // funcion que se sejecuta cuando se abre la pagina
-	$(document).ready(function(){
+$(document).ready(function(){
+//folio del expediente
+
+$.ajax({
+	Type:"POST",
+	url:"<?php echo base_url().'index.php/cOficial/obtener_exp'; ?>",
+	success:function(result){
+			var f = new Date();
+			var Data = jQuery.parseJSON(result);		 	
+						$('#Serie').val(f.getMonth()+1+'-'+f.getFullYear());
+						$("#FolioExp").val(Data[0].FExpediente);
+					 } 
+	  });
+
+
+// Selecciona al demandante
+$('#say_hello').click(function(){
+	hello();
+});
+
+//Etiqueta para la busqueda de usuario
+	$("#resultadoBusqueda").html('<p><p>');
+// Fin buscar usuario...
+
+
 	if ($("#Tiporol").val() == "Usuario") {
 		$("#Oficial").text( $("#Tiporol").val());		
 	} else{
@@ -280,6 +282,7 @@ function Roles(roles){
 	$("#adddemanda").on('click',function(){ 
 	//alert("Esta por subirse el archivo");
 	//	alert(document.getElementById('FolioExp').value);
+	//alert('entra');
 	event.preventDefault();
 	var formData = $(this).serialize();
 		$.ajax({
@@ -311,44 +314,127 @@ function Roles(roles){
 
 			   });
 
-
-
-
-/* multiples
-			var tds='<tr>';
-			var ifile = $("#userfile");
-			
-				var files=ifile.prop("files");
-			    var names = $.map(files,function(val){ return val.name});	
-					var i=1;
-						
-				$.each(names,function(i,name){
-					alert(name);
-						i+=1;	
-						});	
-		
-			
-			$("table tr#first:first").clone().find("files ").each(function(){
-						$(this).attr({
-							'id': function(_,id) {return id + i},
-							'name': function(_,name){ return name + i},
-							'value': ''
-						});
-					}).end().appendTo("#tbfiles"); 
-		
-
-
-			 
-			//	alert(names); 	
-			//$('select#divdoc2').append(options); 
-			   // tds += '</tr>';
-				//alert(tds);
-				//$("#tbfiles").append(tds);
-				//$('#doc2').clone().append('#tbfiles');
-*/				//$('#divdoc2').clone().add();
 		});
 
-	});//LOAD
+});//LOAD
+
+//buscar persona demandante
+function buscar(str){
+var textoBusqueda = $("input#busqueda").val();
+	if($("input#busqueda") != ""){
+		$.ajax({
+			type:'POST',
+			url:"<?php echo base_url().'index.php/cOficial/buscar_persona'; ?>",
+			data: { 'valorBusqueda': str,
+					'idRoles':'7'},
+			success:function(mensaje){
+					var da = mensaje;
+					//alert(da);
+						var Data = jQuery.parseJSON(mensaje);
+					 //$("#resultadoBusqueda").html(mensaje);
+				if(mensaje.length <= 2) 
+				    {
+				    	$('#tags_id').val('');
+				    	//alert(mensaje.length);
+				    }	 
+
+					 $('#tbDatos').html("");													//style="display: none"		
+					 $('#tbDatos').append('<table class ="table table-striped" id="example"><thead><tr><th>Id </th><th>Nombre</th> <th>CURP</th></table>');
+					 var table = $('#tbDatos').children().addClass("display");
+					 for(var i=0;i<Data.length; i++) {
+					 	table.append("<tr class='success' id="+Data[i].idFisica +"'><td>"+ Data[i].idFisica + "</td><td>"+Data[i].Nombre+ " " + Data[i].Apat + " " + Data[i].Amat 
+					 		+" <td>" + "<td class='info' name='CURP'>"+ "<a href='#' id='say_hello'>" + Data[i].CURP+"</a><td></tr>");
+					 }
+			$('#tags_id').val(Data[0].idFisica);
+			},
+			error: function(){
+				alert('error: ' + mensaje);
+			}
+
+		});
+	} else {
+		 $('#tbDatos').html("");
+		 $('#tbDatos').append("");
+	}
+};
+
+/*
+Buscar personas demandado
+*/
+function buscar2(str){
+var textoBusqueda = $("input#busqueda2").val();
+	if($("input#busqueda2") != ""){
+		$.ajax({
+			type:'POST',
+			url:"<?php echo base_url().'index.php/cOficial/buscar_persona'; ?>",
+			data: { 'valorBusqueda': str,
+			'idRoles':'8'},
+			success:function(mensaje){
+					var da = mensaje;
+					//alert(da);
+						var Data = jQuery.parseJSON(mensaje);
+					 //$("#resultadoBusqueda").html(mensaje);
+				if(mensaje.length <= 2) 
+				    {
+				    	$('#tags_id2').val('');
+				    	//alert(mensaje.length);
+				    }	 
+
+					 $('#tbDatos2').html("");													//style="display: none"		
+					 $('#tbDatos2').append('<table class ="table table-striped" id="example"><thead><tr><th>Id </th><th>Nombre</th> <th>CURP</th></table>');
+					 var table = $('#tbDatos2').children().addClass("display");
+					 for(var i=0;i<Data.length; i++) {
+					 	table.append("<tr class='success' id="+Data[i].idFisica +"'><td>"+ Data[i].idFisica + "</td><td>"+Data[i].RazonSocial+ "( "+Data[i].Nombre + " " + Data[i].Apat + " " + Data[i].Amat + " ) " 
+					 		+" <td>" + "<td class='info' name='CURP'>"+ "<a href='#' id='say_hello'>" + Data[i].CURP+"</a><td></tr>");
+					 }
+			$('#tags_id2').val(Data[0].idFisica);
+			},
+			error: function(){
+				alert('error: ' + mensaje);
+			}
+
+		});
+	} else {
+		 $('#tbDatos2').html("");
+		 $('#tbDatos2').append("");
+
+	}
+
+};
+
+
+
+/*
+
+
+*/
+
+function hello(){
+	alert(" ids: ");
+};
+
+
+
+
+
+
+/* fuentes de apoyo...
+http://es.stackoverflow.com/questions/14502/como-poner-en-mi-tabla-en-json-jquery-un-pdf-de-sql
+https://mimentevuela.wordpress.com/2015/08/09/busqueda-instantanea-con-ajax-php-y-mysql/comment-page-1/
+http://stackoverflow.com/questions/8612554/calling-javascript-function-inside-html-tag
+*/
+
+
+
+
+
+
+
+
+
+
+
+//fin buscar una persona
 
 $('#cancelar').on('click',function (){
 	window.location.href='<?php echo base_url().'index.php/cOficial/demanda';?>';

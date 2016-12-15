@@ -1,39 +1,26 @@
 
-<br>
-<br>
-<div id="container">
- 
- <div class="row">
+<div class="container">
+  <div class="row">
     <div class="col-sm-6 col-md-4 col-md-offset-4">
       <h1 class="text-center login-title">SiSeDe v1.0</h1>
         <div class="account-wall">
-          <form class="form-signin">
-            <label >Usuario: </label>
-              <input type="text" class="form-control" id="user" name="user" placeholder="Email" required autofocus>
-            <label>Contraseña:</label>
-              <input type="password" class="form-control" id="password" name ="password" placeholder="Password" required>
-          </form> <!--form-->
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Usuario</label>
+                 <input type="text" class="form-control" id="user" name="user" placeholder="Email" required autofocus>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Contraseña</label>
+                <input type="password" class="form-control" id="password" name ="password" placeholder="Password" required>
+              </div>
+              <button type="button" class="btn btn-success" style="width: 100%;" onclick="loggin();">Iniciar Sesión</button>
+            </form><br>
+            <span><a href="#" class="pull-left need-help">¿Necesitas ayuda? </a></span>
+            <span><a href="<?php echo site_url('Welcome/vregistrar/');?>" class="pull-right new-account">Registrarse</a></span>
         </div><!--account-->
-        </div> <!--cols-->
- </div> <!--ROW-->
- <div class="row">
-    <div class="col-sm-6 col-md-5 col-md-offset-7">
-       <button  type="button" class="btn btn-sm btn-success" onclick="loggin();">Iniciar</button>
-    </div><!--col-->
- </div><!--Row-->
-<div class="row">
-    <div class="col-sm-4 col-md-4 col-md-offset-4">
-       <a href="#" class="pull-right need-help">¿Necesitas ayuda? </a><span class="clearfix"></span>
-    </div><!--Col-->
-</div><!--Row-->
-<div class="row">
-    <div class="col-sm-6 col-md-4 col-md-offset-4">
-      <a href="<?php echo site_url('Welcome/vregistrar/');?>" class="pull-right new-account">Registrarse</a>
-    </div><!--Col-->
-</div><!--Row-->
-
-</div> <!--container-->
-
+    </div>
+  </div>
+</div>
 
 <script lenguage="javascript" type="text/javascript">
 
