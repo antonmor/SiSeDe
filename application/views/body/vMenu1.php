@@ -7,9 +7,9 @@
 <br>
  <div class="row">
         <div class="col-xd-1 col-sm-2 col-md-2 col-md-offset-1">
-            <a id="titimg" href="#">
+            <a id="titimg" href="<?php echo site_url('cOficial/acuerdo'); ?>">
                 <img src="<?php echo base_url();  ?>Imagenes/Acuerdos.png" title="Acuerdos" width="50" height="50"></br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Acuerdos
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Acuerdos 
             </a>
         </div> <!--cols-->
         <div class="col-xd-1 col-sm-2 col-md-2">
@@ -24,7 +24,7 @@
             </a>
         </div> <!--cols-->
         <div class="col-xd-1 col-sm-2 col-md-2">
-            <a id="titimg" href="#">
+            <a id="titimg" href="<?php echo site_url('cOficial/seguimiento'); ?>">
                 <img src="<?php echo base_url();  ?>Imagenes/seguim.png" title="Seguimiento" width="50" height="50"></br>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seguimiento
             </a>
@@ -40,6 +40,4 @@
 <br>
 <br>
 <br>
-
-
 </div> <!--container-->

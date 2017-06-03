@@ -15,7 +15,7 @@
               </div>
               <button type="button" class="btn btn-success" style="width: 100%;" onclick="loggin();">Iniciar Sesión</button>
             </form><br>
-            <span><a href="#" class="pull-left need-help">¿Necesitas ayuda? </a></span>
+            <span><a href="<?php echo site_url('Welcome/recuperar_datos/');?>" class="pull-left need-help">¿Necesitas ayuda? </a></span>
             <span><a href="<?php echo site_url('Welcome/vregistrar/');?>" class="pull-right new-account">Registrarse</a></span>
         </div><!--account-->
     </div>

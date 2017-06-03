@@ -77,7 +77,7 @@ echo  form_open('cLogin/registrar_nuevo');
 	    <div class="row">	
 			<div class="col-xs-4 col-md-2">
 				<label>Teléfono</label>
-				<input class="form-control input-sm" type="text" id="tf" name="tf"   >
+				<input class="form-control input-sm" type="text" id="tf" name="tf" >
 			</div><!--Col-->	
 			<div class="col-xs-4 col-md-2">
 				<label>Móvil</label>
@@ -133,10 +133,10 @@ echo  form_open('cLogin/registrar_nuevo');
 	    </div><!--Row-->
 	    <div class="row">
 	   	 <div class="col-xs-4 col-md-2"> 
-	    	<label class="justificar">Número Interior</label>
+	    	<label class="justificar">Número Exterior</label>
 	     </div><!--Col-->		
 	   	 <div class="col-xs-4 col-md-2"> 
-	    	<label class="justificar">Número Exterior</label>
+	    	<label class="justificar">Número Interior</label>
 	     </div><!--Col-->		
 	   	 <div class="col-xs-4 col-md-2"> 
 	    	<label class="justificar">Código postal</label>
@@ -144,10 +144,11 @@ echo  form_open('cLogin/registrar_nuevo');
 	    </div><!--Row-->
 		<div class="row">	
 	     	<div class="col-xs-4 col-md-2"> 
-	    		<input class="form-control input-sm" type="text" id="interior" name="interior" >
-	     	</div><!--Col-->
-	     	<div class="col-xs-4 col-md-2"> 
 	    		<input class="form-control input-sm" type="text" id="exterior" name="exterior" >
+	     	</div><!--Col-->
+
+	     	<div class="col-xs-4 col-md-2"> 
+	    		<input class="form-control input-sm" type="text" id="interior" name="interior" >
 	     	</div><!--Col-->
 	     	<div class="col-xs-4 col-md-2"> 
 	    		<input class="form-control input-sm" type="text" id="cp" name="cp" >
@@ -190,10 +191,10 @@ echo  form_open('cLogin/registrar_nuevo');
 	    </div><!--Row-->
 	    <div class="row">
 	   	 <div class="col-xs-4 col-md-2"> 
-	    	<label class="justificar">Número Interior</label>
+	    	<label class="justificar">Número Exterior</label>
 	     </div><!--Col-->		
 	   	 <div class="col-xs-4 col-md-2"> 
-	    	<label class="justificar">Número Exterior</label>
+	    	<label class="justificar">Número Interior</label>
 	     </div><!--Col-->		
 	   	 <div class="col-xs-4 col-md-2"> 
 	    	<label class="justificar">Código postal</label>
@@ -201,10 +202,10 @@ echo  form_open('cLogin/registrar_nuevo');
 	    </div><!--Row-->
 		<div class="row">	
 	     	<div class="col-xs-4 col-md-2"> 
-	    		<input class="form-control input-sm" type="text" id="interior1" name="interior1" >
+	    		<input class="form-control input-sm" type="text" id="exterior1" name="exterior1" >
 	     	</div><!--Col-->
 	     	<div class="col-xs-4 col-md-2"> 
-	    		<input class="form-control input-sm" type="text" id="exterior1" name="exterior1" >
+	    		<input class="form-control input-sm" type="text" id="interior1" name="interior1" >
 	     	</div><!--Col-->
 	     	<div class="col-xs-4 col-md-2"> 
 	    		<input class="form-control input-sm" type="text" id="cp1" name="cp1" >
@@ -252,8 +253,12 @@ echo  form_open('cLogin/registrar_nuevo');
 </div> <!--Usuario-->
 </div> <!--accordion-->
 <div class="row">
-	<div class="col-md-3 col-md-offset-4">
+	<div class="col-md-2 col-md-offset-4">
     	 <button type="button" class="btn btn-sm btn-success btn-block" onclick="registro_nuevo();">Guardar</button>	
+    	 </br>
+	</div>
+	<div class="col-md-2 ">
+    	 <button type="button" class="btn btn-sm btn-danger btn-block" onclick="cancelar();">Cancelar</button>	
     	 </br>
 	</div>
 </div><!--Row-->
@@ -274,6 +279,10 @@ echo  form_open('cLogin/registrar_nuevo');
  		$("#Municipio1").selectmenu();
  	});
 	
+ function cancelar(){	
+	var url='<?php echo base_url().'index.php/Welcome/inicio_sesion';?>'
+ 	window.location.href=url;
+ }
  	function tipo_persona(tipo){
  		
  		var ns=document.getElementById('nombre'); 
@@ -298,7 +307,7 @@ echo  form_open('cLogin/registrar_nuevo');
 	} //Tipo_persona
 
  	function registro_nuevo(){
-			var url='<?php echo base_url().'index.php/Welcome/inicio_sesion';?>';
+			var url='<?php echo base_url().'index.php/Welcome/inicio_sesion';?>';			
  		$.ajax({url:"<?php echo base_url().'index.php/cLogin/registrar_nuevo'; ?>",
  			type:'POST',
  			data:{
@@ -331,10 +340,10 @@ echo  form_open('cLogin/registrar_nuevo');
 					user:document.getElementById('user').value,
 					pass:document.getElementById('pass').value,
 					pass1:document.getElementById('pass1').value
-
  			},
+ 			//dataType:'json',
  		success:function(result){
- 			
+ 				//alert(result);
 			if(result !=0)
 			{
 				alert(' Se guardo el registro con exito...');
@@ -342,10 +351,12 @@ echo  form_open('cLogin/registrar_nuevo');
 				alert(' Ocurrio un error y no se guardo el registro...');				
 			}
 		 window.location.href=url;
+ 		},
+ 		error: function(result)	{
+ 			
+ 			alert( 'no se guardo');
  		}
 	
-
-
  		});
  	}//Registro_nuevo
  		

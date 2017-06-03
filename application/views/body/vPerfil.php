@@ -10,56 +10,50 @@
     <br>
     <div class="row">
     	<div class="col-md-4 col-md-offset-4">
-    		<label class="labprf">TIPO DE PERSONA:</label>
-    		<input class="txtin" id="txttp" name="txttp" type="text"> 
+    		<label class="labprf">Rol:</label>
+    		<input class="txtin" id="txttp" name="txttp" type="text" value="<?php print_r($_SESSION["Rol"]);?>"> 
     	</div>
     </div>
     <div class="row">
     	<div class="col-md-4 col-md-offset-4">
     		<label class="labprf">NOMBRE DEL USUARIO:</label>
-    		<input class="txtin" name="txtnom" type="text"> 
-    	</div>
-    </div>
-    <div class="row">
-    	<div class="col-md-4 col-md-offset-4">
-    		<label class="labprf">GENERO:</label>
-    		<input class="txtin" name="txtgen" type="text"> 
+    		<input class="txtin"  name="txtnom" id="txtnom" type="text">
     	</div>
     </div>
     <div class="row">
     	<div class="col-md-4 col-md-offset-4">
     		<label class="labprf">IDENTIFICACION OFICIAL:</label>
-    		<input class="txtin" name="txtidof" type="text"> 
+    		<input class="txtin" name="txtidof" id="txtidof" type="text"> 
     	</div>
     </div>
     <div class="row">
     	<div class="col-md-4 col-md-offset-4">
     		<label class="labprf">REFERENCIA:</label>
-    		<input class="txtin" name="txtref" type="text"> 
+    		<input class="txtin" name="txtref" id="txtref" type="text"> 
     	</div>
     </div>
     <div class="row">
     	<div class="col-md-4 col-md-offset-4">
     		<label class="labprf">TELÉFONO FIJO:</label>
-    		<input class="txtin" name="txttelf" type="text"> 
+    		<input class="txtin" name="txttelf" id="txttelf" type="text"> 
     	</div>
     </div>
     <div class="row">
     	<div class="col-md-4 col-md-offset-4">
     		<label class="labprf">MÓVIL:</label>
-    		<input class="txtin" name="txtmov" type="text"> 
+    		<input class="txtin" name="txtmov" id="txtmov" type="text"> 
     	</div>
     </div>
     <div class="row">
     	<div class="col-md-4 col-md-offset-4">
     		<label class="labprf">E-MAIL:</label>
-    		<input class="txtin" name="txtem" type="email"> 
+    		<input class="txtin" name="txtem" id="txtem" type="email"> 
     	</div>
     </div>
     <div class="row">
     	<div class="col-md-4 col-md-offset-4">
     		<label class="labprf">DIRECCIÓN:</label>
-    		<input class="txtin" name="txtdir" type="text"> 
+    		<input class="txtin" name="txtdir" id="txtdir" type="text"> 
     	</div>
     </div>
     <div class="row">
@@ -122,10 +116,29 @@
 	<br>
 </div>
 
-<script type="text/javascript">
-    
-   
-        $("#txttp").val($_SESSION["Nombre"]);       
+<script>
 
+$(document).ready(function(){
+           
+    $.ajax({
+        url:"<?php echo base_url().'index.php/cOficial/get_perfil'; ?>",
+        type:"POST",
+        success:function(result){
+          
+            $(result).each(function(i,v){
+                  $('#txtnom').val(v.Nombre+' '+v.Apat+' '+v.Amat);
+                  $('#txtidof').val(v.IDoficial);  
+                  $('#txtref').val(v.NumeroIDOficial);                    
+                  $('#txtem').val(v.Email);
+                  $('#txtmov').val(v.Cel);
+                  $('#txttelf').val(v.Tel);
+                  $('#txtdir').val(v.Domicilio + ' ' + v.Colonia);
+
+                });
+            
+        }
+
+    });
+});
 
 </script>

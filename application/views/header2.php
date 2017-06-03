@@ -29,16 +29,21 @@ defined('BASEPATH') or exit('No direct script access allowd');
 	<script src="<?php echo base_url(); ?>jquery-ui-1.11.4/jquery-ui.min.js"></script>
 	<script src="<?php echo base_url(); ?>jquery-ui-1.11.4/jquery-ui.js"></script>
 	
-<!--easy autocomplete-->
+<!--easy autocomplete
   <link   href="<?php echo base_url(); ?>EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.css" rel="stylesheet">
   <script src="<?php echo base_url(); ?>EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script>
    <link   href="<?php echo base_url(); ?>EasyAutocomplete-1.3.5/easy-autocomplete.themes.min.css" rel="stylesheet">
-
-<!-- Table-->
+-->
+<!-- DataTable Ismael-->
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>/bootstrap/css/dataTables.bootstrap.min.css">
 <script src="<?=base_url()?>/bootstrap/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url()?>/bootstrap/js/dataTables.bootstrap.min.js"></script>
-
+<!-- Datetimepicker Ismael-->
+<script src="<?=base_url()?>/bootstrap/js/moment.min.js" type="text/javascript"></script>
+<script src="<?=base_url()?>/bootstrap/js/bootstrap-datetimepicker.min" type="text/javascript"></script>
+<!-- Select editable ismael-->
+<link href="<?=base_url()?>/bootstrap/css/jquery-editable-select.min.css" rel="stylesheet">
+<script src="<?=base_url()?>/bootstrap/js/jquery-editable-select.min.js"></script>
 <!--jquery ui 1.12.custom-->
 <!--  <link rel="stylesheet" href="<?php echo base_url(); ?>jquery-ui-1.12.custom/jquery-ui.theme.css"> -->
 <!--  <script src="<?php echo base_url(); ?>jquery-ui-1.12.custom/external/jquery/jquery.js"></script>

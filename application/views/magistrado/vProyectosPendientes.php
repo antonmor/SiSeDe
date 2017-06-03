@@ -1,59 +1,66 @@
-<div id="container">
+<?php
+    $this->load->database();
+    $revision=$this->mLogin->getarc(2);
+?>
+  <div class="row">
+        <div class="col-xs-12" style="margin-left:10%;width:70%; ">
+          <table class="table" >
+            <thead>
+              <tr>
+                <th style="text-align:center;">Proyecto</th>
+                <th style="text-align:center;">Fecha</th>
+                <th style="text-align:center;">Actividad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+                foreach ($revision as  $rev){
+                  $nombre2=substr(urlencode($rev['nombre']), 0, strlen(urlencode($rev['nombre']))-4);
+              ?>
+              <tr id="<?php echo $rev['nombre']; ?>" name="table1">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <td id="<?php echo $rev['nombre']; ?>" style="text-align:center" >
+                      <?php echo $nombre2; ?></td>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <td id="<?php echo $rev['fechaenv']; ?>" style="text-align:center" >
+                      <?php echo $rev['fechaenv']; ?></td>
+                  </div>
+                </div>
 
-	<div class="row">
-		<div class="col-sm-4 col-md-4 col-md-offset-5">
-			<h5><img class="imgview" src="<?php echo base_url();  ?>Imagenes/folder.png" title="Expedientes Pendientes" width="10" height="10">
-				<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Proyectos Pendientes</strong></h5>
-		</div>
-	</div>
-	<div id="contenido2">
-			<br>		
-			<div id="contenido3">
-
-				<div class="row">
-					<div class="col-md-3 col-md-offset-2">
-						<h5><strong>Número De Folio</strong></h5>
-					</div>
-					<div class="col-md-4 col-md-offset-2">
-						<h5><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Acción a realizar</strong></h5>
-					</div>
-				</div>
-				<br>
-				<div class="row">
-					<div class="col-md-3 col-md-offset-2">
-						<a href="#">XXXX01</a>
-					</div>
-					<div class="col-md-1 col-md-offset-1">
-						<a href="/SiSeDe/index.php/cSPMag"> <img  src="<?php echo base_url();  ?>Imagenes/leer.png" title="Leer" 
-							style="width:35px; height:30px;"></a>
-					</div>
-					<div class="col-md-1">
-						<a href="#"> <img src="<?php echo base_url();  ?>Imagenes/ok.png" title="Aprovado" 
-							style="width:35px; height:30px;"></a>
-					</div>
-										<div class="col-md-1">
-						<a href="#"> <img src="<?php echo base_url();  ?>Imagenes/canc.png" title="Rechazado" 
-							style="width:35px; height:30px;"></a>
-					</div>
-										<div class="col-md-1">
-						<a href="#"> <img src="<?php echo base_url();  ?>Imagenes/firmar.png" title="Firmar" 
-							style="width:35px; height:30px;"></a>
-					</div>
-										<div class="col-md-1">
-						<a href="#"> <img src="<?php echo base_url();  ?>Imagenes/print.png" title="Imprimir" 
-							style="width:35px; height:30px;"></a>
-					</div>
-				</div>
-				<br>
-				<br>
-			</div>
-		<div class="row">
-			<div class="col-md-2 col-md-offset-9">
-				<button type="button" class="btn btn-success">Aceptar</button>
-			</div>
-		</div>
-		<br>
-		<br>	
-	</div>
-
-</div>
+                <td style="text-align: center;">
+                  <div class="row">
+                    <div class="col-xs-2 col-xs-offset-3">
+                      <form action="/SiSeDe/index.php/crevproy/revproym" method="post">
+                        <input type="hidden" value="<?php echo $rev['folder']; ?>" name="folder">
+                        <input type="hidden" value="<?php echo $rev['nombre']; ?>" name="archivo">
+                        <button class="btn btn-primary" title="Revisar " name="Revisar" type="submit">Revisar</button>
+                      </form>
+                    </div>
+                    <div class="col-xs-2">
+                      <form action="/SiSeDe/index.php/cenviar/aprobarmag" method="post">
+                        <input type="hidden" value="<?php echo $rev['folder']; ?>" name="folder">
+                        <input type="hidden" value="<?php echo $rev['nombre']; ?>" name="archivo">
+                        <button class="btn btn-success" title="aprobar " name="Revisar" type="submit">Aprobar</button>
+                      </form>
+                    </div>
+                    <div class="col-xs-2">
+                      <form action="/SiSeDe/index.php/cenviar/rechazarmag" method="post">
+                        <input type="hidden" value="<?php echo $rev['folder']; ?>" name="folder">
+                        <input type="hidden" value="<?php echo $rev['nombre']; ?>" name="archivo">
+                        <button class="btn btn-danger" title="rechazar " name="Revisar" type="submit">Rechazar</button>
+                      </form>
+                    </div>
+                  </div>
+                  </td>
+                </tr>
+              <?php
+                }
+              ?>
+            </tbody>
+        </table>
+        </div>
+      </div>
