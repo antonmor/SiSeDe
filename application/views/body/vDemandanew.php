@@ -253,6 +253,7 @@ tr.shown td.details-control {
                   console.log(jqXHR.responseText);
                 },
                 'success': function(data, textStatus, jqXHR) {
+                 
                   row.child(format(id_expediente,data)).show();
                   tr.addClass('shown');
                 }

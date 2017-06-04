@@ -144,20 +144,16 @@ tr.shown td.details-control {
     </div>
   </div>
 <script lenguage="javascript" type="text/javascript">
-  
   $(function(){
         $("#date").datepicker();
         $("#datelim").datepicker();
   });
-function verifica(id){
-  
+function verifica(id){  
   if(id == 4 ) {
       document.getElementById('desecha').style.display = "inline";
   } else {
      document.getElementById('desecha').style.display = "none";
   }
-
-
 }
 
 
@@ -175,7 +171,7 @@ function verifica(id){
       $th = $('<th>').appendTo($tr).text('Concepto');
       $th = $('<th>').appendTo($tr).text('Documento');
       $th = $('<th>').appendTo($tr).text('Folio');
-      $th = $('<th>').appendTo($tr).text('Archivo');
+      $th = $('<th>').appendTo($tr).text('Responsable');
       $th = $('<th>').appendTo($tr).text('Comentarios');
       $th = $('<th>').appendTo($tr);
       for (var i = 0, anexo; anexo = data.anexos[i]; i++) {
@@ -186,7 +182,7 @@ function verifica(id){
         $td = $('<td>').appendTo($tr).text(anexo.Tipo);
         $td = $('<td>').appendTo($tr).text(anexo.Tipox);
         $td = $('<td>').appendTo($tr).text(anexo.Folio);
-        $td = $('<td>').appendTo($tr).text(anexo.NomFile);
+        $td = $('<td>').appendTo($tr).text(anexo.Responsable);
         $td = $('<td>').appendTo($tr).text(anexo.Comentarios);
         $td = $('<td>').appendTo($tr);
         $a =$('<a>').appendTo($td)
@@ -204,7 +200,6 @@ function verifica(id){
     }
     $(function () {
       var table = $('#example').DataTable({});
-
       // Add event listener for opening and closing details
       $('#example').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
@@ -224,6 +219,7 @@ function verifica(id){
                 'expediente' : id_expediente
                 },
                 'error':function(jqXHR){
+                  alert(jqXHR.responseText);
                   console.log(jqXHR.responseText);
                 },
                 'success': function(data, textStatus, jqXHR) {
