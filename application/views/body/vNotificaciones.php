@@ -208,7 +208,6 @@ function verifica(id){
             } else {
               // Open this row
               var id_expediente = tr.data('child-value');
-             // alert(tr.data('child-value'));
               $.ajax({
                 'type'  : 'GET',
                 'url'   : "<?= base_url()?>index.php/cOficial/recuperar",

@@ -128,7 +128,7 @@ public function get_SA($id){
 	return $array;
 }
 function get_anexos($opts=array()) {
-	$this->db->select('DATE_FORMAT(a.FechaUp, "%d-%m-%Y %T") as FechaUp, a.Folio, a.NomFile, act.Tipo ',FALSE)
+	$this->db->select('DATE_FORMAT(a.FechaUp, "%d-%m-%Y %T") as FechaUp, a.PathAnexo,a.Folio, a.NomFile, act.Tipo ',FALSE)
 	->from('anexopdf a')
 	->join('AcuerdoTipo act', 'act.id = a.id_Tipo')
 	->join('notificacion n','n.id_anexo = a.id','left');

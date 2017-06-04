@@ -188,6 +188,7 @@ function verifica(id){
         $a =$('<a>').appendTo($td)
         .prop('href','#')
         .text('Ver Documento')
+        
         .attr('data-toggle','modal')
         .attr('data-target','#myModalmostrar')
         .attr('onclick','mostrar("'+anexo.PathAnexo+'","'+anexo.NomFile+'")');

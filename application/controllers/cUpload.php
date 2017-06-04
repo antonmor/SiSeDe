@@ -56,7 +56,6 @@ class cUpload extends CI_Controller{
 				'Folio'=>$this->input->post('FolioExp')."_".$i,//Folio
 				'id_tipo'=>$this->input->post('doc2'), // Tipo de documento
 				'id_Expediente'=> $last_id_Exp,    //  id Expediente 
-			//	'FechaUp'=>  $fecha1 ,//fecha
 				'PathAnexo'=> $pathS,	//pathAnexo		
 				'NomFile'=> $_FILES['usr_file']['name'][$i], //NomFile
 				'NomFileSis' => 'null',

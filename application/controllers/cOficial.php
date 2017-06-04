@@ -40,21 +40,16 @@ class cOficial extends CI_Controller {
   				$this->load->view('body/vMenu1');
   				$this->load->view('footer');
   			}
-
-
   	    } else {
   			redirect('Welcome/inicio_sesion');
   	    }
-
   	}
 	public function principal(){
-
 			$this->load->model('mLogin');
 			$this->load->view('header2');
 			$this->load->view('body/vOficial');
 			$this->load->view('body/vMenu1');
 			$this->load->view('footer');
-
 	}
 	public function notificacion(){
 			$this->load->model('mLogin');
@@ -64,13 +59,10 @@ class cOficial extends CI_Controller {
 			$datos['expedientes'] = $this->mLogin->exp_x_sa($Persona_id);
 			$datos['proyectista'] = $this->mLogin->get_SA(4);
 			$datos['actuario'] = $this->mLogin->get_SA(5);
-
 			$datos['tipoacuerdo'] = $this->mLogin->get_tipoacuerdo(2);
-
 			$datos['desecha']= $this->mLogin->get_tipodesecha();
 			$this->load->view('body/vNotificaciones',$datos);
 			$this->load->view('footer');
-
 	}
 /**************************************************************************/
 	public function demanda(){
@@ -100,13 +92,10 @@ class cOficial extends CI_Controller {
  				         	 if($modDest == 4 ){
  				         	 	$id_ts = 8;
  				         	 }
-
  				         	 if($modDest == 5 ){
  				         	 	$id_ts = 12;
  				         	 }
-
  				         }
-
  				         if($_SESSION["Id_rol"] == 4 ){
  				         	$modOrigen=4; //usr:proy mod: 4
  				         }
