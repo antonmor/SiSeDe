@@ -23,7 +23,7 @@ class cUpload extends CI_Controller{
 			//llamamos al modelo
 		   	$pathS='./Historico/' . $this->input->post('FolioExp'); //Folio de expediente
 			$archivo_nombre = $_FILES['usr_file']['name'];			//Nombre del archivo
-			$fecha = date(); // Fehca de expediente
+			$fecha = date("Y-m-d H:i:s"); // Fehca de expediente
 		    $fecha1= date("Y-m-d H:i:s", strtotime("$fecha"));
 			$Des = 	 $this->input->post('tDescrip');				//Descripcion de expediente
 			    $config['upload_path'] = $pathS;
