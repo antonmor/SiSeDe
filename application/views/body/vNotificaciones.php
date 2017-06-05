@@ -102,10 +102,10 @@ tr.shown td.details-control {
                <select id="slt-involucrados" name="slt-involucrados" class="form-control" ></select>
               <br>                  
                   <label>Fecha:</label>
-                  <input  type="date" id="date" name="date">
+                  <input  type="date" id="date" name="date" value="<?php ECHO date("m/d/Y"); ?>">
                    <br>
                   <label>Fecha limite:</label>
-                  <input  type="date" id="datelim" name="datelim">
+                  <input  type="date" id="datelim" name="datelim" >
                   <br>
                   <label>Observaciones:</label>
                   <textarea rows="4" cols="50" name="obs"></textarea>
@@ -196,7 +196,6 @@ function verifica(id){
     }
     $(function () {
       var table = $('#example').DataTable({});
-
       // Add event listener for opening and closing details
       $('#example').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
@@ -255,9 +254,12 @@ function verifica(id){
                 url: "<?= base_url()?>index.php/cOficial/get_involed",
                 data:{id: id},
                 success: function(r){
+                 alert(r);
                     involed.find('option').remove();
                  $(r).each(function(i,v){
                     involed.append('<option value="'+ v.id_persona+'">'+v.razon+'</option>');
+
+
                  });
                 }
             });

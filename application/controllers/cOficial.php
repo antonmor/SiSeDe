@@ -187,6 +187,9 @@ class cOficial extends CI_Controller {
         $config['allowed_types'] = "pdf";
         $config['max_size'] = "503024";
         $archivo_nombre = $config['file_name'];
+        $involed = $this->mLogin->get_involed($id_expediente);
+        	print_r($involed);
+        		die();
         $this->load->library('upload');
         $this->upload->initialize($config);
 		$nuevo = $ultimo_Folio+1;
@@ -207,6 +210,8 @@ class cOficial extends CI_Controller {
           if($_SESSION["Id_rol"] == 7 ) $modulo=1; //usr:usr    mod:1
           if($_SESSION["Id_rol"] == 8 ) $modulo=1; //usr:instit mod:1
 		$insert = $this->mLogin->add_new_doc($folio,$tipo,$id_expediente,$path,$archivo_nombre,$_SESSION["Persona_id"],$modulo,$fecha1,$obs,$tdesecha,$datelim,$id_invol);
+
+
 		if($_SESSION["Id_rol"] == 5 ) redirect(base_url('index.php/cOficial/notificacion'));
 		if($_SESSION["Id_rol"] == 2 ) redirect(base_url('index.php/cOficial/demanda'));
 		if($_SESSION["Id_rol"] == 3 ) redirect(base_url('index.php/cOficial/acuerdo'));
@@ -258,6 +263,7 @@ class cOficial extends CI_Controller {
 		$id_Expediente = $_POST['id'];
 		$this->load->model('mLogin');
 		$involed = $this->mLogin->get_involed($id_Expediente);
+		
 		header("Content-Type: application/json; encoding=UTF-8");
 		print_r(json_encode($involed));
 	}

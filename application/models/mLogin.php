@@ -221,6 +221,9 @@ public function add_new_doc($folio,$tipo,$id_expediente,$path,$archivo_nombre,$o
 					 'obs'=> $obs,
 					 'status'=>'0'
 		);
+
+
+
 	$notificacion = array('id_ac' =>$op ,
 						   'id_destper'=>$id_invol,
 						   'id_exp'=>$id_expediente,
@@ -238,6 +241,7 @@ public function add_new_doc($folio,$tipo,$id_expediente,$path,$archivo_nombre,$o
 	}
 	if($op == 5){
 		$this->db->insert('notificacion',$notificacion);
+		//return(json_decode($notificacion));
 	}
 
 
@@ -275,7 +279,7 @@ public function get_tipodesecha(){
 }
 
 public function get_involed($id){
-	$row=$this->db->query("SELECT p.id AS 'id_persona',if(Razonsocial is NULL,concat(p.Nombre,' ', p.Apat,' ', p.Amat),Razonsocial)as 'razon' FROM involucrados i JOIN persona p on p.id = i.id_persona AND i.id_exp = ".$id.";");
+	$row=$this->db->query("SELECT p.id AS 'id_persona',if(Razonsocial is NULL or Razonsocial ='',concat(p.Nombre,' ', p.Apat,' ', p.Amat),Razonsocial)as 'razon', p.Email FROM involucrados i JOIN persona p on p.id = i.id_persona AND i.id_exp = ".$id.";");
 	$array = $row->result_array();
 	return $array;
 }
@@ -313,7 +317,6 @@ public function get_seguimiento($opts=array()){
 	}
 	$query=$this->db->get();
 	return $query->result_array();
-
 }
 
 /*************************GOGO*************************/
@@ -321,7 +324,6 @@ public function get_seguimiento($opts=array()){
 		$this->db->insert('proyectos',$data);
 	}
 	public function enviar2($data){
- //`Seguimiento` (`idmodulo`, `id_op`, `mov`, `idExpediente`, `id_Tseguimiento`, `Fecha`, `Comentarios`, `Status1`)
 		$this->db->insert('seguimiento',array('fechasis'=>$data['fecha'],
 			'idmodulo'=>$data['id_mod'],'id_op'=>$data['id_op'],'mov'=>'in',
 			'idExpediente'=>$data['id_exp'],'id_Tseguimiento'=>$data['id_seg']));
@@ -341,8 +343,6 @@ public function get_seguimiento($opts=array()){
 		$fecha=$dia."-".$mes."-".$hoy['year']." ".$hoy['hours'].":".$hoy['minutes'].":".$hoy['seconds'];
 		$this->db->where('nombre', $data['nombre']);
 		$this->db->update('proyectos',array('fechaenv'=>$fecha,'estado'=>$data['status']));
-		//$row2=$this->db->query('SELECT * FROM proyectos where nombre = '.$archivo);
-		//$data2=$row2->result_array();
 	}
 	public function editproym($data2){
 		$hoy=getdate();
@@ -357,11 +357,8 @@ public function get_seguimiento($opts=array()){
 			$mes=$hoy['mon'];
 		}
 		$fecha=$dia."-".$mes."-".$hoy['year']." ".$hoy['hours'].":".$hoy['minutes'].":".$hoy['seconds'];
-		//echo "<script>alert('Proyecto ".$archivo2." Aprobado...');</script>";
 		$this->db->where('nombre', $data2['nombre']);
 		$this->db->update('proyectos',array('fecharev'=>$fecha,'estado'=>$data2['status']));
-		//$row2=$this->db->query('SELECT * FROM proyectos where nombre = '.$archivo);
-		//$data2=$row2->result_array();
 	}
 
 	public function getlac(){
