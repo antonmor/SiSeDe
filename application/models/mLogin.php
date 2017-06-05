@@ -113,6 +113,7 @@ public function exp_x_sa($Persona_id){
 		INNER JOIN persona pdo on pdo.Id = e.id_PDemandado
 		INNER JOIN enviasa en on en.id_Exp = e.Id
 		WHERE e.Status = 1 and en.id_SA = ".$Persona_id."
+		group by e.Id
 		order by e.Expediente desc");
 	}
 	$data=$sql->result_array();
@@ -185,8 +186,8 @@ public function get_last_doc($id_exp){
 	$row = $query->row_array();
 	return $row;
 }
-public function add_new_doc($folio,$tipo,$id_expediente,$path,$archivo_nombre,$op,$modulo,$fecha1,$obs,$tdesecha,$datelim,$id_invol){
-	$data = array('Folio' => $folio,
+public function add_new_doc($folio,$tipo,$id_expediente,$path,$archivo_nombre,$op,$modulo,$fecha1,$obs,$tdesecha,$datelim,$id_invol,$rol){
+	 $data = array('Folio' => $folio,
 		'id_Tipo' 	=> $tipo,
 		'id_Expediente' => $id_expediente,
 		'PathAnexo'=> $path,
@@ -222,25 +223,30 @@ public function add_new_doc($folio,$tipo,$id_expediente,$path,$archivo_nombre,$o
 					 'status'=>'0'
 		);
 
-
-
-	$notificacion = array('id_ac' =>$op ,
-						   'id_destper'=>$id_invol,
-						   'id_exp'=>$id_expediente,
-						   'id_anexo'=>$last_idanexo,
-						   'fechasol'=>$fecha1.' curtime()',
-						   'fechalimite'=>$datelim,
-						   'autosub'=>'1'
-		 );
-
 	if($tipo == 1){
 		$this->db->insert('admision',$admite);
 	}
 	if($tipo == 4){
 		$this->db->insert('desechado',$desecha);
 	}
-	if($op == 5){
-		$this->db->insert('notificacion',$notificacion);
+	if($rol == 5){
+			$query=$this->db->query("SELECT p.id AS 'id_destper',if(Razonsocial is NULL or Razonsocial ='',concat(p.Nombre,' ', p.Apat,' ', p.Amat),Razonsocial)as 'razon', p.Email FROM involucrados i JOIN persona p on p.id = i.id_persona AND i.id_exp = ".$id_expediente.";");
+			
+	foreach ($query->result_array() as $row) {
+	$notificacion = array('id_ac' =>$op ,
+						   'id_destper'=>$row['id_destper'],//$id_invol,
+						   'id_exp'=>$id_expediente,
+						   'id_anexo'=>$last_idanexo,
+						   'fechasol'=>$fecha1,
+						   'fechalimite'=>$datelim,
+						   'autosub'=>'1'
+		 );	
+		$this->db->insert('notificacion',$notificacion);	
+
+	}
+
+//	$array = $row->result_array();
+//		$this->db->insert('notificacion',$notificacion);
 		//return(json_decode($notificacion));
 	}
 

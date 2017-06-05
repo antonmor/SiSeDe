@@ -98,7 +98,7 @@ tr.shown td.details-control {
                 <input type="text" class="form-control" readonly>
               </div>
                   <div class="form-group">              
-                <label for="">Notificar a: </label>
+                <label for="">Involucrados: </label>
                <select id="slt-involucrados" name="slt-involucrados" class="form-control" ></select>
               <br>                  
                   <label>Fecha:</label>
@@ -254,7 +254,6 @@ function verifica(id){
                 url: "<?= base_url()?>index.php/cOficial/get_involed",
                 data:{id: id},
                 success: function(r){
-                 alert(r);
                     involed.find('option').remove();
                  $(r).each(function(i,v){
                     involed.append('<option value="'+ v.id_persona+'">'+v.razon+'</option>');

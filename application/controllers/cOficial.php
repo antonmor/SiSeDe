@@ -186,10 +186,8 @@ class cOficial extends CI_Controller {
         $config['file_name'] = $_FILES['pdf_file']['name'];
         $config['allowed_types'] = "pdf";
         $config['max_size'] = "503024";
-        $archivo_nombre = $config['file_name'];
+       $archivo_nombre = $config['file_name'];
         $involed = $this->mLogin->get_involed($id_expediente);
-        	print_r($involed);
-        		die();
         $this->load->library('upload');
         $this->upload->initialize($config);
 		$nuevo = $ultimo_Folio+1;
@@ -209,9 +207,7 @@ class cOficial extends CI_Controller {
           if($_SESSION["Id_rol"] == 6 ) $modulo=6; //usr:magis mod: 6
           if($_SESSION["Id_rol"] == 7 ) $modulo=1; //usr:usr    mod:1
           if($_SESSION["Id_rol"] == 8 ) $modulo=1; //usr:instit mod:1
-		$insert = $this->mLogin->add_new_doc($folio,$tipo,$id_expediente,$path,$archivo_nombre,$_SESSION["Persona_id"],$modulo,$fecha1,$obs,$tdesecha,$datelim,$id_invol);
-
-
+		$insert = $this->mLogin->add_new_doc($folio,$tipo,$id_expediente,$path,$archivo_nombre,$_SESSION["Persona_id"],$modulo,$fecha1,$obs,$tdesecha,$datelim,$id_invol,$_SESSION['Id_rol']);
 		if($_SESSION["Id_rol"] == 5 ) redirect(base_url('index.php/cOficial/notificacion'));
 		if($_SESSION["Id_rol"] == 2 ) redirect(base_url('index.php/cOficial/demanda'));
 		if($_SESSION["Id_rol"] == 3 ) redirect(base_url('index.php/cOficial/acuerdo'));
