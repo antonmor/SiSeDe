@@ -1,6 +1,5 @@
 <?php
 	$expediente=$tipo=$this->input->post('expediente');
-	//echo $expediente;
 	$carpeta="Proyectos/Redactados";
 	if (!file_exists($carpeta)) {
 		mkdir($carpeta, 0777, true);

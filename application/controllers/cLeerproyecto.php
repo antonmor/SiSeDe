@@ -12,8 +12,8 @@ class cleerproyecto extends CI_controller{
 			$datos['actuario'] = $this->mLogin->get_SA(5);
 			$datos['tipoacuerdo'] = $this->mLogin->get_tipoacuerdo(2);
 			$datos['desecha']= $this->mLogin->get_tipodesecha();
-		    $this->load->view('header2');
-		    $this->load->view('body/vOficial');
+		  $this->load->view('header2');
+		  $this->load->view('body/vOficial');
 			$this->load->view('proyectista/vexpeds',$datos);
 			$this->load->view('footer');
 

@@ -231,7 +231,7 @@ public function add_new_doc($folio,$tipo,$id_expediente,$path,$archivo_nombre,$o
 	}
 	if($rol == 5){
 			$query=$this->db->query("SELECT p.id AS 'id_destper',if(Razonsocial is NULL or Razonsocial ='',concat(p.Nombre,' ', p.Apat,' ', p.Amat),Razonsocial)as 'razon', p.Email FROM involucrados i JOIN persona p on p.id = i.id_persona AND i.id_exp = ".$id_expediente.";");
-			
+
 	foreach ($query->result_array() as $row) {
 	$notificacion = array('id_ac' =>$op ,
 						   'id_destper'=>$row['id_destper'],//$id_invol,
@@ -240,8 +240,8 @@ public function add_new_doc($folio,$tipo,$id_expediente,$path,$archivo_nombre,$o
 						   'fechasol'=>$fecha1,
 						   'fechalimite'=>$datelim,
 						   'autosub'=>'1'
-		 );	
-		$this->db->insert('notificacion',$notificacion);	
+		 );
+		$this->db->insert('notificacion',$notificacion);
 
 	}
 
@@ -329,42 +329,13 @@ public function get_seguimiento($opts=array()){
 	public function nuevoproyecto($data){
 		$this->db->insert('proyectos',$data);
 	}
-	public function enviar2($data){
-		$this->db->insert('seguimiento',array('fechasis'=>$data['fecha'],
-			'idmodulo'=>$data['id_mod'],'id_op'=>$data['id_op'],'mov'=>'in',
-			'idExpediente'=>$data['id_exp'],'id_Tseguimiento'=>$data['id_seg']));
-	}
 	public function editproy($data){
-		$hoy=getdate();
-		if ($hoy['mday']<=9) {
-			$dia="0".$hoy['mday'];
-		}else{
-			$mes=$hoy['mday'];
-		}
-		if ($hoy['mon']<=9) {
-			$mes="0".$hoy['mday'];
-		}else{
-			$mes=$hoy['mon'];
-		}
-		$fecha=$dia."-".$mes."-".$hoy['year']." ".$hoy['hours'].":".$hoy['minutes'].":".$hoy['seconds'];
 		$this->db->where('nombre', $data['nombre']);
-		$this->db->update('proyectos',array('fechaenv'=>$fecha,'estado'=>$data['status']));
+		$this->db->update('proyectos',array('estado'=>$data['status']));
 	}
 	public function editproym($data2){
-		$hoy=getdate();
-		if ($hoy['mday']<=9) {
-			$dia="0".$hoy['mday'];
-		}else{
-			$mes=$hoy['mday'];
-		}
-		if ($hoy['mon']<=9) {
-			$mes="0".$hoy['mday'];
-		}else{
-			$mes=$hoy['mon'];
-		}
-		$fecha=$dia."-".$mes."-".$hoy['year']." ".$hoy['hours'].":".$hoy['minutes'].":".$hoy['seconds'];
 		$this->db->where('nombre', $data2['nombre']);
-		$this->db->update('proyectos',array('fecharev'=>$fecha,'estado'=>$data2['status']));
+		$this->db->update('proyectos',array('estado'=>$data2['status'],'comentarios'=>$data2['comentarios']));
 	}
 
 	public function getlac(){
@@ -374,7 +345,23 @@ public function get_seguimiento($opts=array()){
 		$array=$query->result_array();
 		return $array;
 	}
-
+	public function insertmov($datos){
+		date_default_timezone_set('America/Mexico_City');
+		$time = time();
+		$fecha = date("Y-m-d H:i:s", $time);
+		$this->db->insert('seguimiento',array('idmodulo'=>5,'id_op'=>$datos['id'],'mov'=>'in',
+			'idExpediente'=>$datos['expediente'],'id_Tseguimiento'=>13,'Fecha'=>$time,'Comentarios'=>"En proceso de redacción"));
+	}
+	public function insertmovm($datos){
+		date_default_timezone_set('America/Mexico_City');
+		$time = time();
+		$fecha = date("Y-m-d H:i:s", $time);
+		$row=$this->db->query('SELECT expediente FROM proyectos where nombre = '."'".$datos['archivored']."'");
+		$array=$row->result_array();
+		$this->db->insert('seguimiento',array('idmodulo'=>5,'id_op'=>$datos['id'],'mov'=>'out',
+			'idExpediente'=>$array[0]['expediente'],'id_Tseguimiento'=>14,'FechaVisto'=>$fecha,'Comentarios'=>"Enviado a revisión"));
+		$this->db->insert('enviasa',array('id_Exp'=>$array[0]['expediente'],'id_Persona'=>$datos['id'],'id_SA'=>10,'Status'=>1));
+	}
 	public function getarc($estado){
 		$row=$this->db->query('SELECT * FROM proyectos where estado = '.$estado);
 		$array=$row->result_array();
@@ -385,6 +372,13 @@ public function get_seguimiento($opts=array()){
 		$array2=$row2->result_array();
 		return $array2;
 	}
+	public function getexpe($expediente){
+		$arr=$this->db->query("select *, pd.Nombre as 'Demandante', pd.Apat as 'ApatD', pd.Amat as 'AmatD', pd.CURP as 'curpD' , pdo.RazonSocial as 'Demandado' from Expediente e join AnexoPDF a on e.id = a.id_Expediente join Persona pr on pr.id = e.id_Ppresenta join Persona pd on pd.id = e.id_PDemandante join Persona pdo on pdo.id = e.id_PDemandado where id_Expediente=".$expediente);
+		$data=$arr->result_array();
+		return $data;
+	}
+
+
 /******************************************************/
 }//mLogin
 

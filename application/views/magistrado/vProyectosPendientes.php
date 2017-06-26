@@ -7,8 +7,9 @@
           <table class="table" >
             <thead>
               <tr>
+                <th style="text-align:center;">Expediente</th>
                 <th style="text-align:center;">Proyecto</th>
-                <th style="text-align:center;">Fecha</th>
+                <th style="text-align:center;">Fecha de recibido</th>
                 <th style="text-align:center;">Actividad</th>
               </tr>
             </thead>
@@ -20,40 +21,35 @@
               <tr id="<?php echo $rev['nombre']; ?>" name="table1">
                 <div class="row">
                   <div class="col-xs-12">
+                    <td id="<?php echo $rev['expediente']; ?>" style="text-align:center" >
+                      <?php echo $rev['expediente']; ?></td>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12">
                     <td id="<?php echo $rev['nombre']; ?>" style="text-align:center" >
                       <?php echo $nombre2; ?></td>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-xs-12">
-                    <td id="<?php echo $rev['fechaenv']; ?>" style="text-align:center" >
-                      <?php echo $rev['fechaenv']; ?></td>
+                    <td id="<?php echo $rev['fecha_creacion']; ?>" style="text-align:center" >
+                      <?php echo $rev['fecha_creacion']; ?></td>
                   </div>
                 </div>
 
+
                 <td style="text-align: center;">
                   <div class="row">
-                    <div class="col-xs-2 col-xs-offset-3">
+                    <div class="col-xs-12" style="text-align:center">
                       <form action="/SiSeDe/index.php/crevproy/revproym" method="post">
-                        <input type="hidden" value="<?php echo $rev['folder']; ?>" name="folder">
+                          <input type="hidden" value="<?php echo $rev['folder']; ?>" name="folder">
                         <input type="hidden" value="<?php echo $rev['nombre']; ?>" name="archivo">
+                          <input type="hidden" value="<?php echo $rev['expediente']; ?>" name="expediente">
                         <button class="btn btn-primary" title="Revisar " name="Revisar" type="submit">Revisar</button>
                       </form>
                     </div>
-                    <div class="col-xs-2">
-                      <form action="/SiSeDe/index.php/cenviar/aprobarmag" method="post">
-                        <input type="hidden" value="<?php echo $rev['folder']; ?>" name="folder">
-                        <input type="hidden" value="<?php echo $rev['nombre']; ?>" name="archivo">
-                        <button class="btn btn-success" title="aprobar " name="Revisar" type="submit">Aprobar</button>
-                      </form>
-                    </div>
-                    <div class="col-xs-2">
-                      <form action="/SiSeDe/index.php/cenviar/rechazarmag" method="post">
-                        <input type="hidden" value="<?php echo $rev['folder']; ?>" name="folder">
-                        <input type="hidden" value="<?php echo $rev['nombre']; ?>" name="archivo">
-                        <button class="btn btn-danger" title="rechazar " name="Revisar" type="submit">Rechazar</button>
-                      </form>
-                    </div>
+
                   </div>
                   </td>
                 </tr>
