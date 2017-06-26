@@ -21,6 +21,9 @@ class cOficial extends CI_Controller {
 	 public function index(){
 
   		if ($this->session->userdata('logueado')) {
+  			if(($this->session->userdata('Id_rol')==7)||($this->session->userdata('Id_rol')==8)){
+	   			redirect('cOficial2');
+	  		}
   			if($this->session->userdata('Id_rol')==4){
   				$this->load->model('mLogin');
   				$this->load->view('header2');
