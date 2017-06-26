@@ -13,6 +13,7 @@
             </form>
         </div>
         <div class="col-xs-3 " style="text-align:center;">
+          <form action="<?php echo site_url('cOficial/seguimiento'); ?>" >
                 <input title="Seguimiento" type="image" src="<?php echo base_url();  ?>Imagenes/seguim.png" width="50" height="50">
                 <p>Seguimiento</p>
             </form>
