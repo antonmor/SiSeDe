@@ -58,11 +58,11 @@ tr.shown td.details-control {
         <?php foreach ($expedientes as  $expediente): ?>
           <tr data-child-value="<?php echo $expediente['id_expediente']; ?>">
             <td class="details-control" style="color: blue; text-align: center; font-weight: bold;"><?=$expediente['Expediente']; ?></td>
-            <td><?= $expediente['Fecha']?></td>
+            <td><?= $expediente['fechasis']?></td>
             <td><?= $expediente['FechaEnvio']?> </td>
-            <td><?= $expediente['Demandado']?></td>
-            <td><?= $expediente['Demandante']?></td>
-            <td><?= $expediente['Resumen']?></td>
+            <td><?= utf8_decode($expediente['Demandado']);?></td>
+            <td><?= utf8_decode($expediente['Demandante']);?></td>
+            <td><?= utf8_decode($expediente['Resumen']);?></td>
             <td style="text-align: center;">
 
                 <form action="/SiSeDe/index.php/credproy" method="post">

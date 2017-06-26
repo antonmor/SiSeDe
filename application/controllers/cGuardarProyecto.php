@@ -17,32 +17,22 @@ defined('BASEPATH')or exit('No direct script access allowed');
 		}
 
 	 	public function guardar(){
-	 		$hoy=getdate();
+			date_default_timezone_set('America/Mexico_City');
+			$usuario=$this->session->userdata('Persona_id');
+			$time = time();
+			$fecha = date("dmY", $time);
 	 		$expediente=$tipo=$this->input->post('expediente');
-	 		$fechared=$tipo=$this->input->post('fechared');
-			if ($hoy['mday']<=9) {
-				$dia="0".$hoy['mday'];
-			}else{
-				$mes=$hoy['mday'];
-			}
-			if ($hoy['mon']<=9) {
-				$mes="0".$hoy['mday'];
-			}else{
-				$mes=$hoy['mon'];
-			}
-			$fechacre=$dia."-".$mes."-".$hoy['year']." ".$hoy['hours'].":".$hoy['minutes'].":".$hoy['seconds'];
 	 		$folder="Proyectos/Redactados/";
-	 		$archivo=$expediente."-".$dia."-".$mes."-".$hoy['year'].".tca";
+	 		$archivo=$expediente.$fecha.".tca";
 			$ar=fopen($folder.$archivo,"w+") or
 			die("Problemas en la creacion");
 			fputs($ar,$_REQUEST['descripcion']);
 			fclose($ar);
-			echo $expediente;
 			$data=array(
 				'nombre'=>$archivo,
 				'folder'=>$folder,
-				'fechared'=>$fechared,
-				'fechacre'=>$fechacre,
+				'usuario'=>$usuario,
+				'expediente'=>$expediente,
 				'estado'=>1
 			);
 			echo "<script>alert('Se guardo el registro con exito...')</script>";
