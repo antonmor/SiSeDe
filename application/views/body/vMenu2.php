@@ -18,7 +18,7 @@
             </a>
         </div> <!--cols-->
         <div class="col-xd-2 col-sm-3 col-md-2">
-            <a id="titimg" href="#">
+            <a id="titimg" href="<?php echo site_url('cOficial2/seguimiento'); ?>">
                 <img src="<?php echo base_url();  ?>Imagenes/seguim.png" title="Seguimiento" width="50" height="50"></br>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seguimiento
             </a>

@@ -91,14 +91,28 @@ public function exp_x_sa($Persona_id){
 		$sql=$this->db->query("
 		SELECT e.Id as id_expediente, e.Expediente, e.Fecha, pdo.id as id_razonsocial, pdo.RazonSocial as Demandado, pde.id as id_demandante, CONCAT(pde.Nombre,' ',pde.Apat,' ',pde.Amat) as Demandante, e.Descripcion as Resumen, en.FechaEnviado as FechaEnvio
 		FROM expediente e
-		INNER JOIN persona pde on pde.Id = e.id_PDemandante
+		INNER JOIN persona pde on pde.Id = e.id_PDemandante 
 		INNER JOIN persona pdo on pdo.Id = e.id_PDemandado
 		INNER JOIN enviasa en on en.id_Exp = e.Id
-		WHERE e.Status = 1 and en.id_SA = ".$Persona_id."
+		WHERE e.Status = 1 AND en.id_SA = ".$Persona_id."
 		order by e.Expediente asc");	
 	$data=$sql->result_array();
 	return $data;
 }
+
+public function exp_x_nt($Persona_id){
+$sql = $this->db->query("
+SELECT DISTINCT e.Id as id_expediente, e.Expediente, e.Fecha, pdo.id as id_razonsocial, pdo.RazonSocial as Demandado, 
+pde.id as id_demandante, CONCAT(pde.Nombre,' ',pde.Apat,' ',pde.Amat) as Demandante, e.Descripcion as Resumen, n.fechacreado as FechaEnvio
+FROM
+notificacion n INNER join Anexopdf ap ON n.id_exp = ap.id_Expediente and n.id_destper = 109 AND ap.id_Tipo = 31
+INNER JOIN expediente e on e.id = n.id_exp
+INNER JOIN persona pde on pde.id = e.id_PDemandante
+INNER JOIN persona pdo on pdo.id = e.id_PDemandado
+	");
+
+}
+
 public function get_SA($id){
 	$query=$this->db->query("
 		SELECT p.id, CONCAT(p.Nombre,' ',p.Apat,' ',p.Amat) as Persona
@@ -265,6 +279,38 @@ public function get_perfill($id){
 	$array = $row->result_array();
 	return $array;
 }
+
+public function get_track($Persona_id){
+	$sql=$this->db->query("
+		SELECT e.Id as id_expediente, e.Expediente, DATE_FORMAT(e.fechasis, '%d-%m-%Y %T') as fechasis, pdo.id as id_razonsocial, pdo.RazonSocial as Demandado, pde.id as id_demandante, CONCAT(pde.Nombre,' ',pde.Apat,' ',pde.Amat) as Demandante, e.Descripcion as Resumen, DATE_FORMAT(en.FechaEnviado, '%d-%m-%Y %T') as FechaEnvio
+		FROM expediente e
+		INNER JOIN persona pde on pde.Id = e.id_PDemandante AND pde.Id=$Persona_id
+		INNER JOIN persona pdo on pdo.Id = e.id_PDemandado
+		LEFT JOIN enviasa en on en.id_Exp = e.Id
+		WHERE e.Status = 1
+		group by e.Id
+		order by e.Expediente desc");
+		$data=$sql->result_array();
+	return $data;
+}
+public function get_seguimiento($opts=array(),$Persona_id){
+	$this->db->SELECT('DATE_FORMAT(s.fechasis, "%d-%m-%Y %T") as fechasis,Expediente,if(ap.Folio is null,"",ap.Folio) as Folio, ap.PathAnexo, ap.NomFile, s.mov,if(act.Tipo is null,"",act.Tipo) as "Tipox",TS.Tipo, if(act.Tipo is null,"",act.Tipo), m.modulo,if(s.Comentarios is null,"",s.Comentarios) as Comentarios',FALSE)
+				->FROM('Seguimiento s')
+				->JOIN('Modulo m', 'm.idmodulo = s.idmodulo')
+				->JOIN('Persona p','p.id = s.id_op AND p.id ='.$Persona_id,'left')
+				->JOIN('Expediente e','e.id = s.idExpediente','left')
+				->JOIN('TipoSeguimiento TS','TS.Id_Ts = s.id_Tseguimiento','left')
+				->JOIN('AnexoPDF ap','ap.id = s.AnexoPDF_id','left')
+				->JOIN('AcuerdoTipo act','act.id = ap.id_Tipo','left');
+	if (!empty($opts['id_Expediente'])) {
+		$this->db->where('s.idExpediente',$opts['id_Expediente']);	
+		$this->db->order_by('s.fechasis','asc');
+	}
+	$query=$this->db->get();
+	return $query->result_array();
+}
+
+
 
 }//mLogin
 
