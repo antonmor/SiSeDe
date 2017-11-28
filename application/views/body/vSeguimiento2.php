@@ -84,7 +84,7 @@ tr.shown td.details-control {
         <div class="modal-body">
           <div class="modal-body">
             <div class="row">
-              <form enctype="multipart/form-data" action="<?php echo site_url('cOficial2/add_file'); ?>" method="POST">
+              <form enctype="multipart/form-data" action="<?php echo site_url('Coficial2/add_file'); ?>" method="POST">
                 <div class="col-md-8">
               <label for="">Cargar acta de notificación (.pdf)</label>
                <input type="hidden"  id="id_exp" name="expediente">
@@ -212,7 +212,7 @@ function verifica(id){
              // alert(tr.data('child-value'));
               $.ajax({
                 'type'  : 'GET',
-                'url'   : "<?= base_url()?>index.php/cOficial2/track",
+                'url'   : "<?= base_url()?>index.php/Coficial2/track",
                 'data'  : {
                 'expediente' : id_expediente
                 },
@@ -255,7 +255,7 @@ function verifica(id){
         if(id!=''){           
             $.ajax({
                 type: 'POST',
-                url: "<?= base_url()?>index.php/cOficial2/get_involed",
+                url: "<?= base_url()?>index.php/Coficial2/get_involed",
                 data:{id: id},
                 success: function(r){
                     involed.find('option').remove();

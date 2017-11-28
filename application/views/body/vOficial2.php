@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default navbar-static-top">
 	<div class="navbar-header">	
-		<a class="navbar-brand" href="<?php echo site_url('cOficial'); ?>">SISeDe v1.0 </a>  
+		<a class="navbar-brand" href="<?php echo site_url('Coficial2'); ?>">SISeDe v1.0 </a>  
 	</div>
 	<div class="collapse navbar-collapse pull-right">
 		<ul class="nav navbar-nav">
@@ -15,14 +15,14 @@
 				?> ) <!--PHP-->			
 				<span class="caret"></span></a> 
 				<ul class="dropdown-menu">
- 					<li><a href="<?php echo site_url('cOficial2/demanda'); ?>">Demandas</a></li> 
+ 					<li><a href="<?php echo site_url('Coficial2/demanda'); ?>">Demandas</a></li> 
 					<li>
-						<a href="<?php echo site_url('cOficial2/notificacion'); ?>">Notificaciones</a>
+						<a href="<?php echo site_url('Coficial2/notificacion'); ?>">Notificaciones</a>
 					</li>
 					<li><a href="#">Seguimiento</a></li>
 					 <li role="separator" class="divider"></li> 
 					 <li>
-					 	<a href="<?php echo site_url('cOficial2/miperfil'); ?>">Editar Perfil  
+					 	<a href="<?php echo site_url('Coficial2/miperfil'); ?>">Editar Perfil  
 					 	<?php 
 					 	print_r($_SESSION["Nombre"]); 
 					 	?><!--PHP-->

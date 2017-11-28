@@ -22,8 +22,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | If you need to allow multiple domains, remember that this file is still
 | a PHP script and you can easily do that on your own.
 |
+*/ 
+/*
+http://sisede.tcacolima.com/SiSeDe
 */
-$config['base_url'] = 'http://localhost:8080/SiSeDe';
+$config['base_url'] = 'http://sisede.tcacolima.com/';
 
 /*
 |--------------------------------------------------------------------------
@@ -367,13 +370,23 @@ $config['encryption_key'] = 'sistema2016';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = 'database';
-$config['sess_cookie_name'] = 'ci_session';
+$config['sess_driver'] = 'database';//
+$config['sess_cookie_name'] = 'ci_session';//
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = 'ci_sessions';
-$config['sess_match_ip'] = TRUE;
+$config['sess_save_path'] = 'ci_sessions';//
+$config['sess_match_ip'] = TRUE;  //cambie valor, era TRUE 14/08/2017
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
+
+//codigo agregado 14/08/2017
+$config['sess_expire_on_close'] = FALSE;
+$config['sess_encrypt_cookie'] = FALSE;
+$config['sess_use_database'] = TRUE;
+$config['sess_table_name'] = 'ci_sessions'; 
+$config['sess_match_useragent'] = FALSE; 
+$config['sess_use_time_expire'] = TRUE;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -392,9 +405,9 @@ $config['sess_regenerate_destroy'] = FALSE;
 */
 $config['cookie_prefix']	= '';
 $config['cookie_domain']	= '';
-$config['cookie_path']		= '/';
+$config['cookie_path']		= '/'; 
 $config['cookie_secure']	= FALSE;
-$config['cookie_httponly'] 	= FALSE;
+$config['cookie_httponly'] 	= TRUE;//CAMBIE EL VALOR A FALSE
 
 /*
 |--------------------------------------------------------------------------

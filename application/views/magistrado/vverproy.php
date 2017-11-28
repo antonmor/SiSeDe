@@ -29,7 +29,7 @@
 	<div class="row">
 		<div class="col-xs-12" style="text-align:center">
 			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#Enviar">Enviar</button>
-			<!--<form action="/SiSeDe/index.php/cnwacta/credact2" method="post">
+			<!--<form action="<?php echo site_url('cnwacta/credact2'); ?>" method="post">
 				<input type="hidden" value="<?php echo $fichero; ?>" name="fichero">
 				<button title="Enviar" name="Ver Proyecto" type="submit"> Enviar </button>
 			</form>-->
@@ -70,7 +70,7 @@
         <br>
 		<div class="row">
         	<div class="col-xs-3 col-xs-offset-3" style="text-align:center"> 
-        		<form action="/SiSeDe/index.php/cGuardarProyecto/enviarproy" method="post">
+        		<form action="<?php echo site_url('coficial/enviarproy'); ?>" method="post">
         			<input type="hidden" value="<?php echo $expediente; ?>" name="expediente">
 		            <input type="hidden" value="<?php echo $archivo; ?>" name="archivo">
 		            <input type="hidden" value="<?php echo $re['Persona'];?>" name="persona">
@@ -78,7 +78,7 @@
         		</form> 
         	</div>
         	<div class="col-xs-3" style="text-align:center"> 
-        		<form action="/SiSeDe/index.php/cGuardarProyecto/enviarproy" method="post">
+        		<form action="<?php echo site_url('coficial/enviarproy'); ?>" method="post">
         			<input type="hidden" value="<?php echo $expediente; ?>" name="expediente">
 		            <input type="hidden" value="<?php echo $archivo; ?>" name="archivo">
 		            <input type="hidden" value="<?php echo $re['Persona'];?>" name="persona">

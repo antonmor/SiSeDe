@@ -19,13 +19,14 @@ tr.shown td.details-control {
 	<div class="row">
 		<div class="col-md-3 col-md-offset-6">
 			<div class="input-group">
-				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acción <span class="caret"></span></button>
+				<button type="button" class="btn btn-default dropdown-toggle" 
+				-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acción <span class="caret"></span></button>
 		        <ul class="dropdown-menu dropdown-menu-right">
 		          <li><a href="#">Buscar</a></li>
 		          <li><a href="#">Another action</a></li>
 		          <li><a href="#">Something else here</a></li>
 		          <li role="separator" class="divider"></li>
-		          <li><a href="<?php echo site_url('cOficial/nueva_demanda'); ?>">Nueva demanda</a></li>
+		          <li><a href="<?php echo site_url('Coficial/nueva_demanda'); ?>">Nueva demanda</a></li>
 		        </ul>
 			</div>
 		</div>
@@ -36,7 +37,7 @@ tr.shown td.details-control {
     <div class="wrapper">
       <div class="content-main">
         <span style="font-size: 25px;">Demandas</span>
-        <a href="<?php echo site_url('cOficial/nueva_demanda'); ?>" class="btn btn-default pull-right" role="button">Nueva demanda</a>
+        <a href="<?php echo site_url('Coficial/nueva_demanda'); ?>" class="btn btn-default pull-right" role="button">Nueva demanda</a>
       </div>
     </div>
   </div>
@@ -57,7 +58,7 @@ tr.shown td.details-control {
   </div>
   <?php }?>
   <div class="col-md-12">
-    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <table id="example" class="table table-striped table-bordered"  cellspacing="0" width="100%">
       <thead>
         <tr>
           <th>Expediente</th>
@@ -72,7 +73,7 @@ tr.shown td.details-control {
       <tbody>
         <?php foreach ($expedientes as  $expediente): ?>
           <tr data-child-value="<?php echo $expediente['id_expediente']; ?>">
-            <td class="details-control" style="color: blue; text-align: center; font-weight: bold;"><?=$expediente['Expediente']; ?></td>
+            <td class="details-control" style="color: blue; text-align: center; font-weight: bold;"><?=$expediente['expediente']; ?></td>
             <td><?= $expediente['fechasis']?></td>
             <td><?= $expediente['Demandado']?></td>
             <td><?= $expediente['Demandante']?></td>
@@ -100,18 +101,24 @@ tr.shown td.details-control {
         </div>
         <div class="modal-body">
           <div class="modal-body">
-            <form method="POST" action="<?php echo site_url('cOficial/demanda'); ?>">
+            <form method="POST" action="<?php echo site_url('Coficial/demanda'); ?>">
               <input type="hidden" class="form-control" id="id_exp" name="id_exp">
               <input type="hidden" class="form-control" value="<?=$_SESSION["Persona_id"]?>" name="id_log">
               <input type="hidden" name="idtiposeg" id="idtiposeg" value="4"> <!--tipo de seguimiento-->
               <label> Fecha: </label>
-              <input type="text" id="datepicker" name="fecha">
+              <script>
+		$(function () {
+		    $.datepicker.setDefaults($.datepicker.regional["es"]);
+		    $("#datepicker").datepicker({ minDate: 0 });
+	        });
+	      </script>
+              <input type="text" id="datepicker" name="fecha" style="text-align:center">
               <br>
               <label> Secretario de acuerdos: </label>             
               <div class="form-group"> 
                 <select class="form-control"  name="id_sa" >
                   <?php foreach ($secretario_a as  $sa): ?>
-                    <option value="<?=$sa['id']?>"><?= $sa['Persona']?></option>   
+                    <option value="<?=$sa['id']?>"><?= $sa['persona']?></option>   
                   <?php endforeach; ?>
                 </select>
                 <br>
@@ -138,14 +145,14 @@ tr.shown td.details-control {
         <div class="modal-body">
           <div class="modal-body">
             <div class="row">
-              <form enctype="multipart/form-data" action="<?php echo site_url('cOficial/add_file'); ?>" method="POST">
+              <form enctype="multipart/form-data" action="<?php echo site_url('Coficial/add_file'); ?>" method="POST">
                 <div class="col-md-8">
               <label for="">Cargar PDF</label>
               <input type="hidden"  id="id_exp" name="expediente">
               <div class="input-group">
                 <label class="input-group-btn">
                   <span class="btn btn-primary" required>
-                    Cargar&hellip; <input type="file" name="pdf_file" required style="display: none;" multiple>
+	                    Cargar&hellip; <input type="file" name="pdf_file" required style="display: none;" multiple accept="application/pdf">
                   </span>
                 </label>
                 <input type="text" class="form-control" readonly>
@@ -191,11 +198,13 @@ tr.shown td.details-control {
     </div>
   </div>
 <script lenguage="javascript" type="text/javascript">
+  <script>
+		$(function () {
+		    $.datepicker.setDefaults($.datepicker.regional["es"]);
+		    $.datepicker({ minDate: 0 });
+									    								 });
+	      </script>
   
-  $(function(){
-        $("#datepicker").datepicker();
-  });
-</script>  
 
   <script>
     function format(id_expediente,data) {
@@ -245,15 +254,14 @@ tr.shown td.details-control {
               var id_expediente = tr.data('child-value');
               $.ajax({
                 'type'  : 'GET',
-                'url'   : "<?= base_url()?>index.php/cOficial/recuperar",
+                'url'   : "<?= base_url()?>index.php/Coficial/recuperar",
                 'data'  : {
                   'expediente' : id_expediente
                 },
                 'error':function(jqXHR){
                   console.log(jqXHR.responseText);
                 },
-                'success': function(data, textStatus, jqXHR) {
-                 
+                'success': function(data, textStatus, jqXHR) {         		
                   row.child(format(id_expediente,data)).show();
                   tr.addClass('shown');
                 }

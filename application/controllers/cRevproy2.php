@@ -3,7 +3,7 @@ defined('BASEPATH')or exit('No direct script access allowed');
 
 class crevproy2 extends CI_controller{
 
-	public function index(){
+	public function revproy2(){
 
 		    $this->load->view('header2');
 		    $this->load->view('proyectista/vMenuproy');

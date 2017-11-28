@@ -1,7 +1,7 @@
 <section>
   <div class="row">
     <div class="col-xs-11" style="text-align:right;">
-      <a href="<?php echo site_url('cOficial/acuerdo'); ?>"><span class="glyphicon glyphicon-circle-arrow-left"></span>Regresar</a>
+      <a href="<?php echo site_url('Coficial/acuerdo'); ?>"><span class="glyphicon glyphicon-circle-arrow-left"></span>Regresar</a>
     </div>
   </div>
   <div class="row">

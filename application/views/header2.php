@@ -88,13 +88,13 @@ defined('BASEPATH') or exit('No direct script access allowd');
  <header id="header2">
     <br>
 <!--<div class="container">-->
-    <div class="row">	
-    <div class="col-sm-1 col-md-1 col-md-offset-3">
-      <img id="logoppal" src="<?php echo base_url();  ?>Imagenes/logo.png" title="logo">
-    	<!--<img src="<?php echo base_url();  ?>Imagenes/logo.png" width="25" height="25" title="logo">
+    <div class="row" style="textalign:left;">	
+    <div class="col-sm-1 col-md-1 col-xs-1 col-xs-offset-3 ">
+     <img  src="<?php echo base_url();  ?>Imagenes/logo.png" title="logo" style= "width:30%; height:50%">
+    	 <!--<img id="logoppal" src="<?php echo base_url();  ?>Imagenes/logo.png" title="logo">
     Tribunal de lo Contencioso Administrativo del Estado de Colima</br>-->
    	</div>
-    <div class="col-sm-4 col-md-4">
+    <div class="col-sm-5 col-md-5 col-xs-5">
       <h4>Tribunal de lo Contencioso Administrativo del Estado de Colima</h4>
     </div>
     </div><!--row-->

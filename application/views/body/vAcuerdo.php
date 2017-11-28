@@ -57,7 +57,7 @@ tr.shown td.details-control {
       <tbody>
         <?php foreach ($expedientes as  $expediente): ?>
           <tr data-child-value="<?php echo $expediente['id_expediente']; ?>">
-            <td class="details-control" style="color: blue; text-align: center; font-weight: bold;"><?=$expediente['Expediente']; ?></td>
+            <td class="details-control" style="color: blue; text-align: center; font-weight: bold;"><?=$expediente['expediente']; ?></td>
             <td><?= $expediente['fechasis']?></td>
             <td><?= $expediente['FechaEnvio']?> </td>
             <td><?= $expediente['Demandado']?></td>
@@ -91,7 +91,7 @@ tr.shown td.details-control {
         </div>
         <div class="modal-body">
           <div class="modal-body">
-            <form method="POST" action="<?php echo site_url('cOficial/demanda'); ?>">
+            <form method="POST" action="<?php echo site_url('Coficial/demanda'); ?>">
               <input type="hidden" class="form-control" id="id_exp" name="id_exp">
               <input type="hidden" class="modDestino" name="modDestino" value="4">
               <input type="hidden" class="form-control" value="<?=$_SESSION["Persona_id"]?>" name="id_log">
@@ -99,7 +99,7 @@ tr.shown td.details-control {
               <div class="form-group">
                 <select class="form-control" name="id_sa">
                   <?php foreach ($actuario as  $ac): ?>
-                    <option value="<?=$ac['id']?>"><?= $ac['Persona']?></option>   
+                    <option value="<?=$ac['id']?>"><?= $ac['persona']?></option>   
                   <?php endforeach; ?>
                 </select>
               </div>
@@ -123,7 +123,7 @@ tr.shown td.details-control {
         </div>
         <div class="modal-body">
           <div class="modal-body">
-            <form method="POST" action="<?php echo site_url('cOficial/demanda'); ?>">
+            <form method="POST" action="<?php echo site_url('Coficial/demanda'); ?>">
               <input type="hidden" class="form-control" id="id_exp" name="id_exp">
               <input type="hidden" class="modDestino" name="modDestino" value="5">
               <input type="hidden" class="form-control" value="<?=$_SESSION["Persona_id"]?>" name="id_log">
@@ -131,7 +131,7 @@ tr.shown td.details-control {
               <div class="form-group">
                 <select class="form-control" name="id_sa">
                   <?php foreach ($proyectista as  $sa): ?>
-                    <option value="<?=$sa['id']?>"><?= $sa['Persona']?></option>   
+                    <option value="<?=$sa['id']?>"><?= $sa['persona']?></option>   
                   <?php endforeach; ?>
                 </select>
               </div>
@@ -157,14 +157,14 @@ tr.shown td.details-control {
         <div class="modal-body">
           <div class="modal-body">
             <div class="row">
-              <form enctype="multipart/form-data" action="<?php echo site_url('cOficial/add_file'); ?>" method="POST">
+              <form enctype="multipart/form-data" action="<?php echo site_url('Coficial/add_file'); ?>" method="POST">
                 <div class="col-md-8">
               <label for="">Cargar PDF</label>
               <input type="hidden"  id="id_exp" name="expediente">
               <div class="input-group">
                 <label class="input-group-btn">
                   <span class="btn btn-primary" required>
-                    Cargar&hellip; <input type="file" name="pdf_file" required style="display: none;" multiple>
+                    Cargar&hellip; <input type="file" name="pdf_file" required style="display: none;" multiple accept="application/pdf">
                   </span>
                 </label>
                 <input type="text" class="form-control" readonly>
@@ -177,7 +177,7 @@ tr.shown td.details-control {
                   <?php endforeach; ?>
                 </select>
 
-                <select class="form-control" id="desecha" name="desecha" required " style="display: none;">
+                <select class="form-control" id="desecha" name="desecha"  style="display: none;" required>
                   <?php foreach ($desecha as  $de): ?>
                     <option value="<?=$de['id']?>"><?= $de['Tipo']?></option>   
                   <?php endforeach; ?>
@@ -186,9 +186,31 @@ tr.shown td.details-control {
 
               <br>
               
-                  
+                  <script>
+			 $(function () {
+			    $.datepicker.regional['es'] = {
+				 closeText: 'Cerrar',
+				 prevText: '< Ant',
+				 nextText: 'Sig >',
+				 currentText: 'Hoy',
+				 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+				 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+				 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+				 dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+				 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+				 weekHeader: 'Sm',
+				 dateFormat: 'dd/mm/yy',
+				 firstDay: 1,
+				 isRTL: false,
+				 showMonthAfterYear: false,
+				 yearSuffix: ''
+			    };
+			    $("#datepicker").datepicker({ minDate: 0 });
+			    //$( "#datepicker" ).datepicker( $.datepicker.regional[ "es" ] );
+			 });
+			</script>
                   <label>Fecha:</label>
-                  <input  type="date" id="date" name="date">
+                  <input  type="date" id="datepicker" name="datepicker"  style="text-align: center" >
                   <br>
                   <label>Observaciones:</label>
                   <textarea rows="4" cols="50" name="obs"></textarea>
@@ -294,7 +316,7 @@ function verifica(id){
               var id_expediente = tr.data('child-value');
               $.ajax({
                 'type'  : 'GET',
-                'url'   : "<?= base_url()?>index.php/cOficial/recuperar",
+                'url'   : "<?= base_url()?>index.php/Coficial/recuperar",
                 'data'  : {
                 'expediente' : id_expediente
                 },
@@ -367,4 +389,4 @@ function verifica(id){
       reader.readAsDataURL(input.files[0]);
     }
   }
-   </script>
+</script>

@@ -1,9 +1,9 @@
 <?php
   $this->load->database();
-  $redactado=$this->mLogin->getarc(1);
-  $revision=$this->mLogin->getarc(2);
-  $aprobados=$this->mLogin->getarc(3);
-  $rechazados=$this->mLogin->getarc(4);
+  $redactado=$this->mlogin->getarc(1);
+  $revision=$this->mlogin->getarc(2);
+  $aprobados=$this->mlogin->getarc(3);
+  $rechazados=$this->mlogin->getarc(4);
 ?>
 <div class="container">
   <h2><span class="glyphicon glyphicon-book"></span>  Proyectos de Sentencia</h2>
@@ -33,11 +33,11 @@
               <tr id="<?php echo $red['nombre']; ?>" name="table1">
                 <td id="<?php echo $red['nombre']; ?>" style="text-align:center" ><br><?php echo $nombre1; ?></td>
                 <td style="text-align:center;">
-                    <form method="POST" action="<?php echo site_url('cenviar/guardarmag'); ?>">
+                    <form method="POST" action="<?php echo site_url('coficial/guardarmag'); ?>">
                       <input type="hidden" name="archivored" id="archivored" value="<?php echo $red['nombre']; ?>">
                       <p><button  class="btn btn-primary"> Enviar al magistrado </button></p>
                     </form>
-                    <form action="/SiSeDe/index.php/crevproy2/ceditproy" method="post">
+                    <form action="<?php echo site_url('coficial/ceditproy'); ?>" method="post">
                       <input type="hidden" value="<?php echo $red['folder']; ?>" name="folder">
                       <input type="hidden" value="<?php echo $red['nombre']; ?>" name="archivo">
                       <button class="btn btn-primary" title="Revisar " name="Revisar" type="submit">
@@ -72,7 +72,7 @@
               <tr id="<?php echo $rev['nombre']; ?>" name="table1">
                 <td id="<?php echo $rev['nombre']; ?>" style="text-align:center" ><?php echo $nombre2; ?></td>
                 <td style="text-align: center;">
-                    <form action="/SiSeDe/index.php/crevproy/revproyp" method="post">
+                    <form action="<?php echo site_url('coficial/revproyp'); ?>" method="post">
                       <input type="hidden" value="<?php echo $rev['folder']; ?>" name="folder">
                       <input type="hidden" value="<?php echo $rev['nombre']; ?>" name="archivo">
                       <input type="hidden" value="<?php echo $rev['comentarios']; ?>" name="comentarios">
@@ -107,7 +107,7 @@
               <tr id="<?php echo $apro['nombre']; ?>" name="table1">
                 <td id="<?php echo $apro['nombre']; ?>" style="text-align:center" ><?php echo $nombre; ?></td>
                 <td style="text-align: center;">
-                    <form action="/SiSeDe/index.php/crevproy/revproyp" method="post">
+                    <form action="<?php echo site_url('coficial/revproyp'); ?>" method="post">
                       <input type="hidden" value="<?php echo $apro['folder']; ?>" name="folder">
                       <input type="hidden" value="<?php echo $apro['nombre']; ?>" name="archivo">
                       <input type="hidden" value="<?php echo $apro['comentarios']; ?>" name="comentarios">
@@ -142,7 +142,7 @@
               <tr id="<?php echo $rec['nombre']; ?>" name="table1">
                 <td id="<?php echo $rec['nombre']; ?>" style="text-align:center" ><?php echo $nombre; ?></td>
                 <td style="text-align: center;">
-                    <form action="/SiSeDe/index.php/crevproy/revproyp" method="post">
+                    <form action="<?php echo site_url('coficial/revproyp'); ?>" method="post">
                       <input type="hidden" value="<?php echo $rec['folder']; ?>" name="folder">
                       <input type="hidden" value="<?php echo $rec['nombre']; ?>" name="archivo">
                       <input type="hidden" value="<?php echo $rec['comentarios']; ?>" name="comentarios">

@@ -20,7 +20,7 @@ tr.shown td.details-control {
     <div class="wrapper">
       <div class="content-main">
         <span style="font-size: 25px;">Demandas</span>
-      <!--  <a href="<?php echo site_url('cOficial2/nueva_demanda'); ?>" class="btn btn-default pull-right" role="button">Nueva demanda</a> -->
+        <a href="<?php echo site_url('Coficial2/nueva_demanda'); ?>" class="btn btn-default pull-right" role="button">Nueva demanda</a>
       </div>
     </div>
   </div>
@@ -61,6 +61,8 @@ tr.shown td.details-control {
             <td><?= $expediente['Demandante']?></td>
             <td><?= $expediente['Resumen']?></td>
             <td style="text-align: center;">
+            <a href="#" class="btn btn-link btn-enviar" data-id="<?=$expediente['id_expediente']?>" data-toggle="modal" data-target="#agregarpdf">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar</a>
                 </td>
               </tr>
             <?php endforeach; ?>
@@ -79,7 +81,7 @@ tr.shown td.details-control {
         </div>
         <div class="modal-body">
           <div class="modal-body">
-            <form method="POST" action="<?php echo site_url('cOficial2/demanda'); ?>">
+            <form method="POST" action="<?php echo site_url('Coficial2/demanda'); ?>">
               <input type="hidden" class="form-control" id="id_exp" name="id_exp">
               <input type="hidden" class="form-control" value="<?=$_SESSION["Persona_id"]?>" name="id_log">
               <input type="hidden" name="idtiposeg" id="idtiposeg" value="4"> <!--tipo de seguimiento-->
@@ -117,14 +119,14 @@ tr.shown td.details-control {
         <div class="modal-body">
           <div class="modal-body">
             <div class="row">
-              <form enctype="multipart/form-data" action="<?php echo site_url('cOficial2/add_file'); ?>" method="POST">
+              <form enctype="multipart/form-data" action="<?php echo site_url('Coficial2/add_file'); ?>" method="POST">
                 <div class="col-md-8">
               <label for="">Cargar PDF</label>
               <input type="hidden"  id="id_exp" name="expediente">
               <div class="input-group">
                 <label class="input-group-btn">
                   <span class="btn btn-primary" required>
-                    Cargar&hellip; <input type="file" name="pdf_file" required style="display: none;" multiple>
+                    Cargar&hellip; <input type="file" name="pdf_file" required style="display: none;" multiple accept="application/pdf">
                   </span>
                 </label>
                 <input type="text" class="form-control" readonly>
@@ -224,7 +226,7 @@ tr.shown td.details-control {
               var id_expediente = tr.data('child-value');
               $.ajax({
                 'type'  : 'GET',
-                'url'   : "<?= base_url()?>index.php/cOficial2/recuperar",
+                'url'   : "<?= base_url()?>index.php/Coficial2/recuperar",
                 'data'  : {
                   'expediente' : id_expediente
                 },

@@ -55,7 +55,7 @@ tr.shown td.details-control {
       <tbody>
         <?php foreach ($expedientes as  $expediente): ?>
           <tr data-child-value="<?php echo $expediente['id_expediente']; ?>">
-            <td class="details-control" style="color: blue; text-align: center; font-weight: bold;"><?=$expediente['Expediente']; ?></td>
+            <td class="details-control" style="color: blue; text-align: center; font-weight: bold;"><?=$expediente['expediente']; ?></td>
             <td><?= $expediente['fechasis']?></td>
             <td><?= $expediente['FechaEnvio']?> </td>
             <td><?= $expediente['Demandado']?></td>
@@ -84,7 +84,7 @@ tr.shown td.details-control {
         <div class="modal-body">
           <div class="modal-body">
             <div class="row">
-              <form enctype="multipart/form-data" action="<?php echo site_url('cOficial/add_file'); ?>" method="POST">
+              <form enctype="multipart/form-data" action="<?php echo site_url('Coficial/add_file'); ?>" method="POST">
                 <div class="col-md-8">
               <label for="">Cargar acta de notificación (.pdf)</label>
                <input type="hidden"  id="id_exp" name="expediente">
@@ -214,7 +214,7 @@ function verifica(id){
              // alert(tr.data('child-value'));
               $.ajax({
                 'type'  : 'GET',
-                'url'   : "<?= base_url()?>index.php/cOficial/track",
+                'url'   : "<?= base_url()?>index.php/Coficial/track",
                 'data'  : {
                 'expediente' : id_expediente
                 },
@@ -257,7 +257,7 @@ function verifica(id){
         if(id!=''){           
             $.ajax({
                 type: 'POST',
-                url: "<?= base_url()?>index.php/cOficial/get_involed",
+                url: "<?= base_url()?>index.php/Coficial/get_involed",
                 data:{id: id},
                 success: function(r){
                     involed.find('option').remove();

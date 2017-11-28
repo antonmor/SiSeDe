@@ -3,7 +3,7 @@
  td.details-control {
   cursor: pointer;
 }
-tr.shown td.details-control {  
+tr.shown td.details-control {  f
 }
 .styTable{
   width: 95%;
@@ -91,7 +91,7 @@ tr.shown td.details-control {
         </div>
         <div class="modal-body">
           <div class="modal-body">
-            <form method="POST" action="<?php echo site_url('cOficial/demanda'); ?>">
+            <form method="POST" action="<?php echo site_url('Coficial/demanda'); ?>">
               <input type="hidden" class="form-control" id="id_exp" name="id_exp">
               <input type="hidden" class="modDestino" name="modDestino" value="4">
               <input type="hidden" class="form-control" value="<?=$_SESSION["Persona_id"]?>" name="id_log">
@@ -123,7 +123,7 @@ tr.shown td.details-control {
         </div>
         <div class="modal-body">
           <div class="modal-body">
-            <form method="POST" action="<?php echo site_url('cOficial/demanda'); ?>">
+            <form method="POST" action="<?php echo site_url('Coficial/demanda'); ?>">
               <input type="hidden" class="form-control" id="id_exp" name="id_exp">
               <input type="hidden" class="modDestino" name="modDestino" value="5">
               <input type="hidden" class="form-control" value="<?=$_SESSION["Persona_id"]?>" name="id_log">
@@ -157,7 +157,7 @@ tr.shown td.details-control {
         <div class="modal-body">
           <div class="modal-body">
             <div class="row">
-              <form enctype="multipart/form-data" action="<?php echo site_url('cOficial/add_file'); ?>" method="POST">
+              <form enctype="multipart/form-data" action="<?php echo site_url('Coficial/add_file'); ?>" method="POST">
                 <div class="col-md-8">
               <label for="">Cargar PDF</label>
               <input type="hidden"  id="id_exp" name="expediente">
@@ -294,7 +294,7 @@ function verifica(id){
               var id_expediente = tr.data('child-value');
               $.ajax({
                 'type'  : 'GET',
-                'url'   : "<?= base_url()?>index.php/cOficial/recuperar",
+                'url'   : "<?= base_url()?>index.php/Coficial/recuperar",
                 'data'  : {
                 'expediente' : id_expediente
                 },

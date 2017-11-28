@@ -1,5 +1,5 @@
 <?php
-class mLogin2 extends CI_Model{	
+class Mlogin2 extends CI_Model{	
 	public function loggin($usr,$pass){		 
 		$var= $this->db->query("
 			SELECT p.id, CONCAT(p.Nombre,' ',p.Apat,' ',p.Amat) as Nombre, r.idRoles, r.Tipo
@@ -54,7 +54,7 @@ public function save_bd($tipo,$nombre,$apat,$amat,$rsocial,$genero,$identificaci
 
 public function getExp(){
 
-	$arr=$this->db->query("select *, pd.Nombre as 'Demandante', pd.Apat as 'ApatD', pd.Amat as 'AmatD', pd.CURP as 'curpD' , pdo.RazonSocial as 'Demandado' from Expediente e join AnexoPDF a on e.id = a.id_Expediente join Persona pr on pr.id = e.id_Ppresenta join Persona pd on pd.id = e.id_PDemandante join Persona pdo on pdo.id = e.id_PDemandado;");
+	$arr=$this->db->query("select *, pd.Nombre as 'Demandante', pd.Apat as 'ApatD', pd.Amat as 'AmatD', pd.CURP as 'curpD' , pdo.RazonSocial as 'Demandado' from expediente e join AnexoPDF a on e.id = a.id_Expediente join Persona pr on pr.id = e.id_Ppresenta join Persona pd on pd.id = e.id_PDemandante join Persona pdo on pdo.id = e.id_PDemandado;");
 	$data=$arr->result_array();
 	return $data;
 }
@@ -105,7 +105,7 @@ $sql = $this->db->query("
 SELECT DISTINCT e.Id as id_expediente, e.Expediente, e.Fecha, pdo.id as id_razonsocial, pdo.RazonSocial as Demandado, 
 pde.id as id_demandante, CONCAT(pde.Nombre,' ',pde.Apat,' ',pde.Amat) as Demandante, e.Descripcion as Resumen, n.fechacreado as FechaEnvio
 FROM
-notificacion n INNER join Anexopdf ap ON n.id_exp = ap.id_Expediente and n.id_destper = 109 AND ap.id_Tipo = 31
+notificacion n INNER join anexopdf ap ON n.id_exp = ap.id_Expediente and n.id_destper = 109 AND ap.id_Tipo = 31
 INNER JOIN expediente e on e.id = n.id_exp
 INNER JOIN persona pde on pde.id = e.id_PDemandante
 INNER JOIN persona pdo on pdo.id = e.id_PDemandado
@@ -123,15 +123,37 @@ public function get_SA($id){
 	return $array;
 }
 function get_anexos($opts=array()) {
-	$this->db->from('anexopdf');
-	$this->db->join('AcuerdoTipo', 'AcuerdoTipo.id = anexopdf.id_Tipo');
-	$this->db->join('notificacion','notificacion.id_anexo = anexopdf.id','left');
+	$this->db->distinct();
+	$this->db->select('DATE_FORMAT(a.FechaUp, "%d-%m-%Y %T") as FechaUp, a.PathAnexo,a.Folio, a.NomFile, act.Tipo ',FALSE);
+	$this->db->from('anexopdf a');
+	$this->db->join('acuerdotipo act', 'act.id = a.id_Tipo');
+	$this->db->join('notificacion n','n.id_anexo = a.id','left');
 	if (!empty($opts['id_Expediente'])) {
-		$this->db->where('id_Expediente',$opts['id_Expediente']);
+		$this->db->where('a.id_Expediente',$opts['id_Expediente']);
+		$this->db->order_by('FechaUp','DESC');
 	}
 	$query=$this->db->get();
 	return $query->result_array();
+
 }
+function get_anexos_c($opts=array()){ // solo desplega las notificaicones del expediente.
+
+	$this->db->distinct();
+	$this->db->select('DATE_FORMAT(a.FechaUp, "%d-%m-%Y %T") as FechaUp, a.PathAnexo,a.Folio, a.NomFile, act.Tipo ',FALSE)
+	->from('anexopdf a')
+	->join('acuerdotipo act', 'act.id = a.id_Tipo')
+	->join('notificacion n','n.id_anexo = a.id','left');
+	if (!empty($opts['id_Expediente'])) {
+		$this->db->where('a.id_Expediente',$opts['id_Expediente']);
+		$this->db->where('a.id_Tipo = 31');
+		$this->db->order_by('FechaUp','DESC');
+	}
+	
+	$query=$this->db->get();
+	return $query->result_array();	
+
+}
+
 public function enviar($id_exp,$id_logeado,$id_sa) {
 
 	$data = array('id_Exp' => $id_exp,
@@ -162,7 +184,7 @@ public function get_envios_sa(){
 public function get_ultimoexp(){ 
 	$query=$this->db->query("
 		SELECT max(e.Expediente)+1 as 'FExpediente' 
-		from Expediente e" );
+		from expediente e" );
 	$array=$query->result_array();
 	return $array;
 
@@ -252,7 +274,7 @@ public function recuperar_datos($email){
 }
 
 public function get_tipoacuerdo($id){    // consulta para obtener todos los tipos de acuerdos
-	$row=$this->db->query('SELECT * FROM AcuerdoTipo where nivels = '.$id.';');
+	$row=$this->db->query('SELECT * FROM acuerdotipo where nivels = '.$id.';');
 	$array=$row->result_array();
 	return $array;	
 }
@@ -295,13 +317,13 @@ public function get_track($Persona_id){
 }
 public function get_seguimiento($opts=array(),$Persona_id){
 	$this->db->SELECT('DATE_FORMAT(s.fechasis, "%d-%m-%Y %T") as fechasis,Expediente,if(ap.Folio is null,"",ap.Folio) as Folio, ap.PathAnexo, ap.NomFile, s.mov,if(act.Tipo is null,"",act.Tipo) as "Tipox",TS.Tipo, if(act.Tipo is null,"",act.Tipo), m.modulo,if(s.Comentarios is null,"",s.Comentarios) as Comentarios',FALSE)
-				->FROM('Seguimiento s')
-				->JOIN('Modulo m', 'm.idmodulo = s.idmodulo')
-				->JOIN('Persona p','p.id = s.id_op AND p.id ='.$Persona_id,'left')
-				->JOIN('Expediente e','e.id = s.idExpediente','left')
-				->JOIN('TipoSeguimiento TS','TS.Id_Ts = s.id_Tseguimiento','left')
-				->JOIN('AnexoPDF ap','ap.id = s.AnexoPDF_id','left')
-				->JOIN('AcuerdoTipo act','act.id = ap.id_Tipo','left');
+				->FROM('seguimiento s')
+				->JOIN('modulo m', 'm.idmodulo = s.idmodulo')
+				->JOIN('persona p','p.id = s.id_op AND p.id ='.$Persona_id,'left')
+				->JOIN('expediente e','e.id = s.idExpediente','left')
+				->JOIN('tiposeguimiento TS','TS.Id_Ts = s.id_Tseguimiento','left')
+				->JOIN('anexopdf ap','ap.id = s.AnexoPDF_id','left')
+				->JOIN('acuerdotipo act','act.id = ap.id_Tipo','left');
 	if (!empty($opts['id_Expediente'])) {
 		$this->db->where('s.idExpediente',$opts['id_Expediente']);	
 		$this->db->order_by('s.fechasis','asc');

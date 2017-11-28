@@ -4,11 +4,11 @@
     <br>
   </div>
 </div>
-<form action="/SiSeDe/index.php/cGuardarProyecto/guardaract" method="post">
+<form action="<?php echo site_url('coficial/guardaract'); ?>" method="post">
 			<div class="row">
 				<div class="col-xs-4 col-xs-offset-8">
 					<label>Nombre del documento: </label>
-					<input type="text" id="nombre" name="nombre">
+					<input type="text" id="nombre" name="nombre" required/>
 
 				</div>
 			</div>

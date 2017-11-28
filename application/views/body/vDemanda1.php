@@ -1,9 +1,8 @@
-	<!-- <?php echo form_open_multipart('cupload/do_guardar');?> 	 -->
+	<!-- <?php echo form_open_multipart('Cupload/do_guardar');?> 	 -->
 	<?php $attributes = array('id'=>'form1');
 	echo form_open_multipart('cupload/do_guardar',$attributes);
 	echo validation_errors();
 	?>
-
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-5">
@@ -22,13 +21,13 @@
 				</div><!--col-->
 				<div class="col-md-4 col-md-offset-4">
 					<label>Folio</label>
-					<input type="text" id="FolioExp" name="FolioExp" autofocus style="text-align:right;">
+					<input type="text" id="folioexp" name="folioexp" style="text-align:right;">
 				</div>
 			</div> <!--Row-->
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
 					<div id="accordion">
-						<h3>Información del Demandante y Demandado</h3>
+						<h3>Informaci&oacuten del Demandante y Demandado</h3>
 						<div>
 							<div class="row">
 								<div class="col-md-5 col-md-offset-1">
@@ -52,7 +51,14 @@
 									<input id="Regristra" class="form-control input-sm" type="text" name="Registra"  value="<?php print_r($_SESSION["Nombre"]); ?>"> </br>
 								</div> <!--col-Registra-->
 							<!--	<div class="col-md-5 col-md-offset-1"> 
-									<input type="text" class="form-control" id="datepicker" name="date">
+								<script>
+									 $(function () {
+									    //$("#datepicker").datepicker(d/m/y);	
+									    $.datepicker.setDefaults($.datepicker.regional["es"]);
+									    $("#datepicker").datepicker({ minDate: 0 });
+									    								 });
+								</script>
+									<input type="text" class="form-control" id="datepicker" name="datepicker"  style="text-align: center">
 								</div>   <!--Col-->
 							
 							</div><!--Row-->
@@ -180,11 +186,11 @@ $("#busqueda").keyup(function(){
 	if($(this).val() != ''){
 		$.ajax({
 			type:'POST',
-			url:"<?php echo base_url().'index.php/cOficial/buscar_persona'; ?>",
+			url:"<?php echo base_url().'index.php/Coficial/buscar_persona'; ?>",
 			data:{id:7, valor:$(this).val()},
-			success: function(r){
+			success: function(r){	
 				dem.find('option').remove();
-				if(r.length == 0) $('#tags_id').val('');	
+				if(r.length == 0) $('#tags_id').val('');					
 				$(r).each(function(i,v){
 					dem.append('<option value="'+ v.id+'">'+v.Nombre+"</option>");
 				});
@@ -204,7 +210,7 @@ $("#busqueda2").keyup(function(){
 	if($(this).val() != ''){
 		$.ajax({
 			type:'POST',
-			url:"<?php echo base_url().'index.php/cOficial/buscar_persona'; ?>",
+			url:"<?php echo base_url().'index.php/Coficial/buscar_persona'; ?>",
 			data:{id:8, valor:$(this).val()},
 			success: function(r){
 				dem.find('option').remove();
@@ -258,10 +264,13 @@ $("#busqueda2").keyup(function(){
  			numberFormat: "nn",
  			max:59
  		});
- 		$("#datepicker").datepicker({
+ 		$.datepicker.setDefaults($.datepicker.regional["es"]);
+		$("#datepicker").datepicker({ minDate: 0 });
+ 		/*$("#datepicker").datepicker({
  			yearRange: "2015:2020",
  			dateFormat: "yy-mm-dd"
- 		});	
+ 		});*/
+ 			
  	});//javascripUI
 
  	function Roles(roles){
@@ -273,12 +282,16 @@ $(document).ready(function(){
 //folio del expediente
 $.ajax({
 	Type:"POST",
-	url:"<?php echo base_url().'index.php/cOficial/obtener_exp'; ?>",
+	url:"<?php echo base_url().'index.php/Coficial/obtener_exp'; ?>",
 	success:function(result){
+		//alert(result[0].Fexpediente);
+		$('#folioexp').val(result[0].Fexpediente);
+		//$('#Serie').val("jaja");
 		var f = new Date();
-		var Data = jQuery.parseJSON(result);		 	
+		//var Data = jQuery.parseJSON(result);	
 		$('#Serie').val(f.getMonth()+1+'-'+f.getFullYear());
-		$("#FolioExp").val(Data[0].FExpediente);
+		//$('#folioexp').val(result[0].Fexpediente);
+		
 	} 
 });
 
@@ -301,15 +314,15 @@ if ($("#Tiporol").val() == "Usuario") {
 	//javascript para agregar los archivos en una lista
 	$("#adddemanda").on('click',function(){ 
 	//alert("Esta por subirse el archivo");
-	//	alert(document.getElementById('FolioExp').value);
+	//	alert(document.getElementById('folioexp').value);
 	//alert('entra');
 	event.preventDefault();
 	var formData = $(this).serialize();
 	$.ajax({
-		url:"<?php echo base_url().'index.php/cupload/do_guardar'; ?>",
+		url:"<?php echo base_url().'index.php/Cupload/do_guardar'; ?>",
 		type:'POST',
 				/*data:{
-						FolioExp:document.getElementById('FolioExp').value,//id expediente
+						folioexp:document.getElementById('folioexp').value,//id expediente
 						tipo:document.getElementById('doc2').value, //tipo de documento
 						//idCreaExp: es de la sesi[on] actual
 						idPDemandante: $("#d1").val(), //Demandante
@@ -346,7 +359,7 @@ http://stackoverflow.com/questions/8612554/calling-javascript-function-inside-ht
 */
 //fin buscar una persona
 $('#cancelar').on('click',function (){
-	window.location.href='<?php echo base_url().'index.php/cOficial/demanda';?>';
+	window.location.href='<?php echo base_url().'index.php/Coficial/demanda';?>';
 });
         $(function () {
             $('#datetimepicker4').datetimepicker();

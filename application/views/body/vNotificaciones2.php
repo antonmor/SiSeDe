@@ -45,7 +45,7 @@ tr.shown td.details-control {
         <tr>
           <th>Expediente</th>
           <th>Creado</th>
-          <th>Recibido</th>
+        <!-- <th>Recibido</th> -->
           <th>Demandado</th>
           <th>Demandante</th>
           <th>Resumen</th>
@@ -56,14 +56,15 @@ tr.shown td.details-control {
         <?php foreach ($expedientes as  $expediente): ?>
           <tr data-child-value="<?php echo $expediente['id_expediente']; ?>">
             <td class="details-control" style="color: blue; text-align: center; font-weight: bold;"><?=$expediente['Expediente']; ?></td>
-            <td><?= $expediente['fechasis']?></td>
-            <td><?= $expediente['FechaEnvio']?> </td>
+            <td><?= $expediente['Fecha']?></td>
+           <!-- <td><?= $expediente['FechaUp']?> </td> -->
             <td><?= $expediente['Demandado']?></td>
             <td><?= $expediente['Demandante']?></td>
             <td><?= $expediente['Resumen']?></td>
             <td style="text-align: center;">
-               <a href="#" class="btn btn-link btn-notifica" data-id="<?=$expediente['id_expediente']?>" data-toggle="modal" data-target="#agregarpdf">
+             <!--  <a href="#" class="btn btn-link btn-notifica" data-id="<?=$expediente['id_expediente']?>" data-toggle="modal" data-target="#agregarpdf">
                   <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Notificar</a>
+            -->
             </td>
               </tr>
             <?php endforeach; ?>
@@ -84,7 +85,7 @@ tr.shown td.details-control {
         <div class="modal-body">
           <div class="modal-body">
             <div class="row">
-              <form enctype="multipart/form-data" action="<?php echo site_url('cOficial2/add_file'); ?>" method="POST">
+              <form enctype="multipart/form-data" action="<?php echo site_url('Coficial2/add_file'); ?>" method="POST">
                 <div class="col-md-8">
               <label for="">Cargar acta de notificación (.pdf)</label>
                <input type="hidden"  id="id_exp" name="expediente">
@@ -92,7 +93,7 @@ tr.shown td.details-control {
                 <div class="input-group">
                 <label class="input-group-btn">
                   <span class="btn btn-primary" required>
-                    Cargar&hellip; <input type="file" name="pdf_file" required style="display: none;" multiple>
+                    Cargar&hellip; <input type="file" name="pdf_file" required style="display: none;" multiple accept="application/pdf">
                   </span>
                 </label>
                 <input type="text" class="form-control" readonly>
@@ -121,7 +122,9 @@ tr.shown td.details-control {
       </div>
     </div>
   </div>
- <!--FIN AGREGAR ACUERDO--> 
+ <!--FIN 
+ 
+  ACUERDO--> 
   <div class="modal" id="myModalmostrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
     <div class="modal-dialog">
       <div class="modal-content">
@@ -209,7 +212,7 @@ function verifica(id){
               var id_expediente = tr.data('child-value');
               $.ajax({
                 'type'  : 'GET',
-                'url'   : "<?= base_url()?>index.php/cOficial2/recuperar",
+                'url'   : "<?= base_url()?>index.php/Coficial2/recuperar_notificaciones",
                 'data'  : {
                 'expediente' : id_expediente
                 },
@@ -251,7 +254,7 @@ function verifica(id){
         if(id!=''){           
             $.ajax({
                 type: 'POST',
-                url: "<?= base_url()?>index.php/cOficial2/get_involed",
+                url: "<?= base_url()?>index.php/Coficial2/get_involed",
                 data:{id: id},
                 success: function(r){
                     involed.find('option').remove();

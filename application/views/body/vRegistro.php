@@ -87,7 +87,10 @@ echo  form_open('cLogin/registrar_nuevo');
 	    <div class="row">	
 			<div class="col-xs-4 col-md-2">
 				<label>Email</label>
-				<input class="form-control input-sm" type="email" id="email" name="email"  placeholder="Introduce email">
+				
+				<input class="form-control input-sm" type="email" id="email" name="email"  placeholder="Introduce email" required>
+			
+				
 			</div><!--Col-->	
 			<div class="col-xs-4 col-md-2">
 				<label>Confirmar</label>
@@ -239,7 +242,7 @@ echo  form_open('cLogin/registrar_nuevo');
 	</div> <!--Row-->
 	<div class="row">	
 	     	<div class="col-xs-4 col-md-2"> 
-	    		<input class="form-control input-sm" type="text" id="user" name="user"  placeholder="Usuario">
+	    		<input class="form-control input-sm" type="text" id="user" name="user"  placeholder="Usuario" required>
 	     	</div><!--Col-->
 
 	     	<div class="col-xs-4 col-md-2"> 
@@ -308,7 +311,7 @@ echo  form_open('cLogin/registrar_nuevo');
 
  	function registro_nuevo(){
 			var url='<?php echo base_url().'index.php/Welcome/inicio_sesion';?>';			
- 		$.ajax({url:"<?php echo base_url().'index.php/cLogin/registrar_nuevo'; ?>",
+ 		$.ajax({url:"<?php echo base_url().'index.php/Clogin/registrar_nuevo'; ?>",
  			type:'POST',
  			data:{
 					tipo:document.querySelector('input[name = "tipo"]:checked').value,
@@ -346,7 +349,7 @@ echo  form_open('cLogin/registrar_nuevo');
  				//alert(result);
 			if(result !=0)
 			{
-				alert(' Se guardo el registro con exito...');
+				alert(' Se guardo el registro con exito...'+ result);
 			} else{
 				alert(' Ocurrio un error y no se guardo el registro...');				
 			}
@@ -354,7 +357,7 @@ echo  form_open('cLogin/registrar_nuevo');
  		},
  		error: function(result)	{
  			
- 			alert( 'no se guardo');
+ 			alert( 'CURP ya esta registrado o falta introducirlo');
  		}
 	
  		});

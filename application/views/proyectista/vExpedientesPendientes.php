@@ -26,6 +26,8 @@ tr.shown td.details-control {
   </div>
 </div>
 <br><br>
+
+<!--LO NUEVO-->
 <div class="row">
   <?php
   $actualizar = $this->session->flashdata('actualizado');
@@ -41,7 +43,7 @@ tr.shown td.details-control {
   </div>
   <?php }?>
   <div class="col-md-12">
-    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <table id="nueva" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr>
           <th>Expediente</th>
@@ -57,21 +59,27 @@ tr.shown td.details-control {
       <tbody>
         <?php foreach ($expedientes as  $expediente): ?>
           <tr data-child-value="<?php echo $expediente['id_expediente']; ?>">
-            <td class="details-control" style="color: blue; text-align: center; font-weight: bold;"><?=$expediente['Expediente']; ?></td>
+            <td class="details-control" style="color: blue; text-align: center; font-weight: bold;"><?=$expediente['expediente']; ?></td>
             <td><?= $expediente['fechasis']?></td>
             <td><?= $expediente['FechaEnvio']?> </td>
-            <td><?= utf8_decode($expediente['Demandado']);?></td>
-            <td><?= utf8_decode($expediente['Demandante']);?></td>
-            <td><?= utf8_decode($expediente['Resumen']);?></td>
+            <td><?= $expediente['Demandado']?></td>
+            <td><?= $expediente['Demandante']?></td>
+            <td><?= $expediente['Resumen']?></td>
             <td style="text-align: center;">
-
-                <form action="/SiSeDe/index.php/credproy" method="post">
+            <form action="<?php echo site_url('coficial/proyect_rp'); ?>" method="post">
                   <input type="hidden" value="<?php echo $expediente['id_expediente']; ?>" name="expediente">
                     <button class="btn btn-primary" title="Revisar " name="Revisar" type="submit">
                       Redactar Proyecto</button>
                 </form>
+            
+            <!-- <a href="#" class="btn btn-link btn-enviar" data-id="<?=$expediente['id_expediente']?>" data-toggle="modal" data-target="#Proyectista">
+                <span class="glyphicon glyphicon-send" aria-hidden="true"></span> Enviar</a>
 
-
+                <a href="#" class="btn btn-link btn-enviar" data-id="<?=$expediente['id_expediente']?>" data-toggle="modal" data-target="#agregarpdf">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Acuerdo</a>
+              
+               <a href="#" class="btn btn-link btn-enviar" data-id="<?=$expediente['id_expediente']?>" data-toggle="modal" data-target="#enviarA">
+                  <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Notificar</a>-->
             </td>
               </tr>
             <?php endforeach; ?>
@@ -91,7 +99,7 @@ tr.shown td.details-control {
         </div>
         <div class="modal-body">
           <div class="modal-body">
-            <form method="POST" action="<?php echo site_url('cOficial/demanda'); ?>">
+            <form method="POST" action="<?php echo site_url('Coficial/demanda'); ?>">
               <input type="hidden" class="form-control" id="id_exp" name="id_exp">
               <input type="hidden" class="modDestino" name="modDestino" value="4">
               <input type="hidden" class="form-control" value="<?=$_SESSION["Persona_id"]?>" name="id_log">
@@ -99,7 +107,7 @@ tr.shown td.details-control {
               <div class="form-group">
                 <select class="form-control" name="id_sa">
                   <?php foreach ($actuario as  $ac): ?>
-                    <option value="<?=$ac['id']?>"><?= $ac['Persona']?></option>
+                    <option value="<?=$ac['id']?>"><?= $ac['persona']?></option>   
                   <?php endforeach; ?>
                 </select>
               </div>
@@ -113,25 +121,25 @@ tr.shown td.details-control {
     </div>
   </div>
    <!--FIN ENVIAR AL ACTUARIO-->
-   <!--ENVIAR AL magistrado -->
+   <!--ENVIAR AL POYECCTISTA -->
   <div class="modal fade" id="Proyectista" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h5 class="modal-title" id="myModalLabel">Turnar al Magistrado:</h5>
+          <h5 class="modal-title" id="myModalLabel">Turnar al Proyectista:</h5>
         </div>
         <div class="modal-body">
           <div class="modal-body">
-            <form method="POST" action="<?php echo site_url('cOficial/demanda'); ?>">
+            <form method="POST" action="<?php echo site_url('Coficial/demanda'); ?>">
               <input type="hidden" class="form-control" id="id_exp" name="id_exp">
-              <input type="hidden" class="modDestino" name="modDestino" value="6">
+              <input type="hidden" class="modDestino" name="modDestino" value="5">
               <input type="hidden" class="form-control" value="<?=$_SESSION["Persona_id"]?>" name="id_log">
               <input type="hidden" name="idtiposeg" id="idtiposeg" value="12">  <!--tipo de seguimiento-->
               <div class="form-group">
                 <select class="form-control" name="id_sa">
-                  <?php foreach ($magistrado as  $sa): ?>
-                    <option value="<?=$sa['id']?>"><?= $sa['Persona']?></option>
+                  <?php foreach ($proyectista as  $sa): ?>
+                    <option value="<?=$sa['id']?>"><?= $sa['persona']?></option>   
                   <?php endforeach; ?>
                 </select>
               </div>
@@ -145,7 +153,7 @@ tr.shown td.details-control {
     </div>
   </div>
    <!--FIN ENVIAR AL OROYECCTISTA-->
-
+  
    <!--AGREGAR ACUERDO-->
   <div class="modal fade" id="agregarpdf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -157,7 +165,7 @@ tr.shown td.details-control {
         <div class="modal-body">
           <div class="modal-body">
             <div class="row">
-              <form enctype="multipart/form-data" action="<?php echo site_url('cOficial/add_file'); ?>" method="POST">
+              <form enctype="multipart/form-data" action="<?php echo site_url('Coficial/add_file'); ?>" method="POST">
                 <div class="col-md-8">
               <label for="">Cargar PDF</label>
               <input type="hidden"  id="id_exp" name="expediente">
@@ -173,26 +181,49 @@ tr.shown td.details-control {
                 <label for="">Tipo</label>
                 <select class="form-control" name="id_tipo" required onclick="verifica(this.value);">
                   <?php foreach ($tipoacuerdo as  $ta): ?>
-                    <option value="<?=$ta['id']?>"><?= $ta['Tipo']?></option>
+                    <option value="<?=$ta['id']?>"><?= $ta['Tipo']?></option>   
                   <?php endforeach; ?>
                 </select>
 
-                <select class="form-control" id="desecha" name="desecha" required  style="display: none;">
+                <select class="form-control" id="desecha" name="desecha"  style="display: none;" required>
                   <?php foreach ($desecha as  $de): ?>
-                    <option value="<?=$de['id']?>"><?= $de['Tipo']?></option>
+                    <option value="<?=$de['id']?>"><?= $de['Tipo']?></option>   
                   <?php endforeach; ?>
                 </select>
 
-             <br>
 
-
+              <br>
+              
+                  <script>
+			 $(function () {
+			    $.datepicker.regional['es'] = {
+				 closeText: 'Cerrar',
+				 prevText: '< Ant',
+				 nextText: 'Sig >',
+				 currentText: 'Hoy',
+				 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+				 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+				 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+				 dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+				 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+				 weekHeader: 'Sm',
+				 dateFormat: 'dd/mm/yy',
+				 firstDay: 1,
+				 isRTL: false,
+				 showMonthAfterYear: false,
+				 yearSuffix: ''
+			    };
+			    $("#datepicker").datepicker({ minDate: 0 });
+			    //$( "#datepicker" ).datepicker( $.datepicker.regional[ "es" ] );
+			 });
+			</script>
                   <label>Fecha:</label>
-                  <input  type="date" id="date" name="date">
+                  <input  type="date" id="datepicker" name="datepicker"  style="text-align: center" >
                   <br>
                   <label>Observaciones:</label>
                   <textarea rows="4" cols="50" name="obs"></textarea>
-
-              </div>
+                  
+              </div>  
                 </div>
                 <div class="col-md-4">
                   <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 50px;">Agregar</button>
@@ -204,7 +235,7 @@ tr.shown td.details-control {
       </div>
     </div>
   </div>
- <!--FIN AGREGAR ACUERDO-->
+ <!--FIN AGREGAR ACUERDO--> 
   <div class="modal" id="myModalmostrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
     <div class="modal-dialog">
       <div class="modal-content">
@@ -222,17 +253,17 @@ tr.shown td.details-control {
               </div>
             </div>
           </div>
-        </div>
+        </div>                            
       </div>
     </div>
   </div>
 <script lenguage="javascript" type="text/javascript">
-
+  
   $(function(){
         $("#date").datepicker();
   });
 function verifica(id){
-
+  
   if(id == 4 ) {
       document.getElementById('desecha').style.display = "inline";
   } else {
@@ -243,8 +274,8 @@ function verifica(id){
 }
 
 
-</script>
-
+</script> 
+  
   <script>
     function format(id_expediente,data) {
       var $table = $('<table>'), $tr, $td, $th;
@@ -278,10 +309,10 @@ function verifica(id){
       return $table[0].outerHTML;
     }
     $(function () {
-      var table = $('#example').DataTable({});
+      var table = $('#nueva').DataTable({});
 
       // Add event listener for opening and closing details
-      $('#example').on('click', 'td.details-control', function () {
+      $('#nueva').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
         if (row.child.isShown()) {
@@ -293,7 +324,7 @@ function verifica(id){
               var id_expediente = tr.data('child-value');
               $.ajax({
                 'type'  : 'GET',
-                'url'   : "<?= base_url()?>index.php/cOficial/recuperar",
+                'url'   : "<?= base_url()?>index.php/Coficial/recuperar",
                 'data'  : {
                 'expediente' : id_expediente
                 },

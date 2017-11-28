@@ -7,7 +7,7 @@ class cAcuerdo extends CI_Controller {
 
 		if ($this->session->userdata('logueado')) {
 
-	        $this->load->model('mLogin');
+	        $this->load->model('Mlogin');
 			$this->load->view('header2');
 			$this->load->view('body/vAcuerdo');
 			$this->load->view('body/vMenu1');
@@ -24,9 +24,9 @@ class cAcuerdo extends CI_Controller {
 	public function acuerdo(){
 		
 		if ($this->session->userdata('logueado')) {
-				$this->load->model('mLogin');
+				$this->load->model('Mlogin');
 				
-				$datos['expedientes'] = $this->mLogin->per_exp();
+				$datos['expedientes'] = $this->Mlogin->per_exp();
 
 				/*if ($_POST) {
 					$id_exp=$this->input->post('id_exp' );
@@ -43,18 +43,18 @@ class cAcuerdo extends CI_Controller {
 			  				 // fecha de visto por notificaci[on]
 			  				);
 
-			  			 $this->mLogin->save_demanda($jsonTSeguimiento,"Seguimiento");
+			  			 $this->Mlogin->save_demanda($jsonTSeguimiento,"Seguimiento");
 
-					$insercion = $this->mLogin->enviar($id_exp,$id_logeado,$id_sa);
+					$insercion = $this->Mlogin->enviar($id_exp,$id_logeado,$id_sa);
 					if($insercion){
 		            $this->session->set_flashdata('actualizado', 'El expediente se envio correctamente');
 		          		redirect(base_url('index.php/cOficial/acuerdo'));
 		          	}
 				}*/
 
-				$datos['secretario_a'] = $this->mLogin->get_SA(4);
+				$datos['secretario_a'] = $this->Mlogin->get_SA(4);
 				print_r($datos['secretario_a']);
-				$datos['envios'] = $this->mLogin->get_envios_sa();
+				$datos['envios'] = $this->Mlogin->get_envios_sa();
 				$this->load->view('header2');
 				$this->load->view('body/vOficial');		  
 			    $this->load->view('body/vAcuerdo',$datos);
@@ -68,9 +68,9 @@ class cAcuerdo extends CI_Controller {
 
 		public function recuperar(){
 
-		$this->load->model('mLogin');
+		$this->load->model('Mlogin');
 		$id_expediente = $_GET['expediente'];
-		$anexos_pdf = $this->mLogin->get_anexos(['id_Expediente'=>$id_expediente]);
+		$anexos_pdf = $this->Mlogin->get_anexos(['id_Expediente'=>$id_expediente]);
 		$datos = ['anexos'=>$anexos_pdf];
 		header("Content-Type: application/json; encoding=UTF-8");
 		echo json_encode($datos);
@@ -78,10 +78,10 @@ class cAcuerdo extends CI_Controller {
 
 
 public function add_file(){
-		$this->load->model('mLogin');
+		$this->load->model('Mlogin');
 		$id_expediente=$this->input->post('expediente'); 
 		$tipo=$this->input->post('id_tipo');
-		$exp = $this->mLogin->get_last_doc($id_expediente);
+		$exp = $this->Mlogin->get_last_doc($id_expediente);
 		$expediente = $exp['FExpediente'];
 		$ultimo_Folio = $exp['num'];
 		$path ='./Historico/' . $expediente;		
@@ -103,7 +103,7 @@ public function add_file(){
         }
         $data['uploadSuccess'] = $this->upload->data();
 
-		$insert = $this->mLogin->add_new_doc($folio,$tipo,$id_expediente,$path,$archivo_nombre);
+		$insert = $this->Mlogin->add_new_doc($folio,$tipo,$id_expediente,$path,$archivo_nombre);
 		redirect(base_url('index.php/cOficial/acuerdo'));
 	}
 }

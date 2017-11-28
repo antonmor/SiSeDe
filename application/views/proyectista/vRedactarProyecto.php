@@ -12,7 +12,7 @@
 
 <br>
 <section>
-	<form action="/SiSeDe/index.php/cGuardarProyecto/guardar" method="post">
+	<form action="<?php echo site_url('coficial/guardar_an'); ?>" method="post">
 			<div class="row">
 				<div class="col-xs-10 col-xs-offset-1">
 					<textarea class="form-control" rows="10" name="descripcion">

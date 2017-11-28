@@ -121,7 +121,7 @@
 $(document).ready(function(){
            
     $.ajax({
-        url:"<?php echo base_url().'index.php/cOficial/get_perfil'; ?>",
+        url:"<?php echo base_url().'index.php/Coficial/get_perfil'; ?>",
         type:"POST",
         success:function(result){
           

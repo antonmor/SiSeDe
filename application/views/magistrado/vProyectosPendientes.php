@@ -42,7 +42,7 @@
                 <td style="text-align: center;">
                   <div class="row">
                     <div class="col-xs-12" style="text-align:center">
-                      <form action="/SiSeDe/index.php/crevproy/revproym" method="post">
+                      <form action="<?php echo site_url('coficial/revproym');?>" method="post">
                           <input type="hidden" value="<?php echo $rev['folder']; ?>" name="folder">
                         <input type="hidden" value="<?php echo $rev['nombre']; ?>" name="archivo">
                           <input type="hidden" value="<?php echo $rev['expediente']; ?>" name="expediente">

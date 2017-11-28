@@ -1,12 +1,11 @@
 <?php
-class cUpload extends CI_Controller{
+class cupload extends CI_Controller{
 
 		public function __construct()
 		{
 				parent::__construct();
 		//	$this->load->helper(array('form','url','date'));
 			$this->load->helper(array('form','url'));
-
 		}
 		public function index(){
 			$this->load->model('mLogin');
@@ -21,10 +20,10 @@ class cUpload extends CI_Controller{
 			$this->load->model('mLogin');
 			$time=time();
 			//llamamos al modelo
-		   	$pathS='./Historico/' . $this->input->post('FolioExp'); //Folio de expediente
+		   	$pathS='./Historico/' . $this->input->post('folioexp'); //Folio de expediente
 			$archivo_nombre = $_FILES['usr_file']['name'];			//Nombre del archivo
 			$fecha = date("Y-m-d H:i:s"); // Fehca de expediente
-		    $fecha1= date("Y-m-d H:i:s", strtotime("$fecha"));
+		    	$fecha1= date("Y-m-d H:i:s", strtotime("$fecha"));
 			$Des = 	 $this->input->post('tDescrip');				//Descripcion de expediente
 			    $config['upload_path'] = $pathS;
 				$config['allowed_types'] = 'pdf';
@@ -39,11 +38,11 @@ class cUpload extends CI_Controller{
 		    	  'id_PDemandante'=> $this->input->post('tags_id'),
 		    	  'id_PDemandado'=> $this->input->post('tags_id2'),
 		    	  'Fecha'=>  $fecha1 , 
-		    	  'Expediente'=>$this->input->post('FolioExp'),    //Folio      
+		    	  'Expediente'=>$this->input->post('folioexp'),    //Folio      
 		    	  'Descripcion'=> $Des,
 		    	  'status'=>'1'									//Status creado
 		    	);		
-			$last_id_Exp=$this->mLogin->save_demanda($jsonTExpediente,"Expediente");
+			$last_id_Exp=$this->mLogin->save_demanda($jsonTExpediente,"expediente");
 			 for($i=0; $i<count($_FILES['usr_file']['name']); $i++)
 				{
 					$_FILES['userfile']['name'] = $_FILES['usr_file']['name'][$i];
@@ -53,7 +52,7 @@ class cUpload extends CI_Controller{
 					$_FILES['userfile']['size'] = $_FILES['usr_file']['size'][$i];
 			$jsonTAnexoPDF = 
 			array(
-				'Folio'=>$this->input->post('FolioExp')."_".$i,//Folio
+				'Folio'=>$this->input->post('folioexp')."_".$i,//Folio
 				'id_tipo'=>$this->input->post('doc2'), // Tipo de documento
 				'id_Expediente'=> $last_id_Exp,    //  id Expediente 
 				'PathAnexo'=> $pathS,	//pathAnexo		
@@ -63,14 +62,14 @@ class cUpload extends CI_Controller{
 				'StatusCrea'=>'0'//StatusCrea
 				);
   			//echo json_encode($jsonTAnexoPDF); //TABLA ANEXOPDF
-			$last_id_AnexoPDF=$this->mLogin->save_demanda($jsonTAnexoPDF,"AnexoPDF"); // id de la tabla anterior creada
+			$last_id_AnexoPDF=$this->mLogin->save_demanda($jsonTAnexoPDF,"anexopdf"); // id de la tabla anterior creada
   			
   			$jsonTSeguimiento = 
   			array(
   					//id
   				'idmodulo'=>'2',
   				'id_op'=>$_SESSION["Persona_id"],
-  				'mov'=>'in',
+  				'mov'=>'Entrada',
   				'idExpediente'=>$last_id_Exp,//idexpediente
   				'id_Tseguimiento'=>'2', //status Corresponde a Ingresado, en espera...
   				'Fecha'=>$fecha1,
@@ -79,7 +78,7 @@ class cUpload extends CI_Controller{
   				'Comentarios'=> $Des,
   				'Status1'=>'0',//Status1
   				);
-  			 $this->mLogin->save_demanda($jsonTSeguimiento,"Seguimiento");
+  			 $this->mLogin->save_demanda($jsonTSeguimiento,"seguimiento");
   			 $jsoninvolucrados = 
   			 array(
   			 	'id_persona' =>$this->input->post('tags_id'),
@@ -99,15 +98,15 @@ class cUpload extends CI_Controller{
 				if( !file_exists($pathS) ){
 						mkdir($pathS,0777);
 				}
-			  if ( ! $this->upload->do_upload('userfile'))
-    			{
+			//if($_FILES['userfile']['size'] < 6024)
+			 //if($_FILES['userfile']['type'] == 'pdf')
+			  if ( ! $this->upload->do_upload('userfile')){
        				$error = array('error' => $this->upload->display_errors());
- 				   }
-  			  else
- 			   {
+ 			  }
+  			  else{
  			       $data = array('upload_data' => $this->upload->data());
- 			       redirect(base_url('index.php/cOficial/demanda'));
-   				 }
+ 			       redirect(base_url('index.php/Coficial/demanda'));
+   			      }
 			
    		 }		 
 

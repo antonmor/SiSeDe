@@ -35,30 +35,32 @@ class Welcome extends CI_Controller {
 	}
 
 	public function validar(){
-		 
-		 $this->load->model('mLogin');
+		 $this->load->model('Mlogin');
+		 $this->load->library('session');
 		 $usuario=$this->input->post('user');
 		 $pwd=$this->input->post('password');
-		 $usuario=$this->mLogin->loggin($usuario,$pwd);
+		 $usuario=$this->Mlogin->loggin($usuario,$pwd);
+		 
 		if(count($usuario)>0)
-		{	
-			$user_data = array(
+		{	// session_start();
+		         $data = array(
 				'Persona_id' => $usuario[0]->id,			
 				'Nombre' => $usuario[0]->Nombre,
-				'Id_rol' => $usuario[0] ->idRoles,
+				'Id_rol' => $usuario[0] ->idroles, //cambie de idRoles a idroles 17/08/2017
 				'Rol' => $usuario[0] ->Tipo,
 				'logueado' => TRUE
 				);
-			$this->session->set_userdata($user_data);
-			redirect('cOficial');
-			var_dump($user_data);
-
+				
+		        $this->session->set_userdata($data);
+		       
+			//redirect('Coficial');
+			
 		}else{
 
 			echo "0";
 		}	
 	}
-
+        
 	public function vregistrar(){
 		    $this->load->view('header2');
 			$this->load->view('body/vRegistro');

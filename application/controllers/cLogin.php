@@ -15,7 +15,7 @@ class cLogin extends CI_controller{
 	}
 
 	public function registrar_nuevo(){		
-			$this->load->model('mLogin'); //Guardar
+			$this->load->model('Mlogin'); //Guardar
 			//DATOS DEL USUARIO
 				$tipo=$this->input->post('tipo');
 				$nombre=$this->input->post('nombre' );
@@ -51,18 +51,26 @@ class cLogin extends CI_controller{
 				$pass1=$this->input->post('pass1' );	
 //	   header("Content-Type: application/json; encoding=UTF-8");
 		header("Content-Type: application/json; encoding=UTF-8");
-	   echo json_encode($this->mLogin->save_bd($tipo,$nombre,$apat,$amat,$rsocial,$genero,$identificacion,$referencia,$tf,$movil,$email,$cemail,$Estado,$Municipio,$Dom,$interior,$exterior,$cp,$Estado1,$Municipio1,$Dom1,$interior1,$exterior1,$cp1,$refe,$user,$pass,$curp));
-
+	      	
+		  
+		  
+		   if($this->Mlogin->val_curp($curp) == 0){
+		    die();
+		  }
+		  else{
+		  	echo json_encode($this->Mlogin->save_bd($tipo,$nombre,$apat,$amat,$rsocial,$genero,$identificacion,$referencia,$tf,$movil,$email,$cemail,$Estado,$Municipio,$Dom,$interior,$exterior,$cp,$Estado1,$Municipio1,$Dom1,$interior1,$exterior1,$cp1,$refe,$user,$pass,$curp));
+	  
+	  }
 //echo json_encode($tipo,$nombre,$apat,$amat,$rsocial,$genero,$identificacion,$referencia,$tf,$movil,$email,$cemail,$Estado,$Municipio,$Dom,$interior,$exterior,$cp,$Estado1,$Municipio1,$Dom1,$interior1,$exterior1,$cp1,$refe,$user,$pass,$curp);
 
 	}
 
 	public function recuperar(){
-		$this->load->model('mLogin');
+		$this->load->model('Mlogin');
 		$this->load->library("email");
 
 		$email = $this->input->post('email');
-		$datos = $this->mLogin->recuperar_datos($email);
+		$datos = $this->Mlogin->recuperar_datos($email);
 
 		if ($datos) {
 			foreach ($datos as $item ) {				
@@ -70,32 +78,47 @@ class cLogin extends CI_controller{
 		 
 				//configuracion para gmail
 				$configGmail = array(
-					'protocol' => 'smtp',
-					'smtp_host' => 'ssl://smtp.gmail.com',
+					'protocol' => 'mail',
+					'smtp_host' => 'p3plcpnl0885.prod.phx3.secureserver.net',
 					'smtp_port' => 465,
-					'smtp_user' => 'villavicencioismael@gmail.com',
-					'smtp_pass' => 'edaraisma1989',
+					'smtp_user' => 'info@sisede.tcacolima.com',
+					'smtp_pass' => '0pmR=Z1s[Ovk',
 					'mailtype' => 'html',
 					'charset' => 'utf-8',
+					'priority' => 1,
 					'newline' => "\r\n"
 				);    
 		 
 				//cargamos la configuración para enviar con gmail
 				$this->email->initialize($configGmail);
-				$this->email->from('villavicencioismael@gmail.com');
+				$this->email->from('info@sisede.tcacolima.com');
 				$this->email->to($email);
+				$this->email->bcc('info@sisede.tcacolima.com');
 				$this->email->subject('Datos de usuario');
 				$this->email->message('<h3>Usuario: '.$item->Usuario .'</h3>
-									   <h3>Password: '.$item->Password .'</h3>
+									   <h3>Password: '.$item->contrasena .'</h3>
 									   <hr>
 									   <br> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis minus voluptas mollitia, veritatis nam, dignissimos, esse molestiae pariatur laudantium blanditiis delectus amet perferendis. Officiis, obcaecati quisquam tempora, odit quos aperiam. ');
-				$this->email->send();
-				//con esto podemos ver el resultado
+				if ($this->email->send())
+				{
+					$this->session->set_flashdata('msj', '<div class="alert alert-success" style="margin-top: 20px;">
+				 	 <strong>Éxito</strong> Los datos fueron envidos exitosamente al correo '.$email.'
+					</div>');
+				}
+				else 	{
+				echo $this->email->print_debugger();
+				$this->session->set_flashdata('msj', '<div class="alert alert-danger" style="margin-top: 20px;">
+				 	 <strong>Error</strong> Los datos no se enviaron al correo '.$email.'
+					</div>'.  $this->email->print_debugger());
+				}
+				
+			/*	//con esto podemos ver el resultado
 				//var_dump($this->email->print_debugger());
 				$this->session->set_flashdata('msj', '<div class="alert alert-success" style="margin-top: 20px;">
 				  <strong>Éxito</strong> Los datos fueron envidos exitosamente al correo '.$email.'
 				</div>');
-				redirect(base_url('index.php/Welcome/recuperar_datos'));
+			*/	redirect(base_url('index.php/Welcome/recuperar_datos'));
+			
 			}
 
 			}else{

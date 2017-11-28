@@ -6,12 +6,12 @@
 <section>
 <div class="row">
 	    <div class="col-xs-2">
-	      <form action="/SiSeDe/index.php/cenviar/aprobarmag" method="post">
+		      <form action="<?php echo site_url('coficial/aprobarmag'); ?>" method="post">
 	        <button class="btn btn-success" title="aprobar " name="Revisar" type="submit">Aprobar</button>
 	      </form>
 	    </div>
 	    <div class="col-xs-2">
-	      <form action="/SiSeDe/index.php/cenviar/rechazarmag" method="post">
+	      <form action="<?php echo site_url('coficial/rechazarmag'); ?>" method="post">
 	        <button class="btn btn-danger" title="rechazar " name="Revisar" type="submit">Rechazar</button>
 	      </form>
 	    </div>
@@ -20,7 +20,7 @@
 
 	<div class="row">
 		<div class="col-xs-10 col-xs-offset-1">
-			<form action="/SiSeDe/index.php/ceditarproy/editarm" method="post">
+			<form action="<?php echo site_url('coficial/editarm'); ?>" method="post">
 				<textarea class="form-control" rows="10" name="descripcion">
 					<?php
 						$fichero = $folder.$archivo;

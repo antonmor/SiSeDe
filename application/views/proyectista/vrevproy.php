@@ -8,7 +8,7 @@ $comentarios=$this->input->post('comentarios');
 		<div class="col-xs-2 col-xs-offset-9">
 			<a data-toggle="modal" href="#comentario"><span class="glyphicon glyphicon-align-justify"> </span> Leer comentario</a>
 		</div>
-			<!--<a href="/SiSeDe/index.php/crevproy2/ceditproy"><span class="glyphicon glyphicon-pencil"> </span> Editar</a>-->
+			<!--<a href="<?php echo site_url('coficial/ceditproy'); ?>"><span class="glyphicon glyphicon-pencil"> </span> Editar</a>-->
 
 	</div>
 	<div class="row">
@@ -28,14 +28,14 @@ $comentarios=$this->input->post('comentarios');
 	<br>
 	<div class="row">
 		<div class="col-xs-2 col-xs-offset-10">
-			<form action="/SiSeDe/index.php/crevproy2/ceditproy" method="post">
+			<form action="<?php echo site_url('coficial/ceditproy'); ?>" method="post">
 				<input type="hidden" value="<?php echo $folder; ?>" name="folder">
 				<input type="hidden" value="<?php echo $archivo; ?>" name="archivo">
 				<button class="btn btn-primary" title="Revisar " name="Revisar" type="submit">
 						Editar</button>
 			</form>
 		</div>
-			<!--<a href="/SiSeDe/index.php/crevproy2/ceditproy"><span class="glyphicon glyphicon-pencil"> </span> Editar</a>-->
+			<!--<a href="<?php echo site_url('coficial/ceditproy'); ?>"><span class="glyphicon glyphicon-pencil"> </span> Editar</a>-->
 
 	</div>
 </section>

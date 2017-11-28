@@ -14,7 +14,7 @@ $Expedientes=$this->mLogin->getExp(); //edit 20161123
           <li><a href="#">Another action</a></li>
           <li><a href="#">Something else here</a></li>
           <li role="separator" class="divider"></li>
-          <li><a href="<?php echo site_url('cOficial/nueva_demanda'); ?>">Nueva demanda</a></li>
+          <li><a href="<?php echo site_url('Coficial/nueva_demanda'); ?>">Nueva demanda</a></li>
         </ul>
       </div><!-- /btn-group -->
     </div><!-- /input-group -->

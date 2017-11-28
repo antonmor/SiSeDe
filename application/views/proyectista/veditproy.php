@@ -1,7 +1,7 @@
 <section>
 	<div class="row">
 		<div class="col-xs-10 col-xs-offset-1">
-			<form action="/SiSeDe/index.php/ceditarproy/editar" method="post">
+			<form action="<?php echo site_url('coficial/editar_p'); ?>" method="post">
 				<textarea class="form-control" rows="10" name="descripcion">
 					<?php
 						$archivo=$this->input->Post('archivo');

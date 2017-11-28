@@ -55,7 +55,7 @@ tr.shown td.details-control {
       <tbody>
         <?php foreach ($expedientes as  $expediente): ?>
           <tr data-child-value="<?php echo $expediente['id_expediente']; ?>">
-            <td class="details-control" style="color: blue; text-align: center; font-weight: bold;"><?=$expediente['Expediente']; ?></td>
+            <td class="details-control" style="color: blue; text-align: center; font-weight: bold;"><?=$expediente['expediente']; ?></td>
             <td><?= $expediente['fechasis']?></td>
             <td><?= $expediente['FechaEnvio']?> </td>
             <td><?= $expediente['Demandado']?></td>
@@ -84,7 +84,7 @@ tr.shown td.details-control {
         <div class="modal-body">
           <div class="modal-body">
             <div class="row">
-              <form enctype="multipart/form-data" action="<?php echo site_url('cOficial/add_file'); ?>" method="POST">
+              <form enctype="multipart/form-data" action="<?php echo site_url('Coficial/add_file'); ?>" method="POST">
                 <div class="col-md-8">
               <label for="">Cargar acta de notificación (.pdf)</label>
                <input type="hidden"  id="id_exp" name="expediente">
@@ -92,20 +92,21 @@ tr.shown td.details-control {
                 <div class="input-group">
                 <label class="input-group-btn">
                   <span class="btn btn-primary" required>
-                    Cargar&hellip; <input type="file" name="pdf_file" required style="display: none;" multiple>
+                    Cargar&hellip; <input type="file" name="pdf_file" required style="display: none;" multiple accept="application/pdf">
                   </span>
                 </label>
                 <input type="text" class="form-control" readonly>
               </div>
-                  <div class="form-group">              
+                  <div class="form-group">
+                  <br>              
                 <label for="">Involucrados: </label>
-               <select id="slt-involucrados" name="slt-involucrados" class="form-control" ></select>
+               <p id="slt-involucrados"></p>
               <br>                  
                   <label>Fecha:</label>
-                  <input  type="date" id="date" name="date" value="<?php ECHO date("m/d/Y"); ?>">
+                  <input  type="date" id="date" name="date" value="<?php ECHO date("m/d/Y"); ?>" style="text-align:center">
                    <br>
                   <label>Fecha limite:</label>
-                  <input  type="date" id="datelim" name="datelim" >
+                  <input  type="date" id="datelim" name="datelim" value="<?php ECHO date("m/d/Y"); ?>" style="text-align:center">
                   <br>
                   <label>Observaciones:</label>
                   <textarea rows="4" cols="50" name="obs"></textarea>
@@ -146,8 +147,10 @@ tr.shown td.details-control {
 <script lenguage="javascript" type="text/javascript">
   
   $(function(){
-        $("#date").datepicker();
-        $("#datelim").datepicker();
+	$.datepicker.setDefaults($.datepicker.regional["es"]);
+	$("#date").datepicker({ minDate: 0 });
+	$("#datelim").datepicker({ minDate: 0 });
+
   });
 function verifica(id){
   
@@ -209,7 +212,7 @@ function verifica(id){
               var id_expediente = tr.data('child-value');
               $.ajax({
                 'type'  : 'GET',
-                'url'   : "<?= base_url()?>index.php/cOficial/recuperar",
+                'url'   : "<?= base_url()?>index.php/Coficial/recuperar",
                 'data'  : {
                 'expediente' : id_expediente
                 },
@@ -251,14 +254,14 @@ function verifica(id){
         if(id!=''){           
             $.ajax({
                 type: 'POST',
-                url: "<?= base_url()?>index.php/cOficial/get_involed",
+                url: "<?= base_url()?>index.php/Coficial/get_involed",
                 data:{id: id},
                 success: function(r){
-                    involed.find('option').remove();
+               // involed.find('option').remove();
+               	  involed.text('');
                  $(r).each(function(i,v){
-                    involed.append('<option value="'+ v.id_persona+'">'+v.razon+'</option>');
-
-
+                    //involed.append('<option value="'+ v.id_persona+'">'+v.razon+'</option>');
+                    involed.append( v.razon + '<br>' );
                  });
                 }
             });
